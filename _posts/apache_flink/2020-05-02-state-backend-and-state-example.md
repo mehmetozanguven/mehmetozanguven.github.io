@@ -458,7 +458,7 @@ Here is the log file after I deployed the jar & submit the application:
 
 ### Configure FsStateBackend for Our Flink Job
 
-- Update `flink-conf.yaml` files like this:
+- Update `flink-conf.yaml` file like this:
 
 ````yaml
 # Flink will know that we are going to use FsStateBackend
@@ -474,7 +474,7 @@ state.savepoints.dir: file:///home/mehmetozanguven/Desktop/ApacheTools/flink-1.1
 
 ### Configure RocksDbStateBackend for Our Flink Job
 
-- Update `flink-conf.yaml` files like this:
+- Update `flink-conf.yaml` file like this:
 
 ```yaml
 # Flink will know that we are going to use RocksDb
