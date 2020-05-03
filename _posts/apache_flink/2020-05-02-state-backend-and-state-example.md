@@ -308,6 +308,7 @@ public class StreamCreator
 // ...
 public class FastestVehicleMapper extends RichMapFunction<VehicleInstantData, VehicleInstantData>
 {
+    // ValueState only holds one object for each key
     private transient ValueState<VehicleInstantData> fastestVehicleState;
 
     @Override
@@ -341,6 +342,7 @@ public class FastestVehicleMapper extends RichMapFunction<VehicleInstantData, Ve
     {
         if (Integer.parseInt(previousVehicleData.getSpeed()) < Integer.parseInt(newVehicleData.getSpeed()))
         {
+            // update the state with new one
             this.fastestVehicleState.update(newVehicleData);
             return newVehicleData;
         }
