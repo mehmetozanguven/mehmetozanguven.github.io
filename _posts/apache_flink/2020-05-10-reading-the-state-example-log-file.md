@@ -47,7 +47,9 @@ Let's start to read log files.
 2020-05-03 22:48:42,350 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint         -  Starting StandaloneSessionClusterEntrypoint (Version: 1.10.0, Rev:aa4eb8f, Date:07.02.2020 @ 19:18:19 CET)
 ```
 
+<br />
 
+<br />
 
 ### How StandaloneSessionClusterEntrypoint runs ?
 
@@ -138,7 +140,9 @@ public class StandaloneSessionClusterEntrypoint extends SessionClusterEntrypoint
 ...
 ```
 
+<br />
 
+<br />
 
 ### How GlobalConfiguration loads the flink-conf.yaml file?
 
@@ -178,7 +182,9 @@ public final class GlobalConfiguration {
 2020-05-03 22:48:42,409 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint         - Starting StandaloneSessionClusterEntrypoint.
 ````
 
+<br />
 
+<br />
 
 ### How cluster is starting?
 
@@ -242,7 +248,9 @@ public abstract class ClusterEntrypoint implements AutoCloseableAsync, FatalErro
 2020-05-03 22:48:42,534 INFO  org.apache.flink.runtime.security.SecurityUtils               - Cannot install HadoopSecurityContext because Hadoop cannot be found in the Classpath.
 ```
 
+<br />
 
+<br />
 
 - After setup, cluster service will be initialized
 
