@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Apache Flink Series 10 -  Reading Logs for State Example"
+title:  "Apache Flink Series 10 -  Reading Log files for State Example"
 date:   2020-05-10 14:30:31 +0530
 categories: "apache-flink"
 author: "mehmetozanguven"
