@@ -541,3 +541,8 @@ TM_RESOURCES_JVM_PARAMS extraction logs:
 2020-05-10 19:48:41,187 INFO  org.apache.flink.runtime.taskexecutor.TaskExecutor            - Close JobManager connection for job 9d9ced6c7ac0a516b1958073f0edd4e4.
 ```
 
+
+
+<br />
+
+Last but not least, wait for the next post...
