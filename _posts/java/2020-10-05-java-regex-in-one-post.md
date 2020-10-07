@@ -20,27 +20,28 @@ Before diving into regex examples, we should know the specific characters/symbol
 
 ## Regex Symbols
 
-| Symbol        | Regex Meaning                                                |
-| :------------ | ------------------------------------------------------------ |
-| `.`           | Any character except new line (please be careful, **not a word, character**) |
-| `\d`          | search for any digit [0-9]                                   |
-| `\D`          | search for anything not a digit `[^0-9]`                     |
-| `\w`          | search for a word character `[a-zA-Z0-9-]` (Note: `-` is also a word character) |
-| `\W`          | search for a not word character `[^\w]`                      |
-| `\s`          | search for any whitespace (includes space, tab, newline)     |
-| `\S`          | search for anything not whitespace                           |
-| `\b`          | search for a word boundary. Matches positions where one side is a word character and other side is not a word character. |
-| `\B`          | search for not a word boundary                               |
-| `[]`          | matches a characters in brackets                             |
-| `[^]`         | matches character not in bracket                             |
-| `^`           | Beginning of a string (`^a` => string starts with `a` , be careful this command takes care of whitespace for example string starting with whitespace and a character like ` a` does not match) |
-| `$`           | end of a string (`a$` => string ends with `a`, takes care of whitespace like `^`) |
-| `*`           | 0 or more                                                    |
-| `+`           | 1 or more                                                    |
-| `?`           | 0 or 1                                                       |
-| `{3}`         | exact number                                                 |
-| `{3,5}`       | range of number                                              |
-| `(a | b | c)` | matches the group, (match with a, b or c)                    |
+
+- `.`    =>  Any character except new line (please be careful, **not a word, character**) 
+- `\d` => search for any digit `[0-9]`  
+- `\D` =>  search for anything not a digit `[^0-9]` 
+- `\w` => search for a word character `[a-zA-Z0-9-]` (Note: `-` is also a word character)     
+- `\W`  => search for a not word character 
+- `\s` => search for any whitespace (includes space, tab, newline) 
+- `\S` => search for anything not whitespace 
+- `\b` => search for a word boundary. Matches positions where one side is a word character and other side is not a word character. 
+- `\B` => search for not a word boundary  
+- `[]` => matches a characters in brackets  
+- `[^]` =>  negates the condition in the brackets
+- `^` => Beginning of a string (`^a` => string starts with `a` , be careful this command takes care of whitespace for example string starting with whitespace and a character like ` a` does not match)
+- `$` => end of a string (`a$` => string ends with `a`, takes care of whitespace like) 
+- `*` => 0 or more
+- `+` => 1 or more
+- `?` => 0 or 1
+- `{3}` => exact number
+- `{3,5}` => range of number
+-  `(a | b | c)` => matches the group, (match with a, b or c)     
+
+
 
 Looking at the table is not enough to understand regex. We should do some basic examples before implementing in any programming language. That's why first of all, I am going to use sublime text, then search via regex expression.
 
