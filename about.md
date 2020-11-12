@@ -23,3 +23,4 @@ You can download my resume from [here](/assets/resume/MehmetOzanGuven_cv_eng.pdf
 
 Feel free to contact me via my email address: **mehmetozanguven@gmail.com**
 
+Check out my linkedin [account](https://www.linkedin.com/in/mehmet-ozan-güven-759291114)
