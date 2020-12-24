@@ -10,7 +10,7 @@ author: "mehmetozanguven"
 
 This is the second post for a short series of aspect oriented programming with the spring boot.
 
-In this post, I am going to a simple project example includes spring aop module. I will write aspect for both method execution(s) and annotation(s). At the end you will be able to reference this basic project for yours.
+In this post, I am going to implement a simple project example includes spring aop module. I will write aspect for both method execution(s) and annotation(s). At the end you will be able to reference this basic project for yours.
 
 > Before start, you may need to check the previous [post](https://mehmetozanguven.github.io/spring/2020/11/13/aspect-oriented-programming-with-spring-boot-1.html) which includes AOP definitions, advice types, aspectJ etc.. 
 >
