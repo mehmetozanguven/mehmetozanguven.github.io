@@ -74,7 +74,7 @@ Spring Security is a powerful and highly customizable authentication and access-
 
 <img src="/assets/spring/security/basic_concepts/spring_security_basic.png" alt="spring_security_basic.png" />
 
-- When request is intercepted, `AuthentcationFilter` pass your credentials (username:password) to the ` AuthenticationManager`. Therefore responsibility of AuthenticationFilter is just pass the credentials to the AuthenticationManager
+- When request is intercepted, `AuthenticationFilter` pass your credentials (username:password) to the ` AuthenticationManager`. Therefore responsibility of AuthenticationFilter is just pass the credentials to the AuthenticationManager
 - AuthenticationManager delivers to the responsibility of the authentication to the one of the `AuthenticationProvider` s. (AuthenticationManager will find the proper AuthenticationProvider for the request(s))
 - In the AuthenticationProvider, we will have the Authentication Logic.
 - Most probably requests will include username and password, therefore you should identify these in your database, cache system etc.. We need find out the user with credentials somehow, in spring security component that finds out the correct user is called `UserDetailsService` (UserDetailsService responsibility is the to find out the user in the database via credentials in the requests)
