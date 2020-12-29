@@ -6,7 +6,7 @@ categories: "spring"
 author: "mehmetozanguven"
 ---
 
-In this post, I are going to use real database to check the user against the request(s).
+In this post, I am going to use real database to check the user against the request(s).
 
 Topics are:
 
