@@ -257,7 +257,7 @@ TRUNCATE TABLE
 
 To store user, I just created a simple endpoint called `addUser()` via POST method.
 
-To use POST method, I disabled the CSRF token protection, (Spring will includes in a default manner). (Just now, we can care about it). To disable CSRF token, I updated the configuration and extends the class with `WebSecurityConfigurerAdapter`  to override method `configure(HttpSecurity..) ` .
+To use POST method, I disabled the CSRF token protection, (Spring will includes in a default manner). (Just now, we do not care about CSRF). To disable CSRF token, I updated the configuration and extends the class with `WebSecurityConfigurerAdapter`  to override method `configure(HttpSecurity..) ` .
 
 And also I need to setup such that **addUser** method should not be protected. Otherwise I can not add any user:
 
