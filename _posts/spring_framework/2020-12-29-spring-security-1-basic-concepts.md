@@ -10,19 +10,19 @@ In these short series , I am going to dive into what Spring Security is, how Spr
 
 Topic are:
 
-- **Github Link**
-- **Project Default Setup**
-- **What is the Spring Security?**
-- **Secure the endpoints**
-- **Overriding the default configuration**
+- [**Github Link**](#github_link)
+- [**Default Project Setup**](#default_setup)
+- [**What is the Spring Security?**](#what_is_spring_security)
+- [**Secure the endpoints**](#secure_endpoints)
+- [**Overriding the default configuration**](#default_configuration)
   - If you override the `UserDetailsService` you must also override the `PasswordEncoder`
 
-## Github Link
+## Github Link <a name="github_link"></a>
 
 If you only need to see the code, here is the [github link](https://github.com/mehmetozanguven/spring-security-examples/tree/master/spring-security-basic) 
 
 
-## Project Default Setup
+## Default Project Setup <a name="default_setup"></a>
 
 Before diving into please create a new spring boot application which includes only these dependencies:
 
@@ -68,7 +68,7 @@ Before diving into please create a new spring boot application which includes on
 
 
 
-## What is the Spring Security?
+## What is the Spring Security? <a name="what_is_spring_security"></a>
 
 Spring Security is a powerful and highly customizable authentication and access-control framework. It is the de-facto standard for securing  Spring-based applications. It is a framework that focuses on providing both authentication and authorization to Java applications. 
 
@@ -84,7 +84,7 @@ Spring Security is a powerful and highly customizable authentication and access-
 
 That is the main architecture of Spring Security.
 
-## Secure the endpoints
+## Secure the endpoints <a name="secure_endpoints"></a>
 
 Now let's create a controller and secure it.
 
@@ -160,7 +160,7 @@ public class BasicAuthenticationFilter extends OncePerRequestFilter {
 
 Now let's override the default configuration for spring security
 
-## Overriding the configuration
+## Overriding the configuration <a name="default_configuration"></a>
 
 Let's create our own user instead of the generated one from spring security, right now I will store the user in the memory. 
 
