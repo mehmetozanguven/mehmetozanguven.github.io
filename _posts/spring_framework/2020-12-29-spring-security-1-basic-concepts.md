@@ -6,8 +6,6 @@ categories: "spring"
 author: "mehmetozanguven"
 ---
 
-# Spring Security -- 1) Basic Concepts 
-
 In these short series , I am going to dive into what Spring Security is, how Spring Security works. Most of the example application would be for web environment. Because I am going to use spring boot you should also use it or you have to to some setup to work with xml setup and others. 
 
 Topic are:
