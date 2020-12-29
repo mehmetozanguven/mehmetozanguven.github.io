@@ -72,7 +72,7 @@ Before diving into please create a new spring boot application which includes on
 
 Spring Security is a powerful and highly customizable authentication and access-control framework. It is the de-facto standard for securing  Spring-based applications. It is a framework that focuses on providing both authentication and authorization to Java applications. 
 
-<img src="/assets/spring/security/spring_security_basic.png" alt="spring_security_basic.png" />
+<img src="/assets/spring/security/basic_concepts/spring_security_basic.png" alt="spring_security_basic.png" />
 
 - When request is intercepted, `AuthentcationFilter` pass your credentials (username:password) to the ` AuthenticationManager`. Therefore responsibility of AuthenticationFilter is just pass the credentials to the AuthenticationManager
 - AuthenticationManager delivers to the responsibility of the authentication to the one of the `AuthenticationProvider` s. (AuthenticationManager will find the proper AuthenticationProvider for the request(s))
