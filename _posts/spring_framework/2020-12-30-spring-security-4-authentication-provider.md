@@ -125,7 +125,7 @@ For the `authenticate()` method, there are three options:
 
 1. If the request is authenticated, should return authenticated Authentication instance
 2. If the request is not authenticated, throw AuthenticationException
-3. If the Authentication isn't supported by this provider, then return null, in another words AuthenticationProvider will say the AuthenticationManager: "**Hey AuthenticationManager please try to another Providers, I am not responsible for this**"
+3. If the Authentication isn't supported by this provider, then return null, in another words AuthenticationProvider will say the AuthenticationManager: "**Hey AuthenticationManager please try to use another Providers, I am not responsible for this**"
 
 For the `supports()` method:
 
