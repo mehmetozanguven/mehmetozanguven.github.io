@@ -95,7 +95,7 @@ I can visualize chain process in this picture, as you can see some of the filter
 
 You can also add your custom filter **before and after specific chain**
 
-<img src="./assets/spring/security/custom_filter/spring_filters.png" alt="spring_filters.png" />
+<img src="/assets/spring/security/custom_filter/spring_filters.png" alt="spring_filters.png" />
 
 
 
