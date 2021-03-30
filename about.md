@@ -19,7 +19,7 @@ Here is the my tech stack:
 - Python & Pandas
 - Javascript
 
-You can download my resume from [here](/assets/resume/MehmetOzanGuven_cv_eng.pdf)
+You can download my resume from [here](/assets/resume/MehmetOzanGuven_Blog_cv.pdf)
 
 Feel free to contact me via my email address: **mehmetozanguven@gmail.com**
 
