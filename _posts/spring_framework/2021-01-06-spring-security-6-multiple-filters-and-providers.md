@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  Spring Security -- 6) Multiple Authentication Filters && Providers
-date:   2021-01-06 23:45:31 +0530
+title: Spring Security -- 6) Multiple Authentication Filters && Providers
+date: 2021-01-06 23:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
 ---
 
-In this post, let's implement two steps authentication mechanism. This will be similar to JWT authentication but instead of JWT I will use my implementation. After correct user makes the login request, my response will include the header value called **Authorization** and user can be able to access to restricted endpoints using the Authorization header's value.
+In this post, let's implement two steps authentication mechanism. This will be similar to JWT authentication but instead of JWT I will use my implementation. After legitimate user makes the login request, my response will include the header value called **Authorization** and user can be able to access to restricted endpoints using the Authorization header's value.
 
 > You may see the previous [post](https://mehmetozanguven.github.io/spring/2020/12/30/spring-security-5-custom-filter.html) which includes simple project to understand filter, provider and authentication.
 
@@ -16,7 +16,7 @@ Topics are:
 
 - [**Github Link**](#github_link)
 - [**Project Overview**](#project_overview)
-- [**Default  Project Setup**](#default_project_setup)
+- [**Default Project Setup**](#default_project_setup)
   - [Database Setup](#database_setup)
   - [Password Encoder](#password_encoder)
   - [Entities, Repositories, Controller and Config Classes](#default_classes)
@@ -40,7 +40,7 @@ If you only need to see the code, here is the [github link](https://github.com/m
 
 ## Project Overview <a name="project_overview"></a>
 
-This project will be kind of a JWT token authentication. First, User will be authenticated against the database via **username and password**. After database authentication, I will generate one-time-password(otp) for that user which is actually random code. After that user will send request which also includes this new random otp. Then I will check the otp value, if the otp value is correct, then I will generate Authorization header's value and save it to my database **(in this simple project database will be the `HashSet`, do not do this in real case scenarios)** and my response will include **Authorization: {{Authorization header's value }}** header which is the random token to access the restricted endpoint(s).
+This project will be kind of a JWT token authentication. First, User will be authenticated against the database via **username and password**. After database authentication, I will generate one-time-password(otp) for that user which is actually random code. After that user will send request which also includes this new random otp. Then I will check the otp value, if the otp value is correct, then I will generate Authorization header's value and save it to my database **(in this simple project database will be the `HashSet`, don't do this in real case scenario(s))** and my response will include **Authorization: {{Authorization header's value }}** header which is the random token to access the restricted endpoint(s).
 
 For other requests than the `/login`, I will get the Authorization header's value and check the whether the value is correct or not. If it is not correct, authentication will fail.
 
@@ -52,8 +52,8 @@ If you try the connect the restricted endpoint without authorization, the you wi
 
 ```bash
 $ curl  -X GET http://localhost:8080/hello
-// log in the console
 
+// log in the console:
 org.springframework.security.authentication.BadCredentialsException: Authorization value is not correct
 	at com.mehmetozanguven.springsecuritymultipleproviders.service.providers.TokenAuthProvider.authenticate(TokenAuthProvider.java:27) ~[classes/:na]
 ```
@@ -64,11 +64,11 @@ Before getting the authorization token, you should create an record into the otp
 $ curl -H "username:test_user" -H "password:1234" -X GET http://localhost:8080/login
 ```
 
- Right now look at the otp table, you should have one record:
+Right now look at the otp table, you should have one record:
 
 ```bash
 testdatabase=# select * from otp;
- id | username  |    otp     
+ id | username  |    otp
 ----+-----------+------------
   1 | test_user | RXyObQYNDr
 ```
@@ -86,9 +86,9 @@ Note: Unnecessary use of -X or --request, GET is already inferred.
 > Accept: */*
 > username:test_user
 > otp:RXyObQYNDr
-> 
+>
 * Mark bundle as not supporting multiuse
-< HTTP/1.1 200 
+< HTTP/1.1 200
 -------
 < Authorization: 7c60f6b3-4047-4fc6-8a37-267661c574f4
 -------
@@ -100,7 +100,7 @@ Note: Unnecessary use of -X or --request, GET is already inferred.
 < X-Frame-Options: DENY
 < Content-Length: 0
 < Date: Mon, 04 Jan 2021 18:45:49 GMT
-< 
+<
 * Connection #0 to host localhost left intact
 
 ```
@@ -119,13 +119,10 @@ If you try to access with the wrong value:
 ```bash
 $ curl -H "Authorization:test_value" -X GET http://localhost:8080/hello
 
-// log in the console
-
+// log in the console:
 org.springframework.security.authentication.BadCredentialsException: Authorization value is not correct
 	at com.mehmetozanguven.springsecuritymultipleproviders.service.providers.TokenAuthProvider.authenticate(TokenAuthProvider.java:27) ~[classes/:na]
 ```
-
-
 
 ## Default Project Setup <a name="default_project_setup"></a>
 
@@ -186,9 +183,9 @@ And please setup empty table called `users` which has 3 columns:
 psql (12.5)
 Type "help" for help.
 
-postgres=# \c testdatabase 
+postgres=# \c testdatabase
 You are now connected to database "testdatabase" as user "postgres".
-testdatabase=# drop table users ; // drop the table if you have previously... 
+testdatabase=# drop table users ; // drop the table if you have previously...
 DROP TABLE
 testdatabase=# CREATE TABLE IF NOT EXISTS users (id serial PRIMARY KEY, username VARCHAR(50), password VARCHAR(50));
 CREATE TABLE
@@ -207,17 +204,15 @@ Do not forget to add test user:
 testdatabase=# INSERT INTO users (username, password) VALUES ('test_user', '1234');
 INSERT 0 1
 testdatabase=# select * from users;
- id | username  | password 
+ id | username  | password
 ----+-----------+----------
   1 | test_user | 1234
 (1 row)
 ```
 
+### Password Encoder <a name="password_encoder"></a>
 
-
-### Password Encoder  <a name="password_encoder"></a>
-
-I will  use `NoopPasswordEncoder` for this simple project. 
+I will use `NoopPasswordEncoder` for this simple project.
 
 ### Entities, Repositories, Controller and Config Classes <a name="default_classes"></a>
 
@@ -371,11 +366,9 @@ public class ProjectBeanConfiguration extends WebSecurityConfigurerAdapter {
 }
 ```
 
-
-
 ## Creating Filter and Providers <a name="create_filter_and_providers"></a>
 
-I do not want to convert `ServletRequest` to the `HttpServletRequest` instead I will directly work on the `HttpServletRequest` extending `OncePerRequestFilter` 
+I do not want to convert `ServletRequest` to the `HttpServletRequest` instead I will directly work on the `HttpServletRequest` extending `OncePerRequestFilter`
 
 And also I am going to override method `OncePerRequestFilter#shouldNotFilter(HttpServletRequest request)` to determine for which path(s) this filter will be called.
 
@@ -402,7 +395,7 @@ public class UsernamePasswordAuthFilter extends OncePerRequestFilter {
         if (otp == null){
             // authenticate via username and password and generate one time password
         }else{
-            // authenticate via one time password and 
+            // authenticate via one time password and
             // generate Authorization header with random value
             // finally save the header's value elsewhere!!
         }
@@ -432,7 +425,7 @@ Before diving into authentication instances, first let's define one manager in t
 @Configuration
 public class ProjectBeanConfiguration extends WebSecurityConfigurerAdapter {
 	// ...
-    
+
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -503,13 +496,13 @@ public class UsernamePasswordAuthFilter extends OncePerRequestFilter {
 
         if (otp == null){
             // * if there is no one-time-password, then generate an OTP
-            // 1) first make sure that, correct user is connecting you system
+            // 1) first make sure that, legitimate user is connecting to the your system
             UsernamePasswordAuthentication usernamePasswordAuthentication =
                     new UsernamePasswordAuthentication(username, password);
-            // 2) authManager will find the correct provider for that authentication
+            // 2) authenticationManager will find the correct provider for that authentication
             Authentication resultForUsernamePassword = authenticationManager.authenticate(usernamePasswordAuthentication);
             // 3) Because authenticationManager.authenticate will return fully authenticated instance
-            // ( otherwise it must throw and error), You can generate otp for authenticatied user
+            // ( otherwise it must throw an error), You can generate otp for authenticatied user
             // 4) Generate new otp
             String otpCode = RandomStringUtils.randomAlphabetic(10);
             // 5) save this new one-time-password for that user.
@@ -520,7 +513,7 @@ public class UsernamePasswordAuthFilter extends OncePerRequestFilter {
         }else{
             // if there is a one-time-password, authenticate user via one-time-password(otp)
             OtpAuthentication otpAuthentication = new OtpAuthentication(username, otp);
-            // authManager will find the correct provider for that authentication
+            // authenticationManager will find the correct provider for that authentication
             Authentication resultForOtp = authenticationManager.authenticate(otpAuthentication);
             // after getting fully authenticated instance, generate authorization header' value
             String authValue = UUID.randomUUID().toString();
@@ -534,7 +527,7 @@ public class UsernamePasswordAuthFilter extends OncePerRequestFilter {
 }
 ```
 
-What I am missing is that, **there is provider(s) for these authentication processes**. Let's define the providers
+What I am missing is that, **there should be provider(s) for these authentication processes**. Let's define the providers
 
 ### Creating Providers <a name="creating_provider"></a>
 
@@ -546,7 +539,7 @@ For the `authenticate()` method, there are three options:
 
 1. If the request is authenticated, should return authenticated Authentication instance
 2. If the request is not authenticated, throw AuthenticationException
-3. If the Authentication isn’t supported by this provider, then  return null, in another words AuthenticationProvider will say the  AuthenticationManager: “**Hey AuthenticationManager please try to use another Providers, I am not responsible for this**”
+3. If the Authentication isn’t supported by this provider, then return null, in another words AuthenticationProvider will say the AuthenticationManager: “**Hey AuthenticationManager please try to use another Providers, I am not responsible for this**”
 
 Right now, I need two AuthenticationProvider for each Authentication processes (`OtpAuthentication && UsernamePasswordAuthentication` )
 
@@ -578,7 +571,7 @@ public class UsernamePassswordAuthProvider implements AuthenticationProvider {
             // for this simple project, authorities is hard-coded, do not care about
             return new UsernamePasswordAuthenticationToken(username, password, List.of(() -> "read"));
         }
-        
+
         throw new BadCredentialsException("BadCredentialException");
     }
 
@@ -640,8 +633,6 @@ public class ProjectBeanConfiguration extends WebSecurityConfigurerAdapter {
 }
 ```
 
-
-
 ### Add the Filter to the configuration <a name="filter_to_configuration"></a>
 
 ```java
@@ -651,7 +642,7 @@ public class ProjectBeanConfiguration extends WebSecurityConfigurerAdapter {
     private UsernamePasswordAuthFilter usernamePasswordAuthFilter;
 
     // ...
-    
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.addFilterAt(usernamePasswordAuthFilter, BasicAuthenticationFilter.class);
@@ -659,15 +650,14 @@ public class ProjectBeanConfiguration extends WebSecurityConfigurerAdapter {
 }
 ```
 
-
-
-I can create one-time-password, and using this otp I can also generate Authorization header, it is time to authenticate (allow users to access restricted enpoints) using this Authorization header.
+I can create one-time-password, and using this otp I can also generate Authorization header.
+It is time to authenticate (allow users to access restricted enpoints) using this Authorization header.
 
 ## Creating the second filter <a name="second_filter"></a>
 
 The second filter will look at the Authorization header in the request and it will allow the request to access endpoint or not.
 
-Because `UsernamePasswordAuthFilter` was responsible to process the authentication for only `/login` endpoint,  all other endpoints must be filtered the creating filter.
+Because `UsernamePasswordAuthFilter` was responsible to process the authentication for only `/login` endpoint, all other endpoints must be filtered.
 
 ```java
 package com.mehmetozanguven.springsecuritymultipleproviders.service.filters;
@@ -692,8 +682,8 @@ public class TokenAuthFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         if (isPathLogin(request)){
             // if path is login then return true,
-            //   which means: do not run the TokenAuthFilter#doFilterInternal,
-            //     this authentication must be done by UsernamePasswordAuthFilter
+            // which means: do not run the TokenAuthFilter#doFilterInternal,
+            // this authentication must be done by UsernamePasswordAuthFilter
             return true;
         }else{
             // for other endpoints run this authentication
@@ -707,13 +697,11 @@ public class TokenAuthFilter extends OncePerRequestFilter {
 }
 ```
 
-
-
 As I have done previously, I should create a provider and authenticate instance for that filter. Provider will include the authentication login.
 
 ### Second filter Authentication Instance <a name="second_authentication_instances"></a>
 
-Right now, I will have `TokenAuthentication` which extends `UsernamePasswordAuthenticationToken` 
+Right now, I will have `TokenAuthentication` which extends `UsernamePasswordAuthenticationToken`
 
 ```java
 package com.mehmetozanguven.springsecuritymultipleproviders.service.authentications;
@@ -736,11 +724,9 @@ public class TokenAuthentication extends UsernamePasswordAuthenticationToken {
 }
 ```
 
-
-
 Now AuthenticationManager will call the correct authentication provider for that second filter. Let's implement the provider
 
-### Second filter Authentication Provider  <a name="second_filter_provider"></a>
+### Second filter Authentication Provider <a name="second_filter_provider"></a>
 
 ```java
 @Component
@@ -767,8 +753,6 @@ public class TokenAuthProvider implements AuthenticationProvider {
 }
 ```
 
-
-
 ### Add the second filter and provider to the configuration <a name="add_second_to_configuration"></a>
 
 The last thing is to add these new filters and providers to the configuration:
@@ -777,7 +761,7 @@ The last thing is to add these new filters and providers to the configuration:
 @Configuration
 public class ProjectBeanConfiguration extends WebSecurityConfigurerAdapter {
     // ...
-    
+
     // second filter and provider
     @Bean
     public TokenAuthFilter tokenAuthFilter() {
@@ -805,4 +789,3 @@ public class ProjectBeanConfiguration extends WebSecurityConfigurerAdapter {
 ```
 
 I will continue with the next one ...
-
