@@ -73,12 +73,12 @@ First, summarize the overall architecture:
 
 <img src="/assets/spring/security/basic_concepts/spring_security_basic.png" alt="spring_security_basic.png" />
 
-- When request is intercepted, `AuthenticationFilter` pass your credentials (username:password) to the ` AuthenticationManager`. Therefore responsibility of AuthenticationFilter is just pass the credentials to the AuthenticationManager
+- When request is intercepted, `AuthenticationFilter` pass your credentials (username:password) to the `AuthenticationManager`. Therefore responsibility of AuthenticationFilter is just pass the credentials to the AuthenticationManager
 - AuthenticationManager delivers to the responsibility of the authentication to the one of the `AuthenticationProvider` s. (AuthenticationManager will find the proper AuthenticationProvider for the request(s))
 - In the AuthenticationProvider, we will have the Authentication Logic.
-- Most probably requests will include username and password, therefore you should identify these in your database, cache system etc.. We need find out the user with credentials somehow, in spring security component that finds out the correct user is called `UserDetailsService` (UserDetailsService responsibility is the to find out the user in the database via credentials in the requests)
+- Most probably requests will include username and password, therefore you should identify these in your database, cache system etc.. We need find out the user with credentials somehow, in spring security, component that finds out the correct user is called `UserDetailsService` (UserDetailsService responsibility is the to find out the user in the database via credentials in the requests)
 - The last component that acts on the authentication is the `PasswordEncoder` which is used by the AuthenticationProvider to implement authentication logic. Role of PasswordEncoder is to check whether password is correct or not. After UserDetailsService gets the details of the user from the database and these details also contain user's password, then PasswordEncoder will try to match the passwords in the request(s) and the user's details from the database.
-- Now consider that we have valid authentication, if that is the case, then valid authentication response will forward the AuthenticationFilter, in the AuthenticationFilter, spring will store the authenticated object in the `SecurityContext`
+- Now consider that we have valid authentication, if that is the case, then valid authentication response will forward to the AuthenticationFilter, in the AuthenticationFilter, spring will store the authenticated object in the `SecurityContext`
 - After all we can get the authenticated user object using the SecurityContext.
 
 That is the main architecture of Spring Security.
@@ -115,7 +115,7 @@ Using generated security password: 539983a1-3724-4fde-b757-da3818bc8f16
 If you call this endpoint via curl (or postman), you will not access it:
 
 ```bash
-[mehmetozanguven@localhost ~]$ curl -X GET http://localhost:8080/test | jq .
+curl -X GET http://localhost:8080/test | jq .
 {
   "timestamp": "2020-12-27T13:42:38.169+00:00",
   "status": 401,
@@ -130,7 +130,7 @@ Because the default spring security configuration is the Basic Authentication, j
 > Removed `.jq` pipeline because i am not returning json from the endpoint. jq is the command line JSON processor
 
 ```bash
-[mehmetozanguven@localhost ~]$ curl --user user:539983a1-3724-4fde-b757-da3818bc8f16 -X GET  http://localhost:8080/test
+curl --user user:539983a1-3724-4fde-b757-da3818bc8f16 -X GET  http://localhost:8080/test
 test
 ```
 
@@ -142,8 +142,7 @@ package org.springframework.security.web.authentication.www;
 public class BasicAuthenticationFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request,
-			HttpServletResponse response, FilterChain chain)
-					throws IOException, ServletException {
+			HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 			// ....
 			if (authenticationIsRequired(username)) {
 				Authentication authResult = this.authenticationManager
@@ -161,9 +160,9 @@ Now let's override the default configuration for spring security
 
 ## Overriding the configuration <a name="default_configuration"></a>
 
-Let's create our own user instead of the generated one from spring security, right now I will store the user in the memory.
+Let's create our own user instead of the generated one from spring security, for now I will store the user in the memory.
 
-In my scenario I am just overriding the `UserDetailsService` and do not forget that overriding the UserDetailsService forces us to override the PasswordEncoder
+In my scenario I am just overriding the `UserDetailsService` and **do not forget that overriding the UserDetailsService forces us to override the PasswordEncoder**
 
 In default configuration, because there is no UserDetailsService and PasswordEncoder, these ones are generated by spring security.
 
@@ -195,17 +194,16 @@ public class ProjectBeanConfiguration {
 }
 ```
 
-In the configuration `InMemoryUserDetailsManager` implements `UserDetailsManager` interface which extends ` UserDetailsService`
+In the configuration `InMemoryUserDetailsManager` implements `UserDetailsManager` interface which extends `UserDetailsService`
 
-After that I am just creating the testUser type of UserDetails (that is the type spring security requests), and testUser has a username **testUser** with password: **1234** and one authority: **read** (testUser can read something)
+After that I am just creating the testUser of type UserDetails (that is the type spring security requests), and testUser has a username **testUser** with password: **1234** and one authority: **read** (testUser can read something)
 
 After all I am just adding the testUser to the my InMemoryUserDetailsManager. At the end I just defined the my own UserDetailsService
 
 Now, if I run the project, I will not see **Using generated security password: ...** in the console, because I just told spring to use my own userDetailsService. However, because there is no default configuration for UserDetailsService there won't be also default PasswordEncoder and if you run this curl command, you will get an exception:
 
 ```bash
-[mehmetozanguven@localhost ~]$ curl --user testUser:1234 -X GET  http://localhost:8080/test
-[mehmetozanguven@localhost ~]$
+curl --user testUser:1234 -X GET  http://localhost:8080/test
 ```
 
 and the exception will be:
@@ -243,7 +241,7 @@ public class ProjectBeanConfiguration {
 Now let's run the application again:
 
 ```bash
-[mehmetozanguven@localhost ~]$ curl --user testUser:1234 -X GET  http://localhost:8080/test
+curl --user testUser:1234 -X GET  http://localhost:8080/test
 test
 ```
 
