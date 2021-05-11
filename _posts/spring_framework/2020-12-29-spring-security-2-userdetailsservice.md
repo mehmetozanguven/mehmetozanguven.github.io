@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  Spring Security -- 2) UserDetailsService"
-date:   2020-12-29 16:45:31 +0530
+title: Spring Security -- 2) UserDetailsService"
+date: 2020-12-29 16:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
 ---
@@ -15,13 +15,11 @@ Topics are:
 - [**Architecture**](#architecture)
 - [**Creating UserDetailsService**](#creating_userDetailsService)
 
-
-
-## Github Link  <a name="github_link"></a>
+## Github Link <a name="github_link"></a>
 
 If you only need to see the code, here is the [github link](https://github.com/mehmetozanguven/spring-security-examples/tree/master/spring-security-with-database)
 
-## Default Setup for Project  <a name="default_setup"></a>
+## Default Setup for Project <a name="default_setup"></a>
 
 I am going to use Postgresql, and I created new spring boot application with these dependencies:
 
@@ -92,12 +90,12 @@ Please create the table and initialize with predefined data:
 
 > In our example, because I use the NoOpPasswordEncoder, I do not need to find hashcode for the dummy inserted user.
 >
-> Do not use NoOpPasswordEncoder in the production
+> **Do not use NoOpPasswordEncoder in the production**
 
 ```bash
 [mehmetozanguven@localhost ~]$ sudo -iu postgres
 [postgres@localhost ~]$ psql
-postgres=# \c testdatabase 
+postgres=# \c testdatabase
 You are now connected to database "testdatabase" as user "postgres".
 testdatabase=# CREATE TABLE IF NOT EXISTS test_users (id serial PRIMARY KEY, username VARCHAR(50), password VARCHAR(50));
 testdatabase=# INSERT INTO test_users (username,password) VALUES ('dummy_user','1234');
@@ -130,6 +128,7 @@ Repository to connect the database:
 
 ```java
 package com.mehmetozanguven.springsecuritywithdatabase.repository;
+
 @Repository
 public interface UserRepository extends JpaRepository<UserDTO, Long> {
 
@@ -137,7 +136,7 @@ public interface UserRepository extends JpaRepository<UserDTO, Long> {
 }
 ```
 
-And Spring Security requires to work with `UserDetails` object, therefore I should somehow convert to the UserDTO to the `UserDetails` object. I have created a class for that:
+And Spring Security needs to work with `UserDetails` object, therefore I should somehow convert to the UserDTO to the `UserDetails` object. I have created a class for that:
 
 ```java
 package com.mehmetozanguven.springsecuritywithdatabase.services;
@@ -163,7 +162,7 @@ public class SecureUser  implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(() -> "read");
     }
-    
+
     @Override
     public String getPassword() {
         return userDTO.getPassword();
