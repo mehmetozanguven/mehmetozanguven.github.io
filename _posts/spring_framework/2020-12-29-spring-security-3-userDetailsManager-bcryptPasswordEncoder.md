@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  Spring Security -- 3) UserDetailsManager, JdbcUserDetailsManager and BCryptPasswordEncoder"
-date:   2020-12-29 19:45:31 +0530
+title: Spring Security -- 3) UserDetailsManager, JdbcUserDetailsManager and BCryptPasswordEncoder"
+date: 2020-12-29 19:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
 ---
 
-In this post, let's look at the what **UserDetailsManager** is, differences between **UserDetailsService**. And also I am going to do a project that uses **JdbcUserDetailsManager** with different passwordEncoder.
+In this post, let's look at the what **UserDetailsManager** is, differences between **UserDetailsService**. And also I am going to implement a project that uses **JdbcUserDetailsManager** with different passwordEncoder.
 
 > Before diving into the detail, you may refer to the previous blog: [**Security with UserDetailsService**](https://mehmetozanguven.github.io/spring/2020/12/29/spring-security-2-userdetailsservice.html)
 
@@ -18,7 +18,7 @@ Topics are:
 - [**Why UserDetailsManager and differences between UserDetailsService**](#userdetailsmanager)
 - [**Creating a JdbcUserDetailsManager**](#jdbcUserDetailsManager)
   - DataSource setup for Postgresql
-  - Creating correspond tables
+  - Creating corresponding tables
 - [**Changing PasswordEncoder**](#changing_passwordencoder)
   - Disable the CSRF token (for demo purpose)
   - Create a new endpoint to add user (making sure that the new endpoint is not protected)
@@ -30,7 +30,7 @@ If you only need to see the code, here is the [github link](https://github.com/m
 
 ## Default Project Setup <a name="default_project_setup"></a>
 
-Default project includes the following dependencies: (Yo do not need to use  dependency `spring-boot-starter-data-jpa` )
+Default project includes the following dependencies: (Yo do not need to use dependency `spring-boot-starter-data-jpa` )
 
 ```xml
 <dependencies>
@@ -67,7 +67,7 @@ Default project includes the following dependencies: (Yo do not need to use  dep
 
 I have one controller:
 
-````java
+```java
 @RestController
 public class HelloController {
 
@@ -76,7 +76,7 @@ public class HelloController {
         return "hello";
     }
 }
-````
+```
 
 > You do not need to update application.properties file for database connection. In that example, You are going to connect your database via programmatic way (using **DataSource** object)
 
@@ -86,7 +86,7 @@ public class HelloController {
 
 ## Why UserDetailsManager <a name="userdetailsmanager"></a>
 
-In default, Spring only needs to find out the user's details by using username, Spring does not need to do some operation on the user. However some applications needs more operational stuff, such as changing password, update the existing user etc.. In that case you should use a `UserDetailsManager` which extends `UserDetailsService` 
+In default, Spring only needs to find out the user's details by using username, Spring does not need to do some operation on the user. However some applications needs more operational stuff, such as changing password, update the existing user etc.. In that case you should use a `UserDetailsManager` which extends `UserDetailsService`
 
 ```java
 public interface UserDetailsManager extends UserDetailsService {
@@ -98,12 +98,11 @@ public interface UserDetailsManager extends UserDetailsService {
 }
 ```
 
-As you recall from  [previous blog](https://mehmetozanguven.github.io/spring/2020/12/29/spring-security-1-basic-concepts.html#default_configuration), I have used `InMemoryUserDetailsManager` to create user on the fly. InMemoryUserDetailsManager was actually a **UserDetailsManager** which states that it is also **UserDetailsService**. I used InMemoryUserDetailsManager to create a **user(or dummy user to test let's say)**
+As you recall from [previous blog](https://mehmetozanguven.github.io/spring/2020/12/29/spring-security-1-basic-concepts.html#default_configuration), I have used `InMemoryUserDetailsManager` to create user on the fly. InMemoryUserDetailsManager was actually an **UserDetailsManager** which states that it is also **UserDetailsService**. I used InMemoryUserDetailsManager to create a **user(or dummy user)**
 
 ```java
-public class InMemoryUserDetailsManager implements UserDetailsManager,
-		UserDetailsPasswordService {
-            // ...
+public class InMemoryUserDetailsManager implements UserDetailsManager, UserDetailsPasswordService {
+    // ...
 }
 ```
 
@@ -112,8 +111,7 @@ public class InMemoryUserDetailsManager implements UserDetailsManager,
 In this example, I am going to use JdbcUserDetailsManager, and as you can guess, it is used to create, read, delete or update the user based on the table structure.
 
 ```java
-public class JdbcUserDetailsManager extends JdbcDaoImpl implements UserDetailsManager,
-		GroupManager {
+public class JdbcUserDetailsManager extends JdbcDaoImpl implements UserDetailsManager, GroupManager {
 	// ~ Static fields/initializers
 	// =====================================================================================
 
@@ -122,15 +120,15 @@ public class JdbcUserDetailsManager extends JdbcDaoImpl implements UserDetailsMa
 	public static final String DEF_DELETE_USER_SQL = "delete from users where username = ?";
 	public static final String DEF_UPDATE_USER_SQL = "update users set password = ?, enabled = ? where username = ?";
     public static final String DEF_DELETE_USER_AUTHORITIES_SQL = "delete from authorities where username = ?";
-            // ....
-        }
+    // ....
+}
 ```
 
-Take a careful look at this class, this class says that: 
+Take a careful look at this class, this class says that:
 
->  "Hey developer, you should have a table called **users which has 3 columns--username,password,enabled--(to create, delete or update the users)** and **authorities which has 2 columns--username,authority--(to store authority for the user)**, because that's my the default behavior. If you want to change table's name, in somehow you should override it!!"
+> "Hey developer, you should have a table called **users which has 3 columns--username,password,enabled--(to create, delete or update the users)** and table called **authorities which has 2 columns--username,authority--(to store authority for the user)**, because that's my the default behavior. If you want to change table's name, in somehow you should override it!!"
 
-To create your own `JdbcUserDetailsManager` you should give your `DataSource` to the JdbcUserDetailsManager and manager will try to connect your database with that source.
+To create your own `JdbcUserDetailsManager` you should give your `DataSource` to the JdbcUserDetailsManager and JdbcUserDetailsManager will try to connect your database with that source.
 
 Here is the configuration:
 
@@ -183,7 +181,7 @@ Now I should create the correct tables (table's names that spring knows as defau
 psql (12.5)
 Type "help" for help.
 
-postgres=# \c testdatabase 
+postgres=# \c testdatabase
 You are now connected to database "testdatabase" as user "postgres".
 testdatabase=# CREATE TABLE IF NOT EXISTS users (username VARCHAR(50) PRIMARY KEY, password TEXT, enabled VARCHAR(50));
 CREATE TABLE
@@ -200,7 +198,7 @@ INSERT 0 1
 After dummy user is ready, run the project and the following curl command:
 
 ```bash
-[mehmetozanguven@localhost ~]$ curl --user dummy_user:123456 -X GET http://localhost:8080/hello 
+[mehmetozanguven@localhost ~]$ curl --user dummy_user:123456 -X GET http://localhost:8080/hello
 
 hello
 ```
@@ -211,7 +209,7 @@ As you can see, now I can access the protected endpoint.
 
 Let's now change the passwordEncoder to the `BCryptPasswordEncoder` .
 
-> Be careful when you are changing the password encoder, some of the encoders are not considered as secure, Spring will annotate these encoders as deprecated.
+> Be careful when you are changing the password encoder, some of the encoders are not considered as secure, Spring will annotate these encoders as **deprecated**.
 
 ```java
 package org.springframework.security.crypto.bcrypt;
@@ -247,7 +245,7 @@ After running the project and the same curl command, you won't access the protec
 psql (12.5)
 Type "help" for help.
 
-postgres=# \c testdatabase 
+postgres=# \c testdatabase
 You are now connected to database "testdatabase" as user "postgres".
 testdatabase=# TRUNCATE authorities ;
 TRUNCATE TABLE
@@ -257,7 +255,7 @@ TRUNCATE TABLE
 
 To store user, I just created a simple endpoint called `addUser()` via POST method.
 
-To use POST method, I disabled the CSRF token protection, (Spring will includes in a default manner). (Just now, we do not care about CSRF). To disable CSRF token, I updated the configuration and extends the class with `WebSecurityConfigurerAdapter`  to override method `configure(HttpSecurity..) ` .
+To use POST method, I disabled the CSRF token protection, (Spring will includes in a default manner). (Just now, we do not care about CSRF). To disable CSRF token, I updated the configuration and extends the class with `WebSecurityConfigurerAdapter` to override method `configure(HttpSecurity..) ` .
 
 And also I need to setup such that **addUser** method should not be protected. Otherwise I can not add any user:
 
@@ -279,20 +277,20 @@ public class ProjectBeanConfiguration extends WebSecurityConfigurerAdapter {
 }
 ```
 
- Finally, here is the new endpoint and correspond new classes:
+Finally, here is the new endpoint and corresponding new classes:
 
- ```java
+```java
 @RestController
 public class HelloController {
 
-    @Autowired
-    private JdbcUserDetailsManager userDetailsManager;
- 	// ...
-	
-    @PostMapping("/user")
-    public void addUser(@RequestBody UserRequest userRequest){
-        userDetailsManager.createUser(new SecureUser(userRequest));
-    }
+   @Autowired
+   private JdbcUserDetailsManager userDetailsManager;
+	// ...
+
+   @PostMapping("/user")
+   public void addUser(@RequestBody UserRequest userRequest){
+       userDetailsManager.createUser(new SecureUser(userRequest));
+   }
 }
 ```
 
@@ -330,13 +328,13 @@ Take a look at the databases right now:
 
 ```bash
 testdatabase=# select * from authorities ;
- id |  username  | authority 
+ id |  username  | authority
 ----+------------+-----------
   4 | dummy_user | read
 (1 row)
 
 testdatabase=# select * from users ;
-  username  | password | enabled 
+  username  | password | enabled
 ------------+----------+---------
  dummy_user | 1234     | true
 (1 row)
@@ -355,14 +353,14 @@ public class HelloController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-	
+
     // ...
-    
+
     @PostMapping("/user")
     public void addUser(@RequestBody UserRequest userRequest){
-        // place where I hash the password from the request
+        // Method where I hash the password from the request
         // NOTE: doing the hash operation in controller may not be the correct place
-        // doing the hash operation in any service object would be better
+        // Implementing the hash operation in any service would be better
         userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
         userDetailsManager.createUser(new SecureUser(userRequest));
     }
@@ -379,13 +377,13 @@ Databases right now:
 
 ```bash
 testdatabase=# select * from users ;
-    username    |                           password                           | enabled 
+    username    |                           password                           | enabled
 ----------------+--------------------------------------------------------------+---------
  dummy_user     | 1234                                                         | true
  new_dummy_user | $2a$10$0Y81dEUg4.aAfjxLkXJvO.3dOy0D9IHS1/bUvPm9mCtv25bdVFlwG | true
 
 testdatabase=# select * from authorities ;
- id |    username    | authority 
+ id |    username    | authority
 ----+----------------+-----------
   5 | dummy_user     | read
   6 | new_dummy_user | read
@@ -394,7 +392,7 @@ testdatabase=# select * from authorities ;
 Finally I hashed the password, right now I can access the protected endpoint using the new_dummy_user:
 
 ```bash
-[mehmetozanguven@localhost ~]$ curl --user new_dummy_user:1234 -X GET http://localhost:8080/hello 
+[mehmetozanguven@localhost ~]$ curl --user new_dummy_user:1234 -X GET http://localhost:8080/hello
 hello
 ```
 
