@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  Spring Security -- 4) Implementing Custom Authentication Provider
-date:   2020-12-30 19:45:31 +0530
+title: Spring Security -- 4) Implementing Custom Authentication Provider
+date: 2020-12-30 19:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
 ---
 
-In this post, I am going to answer to these questions "what is the **Authentication Provider**" and I am going to implement a project includes custom authentication provider.
+In this post, I am going to answer to this question "what is the **Authentication Provider**" and I am going to implement a project includes custom authentication provider.
 
 Topics are:
 
@@ -19,11 +19,9 @@ Topics are:
   - `MyCustomAuthenticationProvider` class
   - Adding the CustomProvider to the configuration
 
-
 ## Github Link <a name="github_link"></a>
 
 If you only need to see the code, here is the [github link](https://github.com/mehmetozanguven/spring-security-examples/tree/master/spring-security-authentication-provider)
-
 
 ## Overall Architecture in one picture <a name="overall_architecture"></a>
 
@@ -115,8 +113,7 @@ In general `AuthenticationProvider` contains two methods: `authenticate()` conta
 
 ```java
 public interface AuthenticationProvider {
-	Authentication authenticate(Authentication authentication)
-			throws AuthenticationException;
+	Authentication authenticate(Authentication authentication) throws AuthenticationException;
 	boolean supports(Class<?> authentication);
 }
 ```
@@ -129,15 +126,13 @@ For the `authenticate()` method, there are three options:
 
 For the `supports()` method:
 
-- This method calls by the AuthenticationManager, and this method should check the authentication type. For instance: `return UsernamePasswordAuthenticationToken.class.equals(authentication);` (httpBasic uses this authentication) means that authentication  should be processed when authentication type is UsernamePasswordAuthenticationToken
+- This method is called by the AuthenticationManager, and this method should check the authentication type. For instance: `return UsernamePasswordAuthenticationToken.class.equals(authentication);` means that authentication should be processed when authentication type is UsernamePasswordAuthenticationToken (httpBasic uses this authentication)
 
 Here is the `MyCustomAuthenticationProvider`:
 
 > Note: When you are returning fully authenticated instance, return an instance that implements Authentication interface and `Authenticate#isAuthenticated` **must return true**.
 >
-> For  httpBasicAuthentication, instance will be `UsernamePasswordAuthenticationToken,`
->
-> And I am going to use this constructor, because it sets the authenticated to true
+> For httpBasicAuthentication, instance will be `UsernamePasswordAuthenticationToken,`
 >
 > ```java
 > public class UsernamePasswordAuthenticationToken extends AbstractAuthenticationToken {
@@ -148,8 +143,8 @@ Here is the `MyCustomAuthenticationProvider`:
 > 		this.credentials = credentials;
 > 		setAuthenticated(false);
 > 	}
-> 
->     // for fully authentication instance, USE THIS ONE
+>
+>   // for fully authentication instance, USE THIS ONE
 > 	public UsernamePasswordAuthenticationToken(Object principal, Object credentials,
 > 			Collection<? extends GrantedAuthority> authorities) {
 > 		super(authorities);
@@ -159,13 +154,11 @@ Here is the `MyCustomAuthenticationProvider`:
 > 	}
 > }
 > ```
->
-> 
 
 ```java
 /**
  * This class includes the following logic:
- * If a user is exists and password is correct, then login must be successful
+ * If a user exists and password is correct, then login must be successful
  * otherwise login should fail
  */
 @Component
@@ -195,8 +188,8 @@ public class MyCustomAuthenticationProvider implements AuthenticationProvider {
     }
 
     /**
-     * Because I am going to use HttpBasicAuthentication and
-     * HttpBasicAuthentication uses UsernamePasswordAuthenticationToken
+     * Because I am going to use HttpBasicAuthentication
+     * and HttpBasicAuthentication uses UsernamePasswordAuthenticationToken
      * @param authenticationType
      * @return
      */
@@ -207,7 +200,7 @@ public class MyCustomAuthenticationProvider implements AuthenticationProvider {
 }
 ```
 
-The last step is to adding the custom provider to the configuration:
+The last step is to add the custom provider to the configuration:
 
 ```java
 @Configuration
@@ -226,7 +219,7 @@ public class ProjectBeanConfiguration  extends WebSecurityConfigurerAdapter {
 After starting the application, run the following curl command: (You can also add the debug point to the custom authentication provider)
 
 ```bash
-[mehmetozanguven@localhost ~]$ curl --user dummy_user:1234 -X GET http://localhost:8080/hello 
+[mehmetozanguven@localhost ~]$ curl --user dummy_user:1234 -X GET http://localhost:8080/hello
 
 hello
 ```
