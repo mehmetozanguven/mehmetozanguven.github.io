@@ -4,7 +4,6 @@ on:
     types:
       - opened
       - edited
-      - synchronize
   schedule:
     # https://crontab.guru/every-hour
     - cron: 0 * * * *
@@ -13,12 +12,6 @@ jobs:
   merge_schedule:
     runs-on: ubuntu-latest
     steps:
-      - uses: gr2m/merge-schedule-action@v1
-        with:
-          # Merge method to use. Possible values are merge, squash or
-          # rebase. Default is merge.
-          merge_method: merge
-          #  Time zone to use. Default is UTC.
-          time_zone: "Europe/Istanbul"
+      - uses: gr2m/merge-schedule-action@v1.x
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
