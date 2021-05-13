@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring Security -- Security Context and Security Context Holder
+title: Spring Security -- 7) Security Context and Security Context Holder
 date: 2021-05-11 22:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
