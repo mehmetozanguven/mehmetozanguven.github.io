@@ -8,7 +8,7 @@ author: "mehmetozanguven"
 
 # Aspect Oriented Programming(AOP) with Spring Boot Example - 2
 
-This is the second post for a short series of aspect oriented programming with the spring boot.
+This is the second post for a short series of **aspect oriented programming with the spring boot.**
 
 In this post, I am going to implement a simple project example includes spring aop module. I will write aspect for both method execution(s) and annotation(s). At the end you will be able to reference this basic project for yours.
 
