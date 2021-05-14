@@ -12,7 +12,7 @@ description: Includes my notes about Java, Spring, Apache Flink and more ...
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site
 twitter_username: mehmetozanguven
-github_username:  mehmetozanguven
+github_username: mehmetozanguven
 paginate: 5
 theme-dark: false #Set to true to change to dark website theme
 
