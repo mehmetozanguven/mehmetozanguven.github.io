@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Aspect Oriented Programming(AOP) with Spring Boot Example - 2"
-date:   2020-11-17 12:45:31 +0530
+title: "Aspect Oriented Programming(AOP) with Spring Boot Example - 2"
+date: 2020-11-17 12:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
 ---
@@ -12,9 +12,9 @@ This is the second post for a short series of **aspect oriented programming with
 
 In this post, I am going to implement a simple project example includes spring aop module. I will write aspect for both method execution(s) and annotation(s). At the end you will be able to reference this basic project for yours.
 
-> Before start, you may need to check the previous [post](https://mehmetozanguven.github.io/spring/2020/11/13/aspect-oriented-programming-with-spring-boot-1.html) which includes AOP definitions, advice types, aspectJ etc.. 
+> Before start, you may need to check the previous [post](https://mehmetozanguven.github.io/spring/2020/11/13/aspect-oriented-programming-with-spring-boot-1.html) which includes AOP definitions, advice types, aspectJ etc..
 >
-> If you only need to use github repo, here is the [link](https://github.com/mehmetozanguven/spring-aop-demo-project)
+> If you only need to use github repo, here is the [link](https://github.com/mehmetozanguven/spring-boot-examples/tree/master/spring-aop)
 
 ## Aspects in the Project
 
@@ -36,14 +36,14 @@ Before diving into the project, let me point to the aspects I am going to use fo
 
 - For any execution of the `POST` method, log that "POST method called"
 
-### Tricky Method Aspect 
+### Tricky Method Aspect
 
 - **Will aspect work when you call it from another method e.g indirect-call ?**
 - **How Spring AOP actually works**
 
 ## Basic Project Structure
 
-Before adding the aspect, default project setup includes three controllers (`CustomerController, LoginController, StatusController`) and two services (`CustomerService, LoginService`) and one repository (`CustomerRepository`) 
+Before adding the aspect, default project setup includes three controllers (`CustomerController, LoginController, StatusController`) and two services (`CustomerService, LoginService`) and one repository (`CustomerRepository`)
 
 There is no real database setup or other complex setup to start this application. These are just the dummy endpoints. Take a look at all the endpoints:
 
@@ -104,16 +104,16 @@ public class CustomerController {
 
 ## Adding Aspect
 
-Before directly adding annotation to other project, 
+Before directly adding annotation to other project,
 
 First define some pointcut designators:
 
-- **execution**:  matching method execution join points. This is the most widely used.
+- **execution**: matching method execution join points. This is the most widely used.
 - **within**: for matching methods of classes within certain types e.g. classes within a package.
 - **@within** – for matching to join points within types (target object class) that have the given annotation. (used for class level annotation)
 - **@annotation –** for matching to join points where the subject (method) of the Joinpoint has the given annotation. (method level annotation)
 
-Second define some *pre-define* pointcut, such as **pointcut for serviceClassMethod(s), repositoryClassMethod(s) etc..**
+Second define some _pre-define_ pointcut, such as **pointcut for serviceClassMethod(s), repositoryClassMethod(s) etc..**
 
 ```java
 @Aspect
@@ -122,13 +122,11 @@ public class SystemPointcut {
     // we can refer this pointcut via controllerLayer()
     @Pointcut("within(com.mehmetozanguven.springaopexample.controller..*)")
     public void controllerLayer() {}
-    
+
     // ...
 }
 
 ```
-
-
 
 ### @InjectResponseCookie aspect
 
@@ -161,7 +159,7 @@ public class InjectResponseCookieAspect {
 }
 ```
 
- Add `@InjectResponseCookie` annotation to any method: (I have added the `findCustomerById` method)
+Add `@InjectResponseCookie` annotation to any method: (I have added the `findCustomerById` method)
 
 ```java
 @InjectResponseCookie(cookieValue = "injectResponseCookie")
@@ -173,8 +171,6 @@ public String findCustomerById(HttpServletRequest request, HttpServletResponse r
 }
 // hit the http://localhost:8080/api/customer-by-id/22 and see the cookies
 ```
-
-
 
 ### @Retry Aspect
 
@@ -196,7 +192,7 @@ Define the aspect: **This should be `@Around` advice, because i need to catch th
 @Component
 public class RetryAspect {
     private static final Logger LOGGER = LoggerFactory.getLogger(RetryAspect.class);
-    
+
 	// Fully qualified name to avoid 'error Type referred to is not an annotation type:'
     @Around("@annotation(com.mehmetozanguven.springaopexample.annotation.Retry)")
     public Object retryTheExecution(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
@@ -209,8 +205,6 @@ public class RetryAspect {
     }
 }
 ```
-
-
 
 Add `@Rety` to any method execution, I have added to the `StatusController`, logic is very basic:
 
@@ -247,8 +241,6 @@ Depending on your execution, you may see the logs like this:
 2020-11-17 00:08:52.804  INFO 15258 --- [nio-8080-exec-1] c.m.s.controller.StatusController        : Status controller with randomNumber: 8
 ```
 
-
-
 ### Logging Aspect
 
 Define the aspect:
@@ -270,8 +262,8 @@ You can hit the login endpoint via this payload
 
 ```json
 {
-    "email":"sample",
-    "password": "password"
+  "email": "sample",
+  "password": "password"
 }
 ```
 
@@ -281,9 +273,7 @@ Here is the aspect log:
 2020-11-17 00:18:15.420  INFO 15979 --- [nio-8080-exec-1] c.m.s.aspect.PostLoggingAspect           : POST method called: String com.mehmetozanguven.springaopexample.controller.LoginController.loginCustomer(LoginRequest)
 ```
 
-
-
-### Tricky Method Aspect 
+### Tricky Method Aspect
 
 As I have said previously, We are going to find out "aspect will work for indirect call or not?"
 
@@ -294,7 +284,7 @@ Define aspect:
 @Component
 public class TrickyAspect {
     private static final Logger LOGGER = LoggerFactory.getLogger(TrickyAspect.class);
-    
+
     @After("execution(* trickyMethod(..))")
     public void trickyMethodAdvice(){
         LOGGER.info("Tricky after advice called");
@@ -302,7 +292,7 @@ public class TrickyAspect {
 }
 ```
 
-Update the `CustomerController,Service and Repository` 
+Update the `CustomerController,Service and Repository`
 
 ```java
 @RestController
@@ -343,7 +333,7 @@ public class CustomerServiceImpl implements CustomerService{
 @Repository
 public class CustomerRepositoryImpl implements CustomerRepository {
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomerRepositoryImpl.class);
-    
+
     @Override
     public void trickyMethod() {
         LOGGER.info("Tricky method called");
@@ -370,7 +360,7 @@ Hit the: http://localhost:8080/api/tricky, here is the logs:
 
 Hit the http://localhost:8080/api/tricky-in, here is the logs:
 
-````wiki
+```wiki
 2020-11-17 01:16:28.204  INFO 20927 --- [nio-8080-exec-1] c.m.s.repository.CustomerRepositoryImpl  : -------
 
 2020-11-17 01:16:28.204  INFO 20927 --- [nio-8080-exec-1] c.m.s.repository.CustomerRepositoryImpl  : indirectCallOfTrickyMethod will call the trickyMethod
@@ -380,7 +370,7 @@ Hit the http://localhost:8080/api/tricky-in, here is the logs:
 2020-11-17 01:16:28.204  INFO 20927 --- [nio-8080-exec-1] c.m.s.repository.CustomerRepositoryImpl  : -------
 
 2020-11-17 01:16:28.204  INFO 20927 --- [nio-8080-exec-1] c.m.s.repository.CustomerRepositoryImpl  : Tricky method called
-````
+```
 
 As you can see TrickyAfterAdvice did not get call. If you look for an answer, answer is related to the Spring proxy mechanism.
 
@@ -396,9 +386,7 @@ If Spring knows your object, Spring will wrap (will create a proxy) the original
 
 <img src="/assets/spring/aop/proxy.png" alt="original_object" />
 
-
-
-Other spring beans does call to this proxy,  this call is forwarded to the Original Object and also the Advice is called. This is **how Spring AOP works.** Instead of the Original object proxy is used:
+Other spring beans does call to this proxy, this call is forwarded to the Original Object and also the Advice is called. This is **how Spring AOP works.** Instead of the Original object proxy is used:
 
 <img src="/assets/spring/aop/adviceCall.png" alt="original_object" />
 
@@ -423,7 +411,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 }
 ```
 
-After hit the  http://localhost:8080/api/tricky, you can see that `trickyMethod` will be called from class named: `CustomerRepositoryImpl$$FastClassBySpringCGLIB...`  which is nothing but a Proxy, and that means Advice will be called also.
+After hit the http://localhost:8080/api/tricky, you can see that `trickyMethod` will be called from class named: `CustomerRepositoryImpl$$FastClassBySpringCGLIB...` which is nothing but a Proxy, and that means Advice will be called also.
 
 <img src="/assets/spring/aop/proxyCalled.png" alt="original_object" />
 
@@ -438,20 +426,18 @@ Another example could `@Transactional` annotation:
 public class CustomerRepository{
     @Transactional
     public void transaction(){
-        
+
     }
-    
+
     public void callTransactional(){
-        /* Because @Transaction is implemented using Spring AOP, 
-        	callTransactional method has no configuration(even it is calling transaction method) for transaction such as: 
+        /* Because @Transaction is implemented using Spring AOP,
+        	callTransactional method has no configuration(even it is calling transaction method) for transaction such as:
         		the rollback rules, timeout, isolation level etc..
         */
         transaction()
     }
 }
 ```
-
-
 
 That's it. I hope this post could be helpful for anyone that needs to use Spring-AOP.
 
