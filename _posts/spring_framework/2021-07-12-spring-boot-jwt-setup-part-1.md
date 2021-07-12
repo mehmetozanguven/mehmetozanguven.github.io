@@ -431,7 +431,7 @@ org.springframework.security.access.AccessDeniedException: Access is denied
 	// ..
 ```
 
-Spring Security will protect all endpoints for CSRF attacks by default. But we can allow the Spring Security to pass the register endpoint.
+Spring Security will protect all endpoints(state-changing operations) for CSRF attacks by default. But we can allow the Spring Security to pass the register endpoint.
 
 #### Error Invalid CSRF token found <a name="csrf_invalid_token"></a>
 
