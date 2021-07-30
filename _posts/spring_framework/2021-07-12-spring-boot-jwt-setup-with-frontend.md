@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Spring Boot JWT Setup with Frontend (VueJs) Part 1
+title: Spring Boot JWT Setup with Frontend (VueJs)
 date: 2021-07-12 14:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
 ---
 
-In this post, we are going to setup spring boot rest project with using JWT. The other post will be related to the how to integrate the our spring boot application with the frontend (in this case I am going to use VueJS).
+In this post, we are going to setup spring boot rest project with using JWT. we will also integrate the our spring boot application with the frontend (in this case I am going to use VueJS).
 
 Topics are:
 
@@ -16,35 +16,35 @@ Topics are:
   - [**PostgreSQL Setup**](#postgresql_setup)
 - [**What is the JSON Web Token (JWT)**](#what_is_jwt)
 - [**Security Configuration**](#security_configuration)
-    - [**UserDetailsService**](#user_details_service)
-    - [**BCryptPasswordEncoder Bean**](#password_encoder)
-    - [**Allow Register and Login Endpoints**](#allow_register_and_login_endpoints)
+  - [**CORS Policy setup**](#cors_setup)
+  - [**UserDetailsService**](#user_details_service)
+  - [**BCryptPasswordEncoder Bean**](#password_encoder)
+  - [**Allow Register and Login Endpoints**](#allow_register_and_login_endpoints)
 - [**Implementing Register Endpoint**](#implement_register_endpoint)
-    - [**Validate Register Request**](#validate_register_request)
-    - [**Delegate Request to the RegisterService & Wrap the Service Response**](#delegate_to_register_service)
+  - [**Validate Register Request**](#validate_register_request)
+  - [**Delegate Request to the RegisterService & Wrap the Service Response**](#delegate_to_register_service)
 - [**Implementing Register Service**](#implement_register_service)
-    - [**Check the Username**](#check_username)
-    - [**Encrypt user's password & save into db**](#save_to_db)
-        - [**Error Invalid CSRF token found**](#csrf_invalid_token)
+  - [**Check the Username**](#check_username)
+  - [**Encrypt user's password & save into db**](#save_to_db)
+    - [**Error Invalid CSRF token found**](#csrf_invalid_token)
 - [**Implementing Login Endpoint**](#implement_login_endpoint)
-    - [**Validate Login Request**](#validate_login_request)
-    - [**Delegate Request to the LoginService & Wrap the Service Response**](#delegate_to_login_service)
+  - [**Validate Login Request**](#validate_login_request)
+  - [**Delegate Request to the LoginService & Wrap the Service Response**](#delegate_to_login_service)
 - [**Implementing Login Service**](#implement_login_service)
-    - [**Delegate the request to the `AuthenticationManager`**](#delegate_to_auth_manager)
-    - [**Set the fully authenticated user to the security context**](#set_auth_user)
-    - [**Generate JWT with Username**](#generate_jwt)
-    - [**Return the login response**](#return_login_response)
+  - [**Delegate the request to the `AuthenticationManager`**](#delegate_to_auth_manager)
+  - [**Set the fully authenticated user to the security context**](#set_auth_user)
+  - [**Generate JWT with Username**](#generate_jwt)
+  - [**Return the login response**](#return_login_response)
 - [**Implementing AuthTokenFilter**](#implement_auth_filter)
-    - [**Intercept the all incoming requests**](#intercept_all_requests)
-    - [**Get JWT from the request**](#get_jwt_from_request)
-    - [**Validate JWT**](#validate_jwt)
-    - [**Get the username from JWT and find the authenticated user**](#get_username_from_jwt)
-    - [**Forward the request to the next filter**](#forward_request_to_next_filter)
+  - [**Intercept the all incoming requests**](#intercept_all_requests)
+  - [**Get JWT from the request**](#get_jwt_from_request)
+  - [**Validate JWT**](#validate_jwt)
+  - [**Get the username from JWT and find the authenticated user**](#get_username_from_jwt)
+  - [**Forward the request to the next filter**](#forward_request_to_next_filter)
 - [**Adding AuthTokenFilter to our application**](#add_auth_filter_to_app)
-    - [**Reason for `addFilterBefore`**](#filter_before)
+  - [**Reason for `addFilterBefore`**](#filter_before)
 - [**Create Dummy Protected Controller**](#dummy_controller)
-
-
+- [**Front-end Setup**](#frontend-setup)
 
 ## Github Link <a name="github_link"></a>
 
@@ -97,6 +97,53 @@ In the project, because we will use our database, then we need to implement our 
 As I said my previous post, If we create our UserDetailsService, we must also create a PasswordEncoder.
 
 > I am going to use `BCryptPasswordEncoder`
+
+### CORS Policy Setup <a name ="cors_setup"></a>
+
+Because we have two different origins (one for running on localhost:8080-spring boot-, and one for running on localhost:8081-vuejs-), we should enable cross origin request between these origins. Otherwise client ajax request (I will use axios) will fail. For the sake of simplicity, I allowed all the origins:
+
+```java
+@Configuration
+@EnableWebSecurity
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+	// ...
+    @Bean
+    public CorsFilter corsFilter() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.setAllowedOrigins(Collections.singletonList(CorsConfiguration.ALL));
+        corsConfiguration.setAllowedMethods(Collections.singletonList(CorsConfiguration.ALL));
+        corsConfiguration.setAllowedHeaders(Collections.singletonList(CorsConfiguration.ALL));
+        corsConfiguration.setMaxAge(Duration.ofMinutes(10));
+        corsConfiguration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfiguration);
+        return new CorsFilter(source);
+    }
+	// ...
+}
+```
+
+### Make CSRF token accessible via Cookies <a name ="csrf_cookie_setup"></a>
+
+I will allow spring to set csrf token in the cookie, otherwise I can't send the csrf token for the following requests.
+
+> Actually in the front-end, I will store the JWT in the local-storage, therefore I could disable csrf protection at all. You can just reference my project to see "how to enable CSRF with rest communication"
+
+```java
+@Configuration
+@EnableWebSecurity
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+	// ...
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf(c -> {
+            c.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+        });
+        // ...
+    }
+}
+```
 
 ### UserDetailsService <a name="user_details_service"></a>
 
@@ -460,7 +507,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 Re-run the project and send the request again, response will be:
 
 ```json
-{"messsage":"User was saved","registered":true}
+{ "messsage": "User was saved", "registered": true }
 ```
 
 Take a look at the database:
@@ -473,12 +520,18 @@ password | $2a$10$IA3OlClwnzWxcxb2wXujhuZS/bMdkXga7yhzFswiN2UaUOlJpksAC
 username | test
 ```
 
-As you can see, we saved the user in the database. 
+As you can see, we saved the user in the database.
 
 If you send the same request, you will get a response like this:
 
 ```json
-{"timestamp":"2021-07-10T19:35:13.141+00:00","status":500,"error":"Internal Server Error","message":"","path":"/api/register"}
+{
+  "timestamp": "2021-07-10T19:35:13.141+00:00",
+  "status": 500,
+  "error": "Internal Server Error",
+  "message": "",
+  "path": "/api/register"
+}
 ```
 
 Look at the console:
@@ -490,14 +543,13 @@ java.lang.RuntimeException: User has already in db
 
 ## Implementing Login Endpoint <a name="implement_login_endpoint"></a>
 
-### Disable CSRF protection 
+### Disable CSRF protection
 
 First, I will disable the CSRF protection for the login endpoint.
 
-> Because disabling csrf protection in the login endpoint may cause security vulnerabilities I am not sure about doing that. 
+> Because disabling csrf protection in the login endpoint may cause security vulnerabilities I am not sure about doing that.
 >
 > Disabling csrf in the login endpoint could be more dangerous rather than disabling on the register endpoint! Do your research then disable (or not disable) CSRF protection.
-
 
 ```java
 @Configuration
@@ -518,8 +570,7 @@ The login endpoint have to perform the following actions:
 
 - It will validate the request (this can be done by @Valid annotation)
 - If request is valid, then it will delegate the request to the `LoginService`
-- Wrap the service response with `ResponseEntity` 
-
+- Wrap the service response with `ResponseEntity`
 
 ### Validate Login Request <a name="validate_login_request"></a>
 
@@ -608,7 +659,7 @@ public class LoginServiceImpl implements LoginService {
     public LoginServiceImpl(@Autowired AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
-    
+
     @Override
     public LoginResponse doLogin(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
@@ -617,27 +668,27 @@ public class LoginServiceImpl implements LoginService {
 }
 ```
 
-If you recall from previous blogs, `AuthenticationManager` will find the correct provider  with the given `Authentication `. In this case we provided `UsernamePasswordAuthenticationToken` .
+If you recall from previous blogs, `AuthenticationManager` will find the correct provider with the given `Authentication `. In this case we provided `UsernamePasswordAuthenticationToken` .
 
 Here is the step by step what is happening:
 
 - `AuthenticationManager` will try to find `AuthenticationProvider` for the `Authentication` instance.
-- For  `UsernamePasswordAuthenticationToken`, provider will be `DaoAuthenticationProvider` 
+- For `UsernamePasswordAuthenticationToken`, provider will be `DaoAuthenticationProvider`
 - `AuthenticationManager` will call `Authentication authentication = provider.authenticate()` method.
 - Provider will return fully authenticated object or throw an exception
 - Because we have defined our `UserDetailsService` and `PasswordEncoder`. `DaoAuthenticationProvider` will use these beans.
-- Provider will call the method: `UserDetails loadedUser = this.getUserDetailsService().loadUserByUsername(username);` 
+- Provider will call the method: `UserDetails loadedUser = this.getUserDetailsService().loadUserByUsername(username);`
 
-> `this.getUserDetailsService()` equals to our `UserDetailsService(MyUserDetailService)` . After all `MyUserDetailService#loadUserByUsername` will be called by the provider. And we will return `UserDetails` or throw an error 
+> `this.getUserDetailsService()` equals to our `UserDetailsService(MyUserDetailService)` . After all `MyUserDetailService#loadUserByUsername` will be called by the provider. And we will return `UserDetails` or throw an error
 
-- After getting `UserDetails`, provider will check the request's password and password from the database. Provider will use our password encoder for that (`BCryptPasswordEncoder`) 
+- After getting `UserDetails`, provider will check the request's password and password from the database. Provider will use our password encoder for that (`BCryptPasswordEncoder`)
 
 ```java
 protected void additionalAuthenticationChecks(UserDetails userDetails,
 			UsernamePasswordAuthenticationToken authentication)
 			throws AuthenticationException {
     	// userDetails = MyUserDetailService#loadUserByUsername
-		
+
     	// authentication.getCredentials() = loginRequest.getPassword()
 		String presentedPassword = authentication.getCredentials().toString();
 		if (!passwordEncoder.matches(presentedPassword, userDetails.getPassword())) {
@@ -746,7 +797,7 @@ org.springframework.security.authentication.BadCredentialsException: Bad credent
 	// ...
 ```
 
-After successful login, we should check the JWT for each subsequent request to verify the user. We somehow intercepts the all coming requests. This can be done by adding filter in our application.  Let's implement this feature.
+After successful login, we should check the JWT for each subsequent request to verify the user. We somehow intercepts the all coming requests. This can be done by adding filter in our application. Let's implement this feature.
 
 ## Implementing AuthTokenFilter <a name="implement_auth_filter"></a>
 
@@ -766,7 +817,7 @@ Spring already provides a base class to intercept all requests which is `OncePer
 public class AuthTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-		
+
     }
 
     @Override
@@ -822,7 +873,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             String jwt = parseJwt(request);
 			if (jwt != null && JwtUtil.validateJwtToken(jwt)) {
 				// JWT valid
-            }        
+            }
         } catch (Exception e) {
             logger.error("Exception: ", e);
         }
@@ -839,7 +890,7 @@ In this time, we don't need to call authenticationManager. Using the UserDetails
 public class AuthTokenFilter extends OncePerRequestFilter {
     @Autowired
     private  MyUserDetailService userDetailsService;
-   
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
@@ -853,7 +904,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
-        } 
+        }
         // ...
     }
 }
@@ -922,17 +973,17 @@ In the Spring environment we have three options to put filter:
 
 - `http.addFilter()` :
 
-Adds a `Filter` that must be an instance of or extend one of the Filters provided within the Security framework. The method ensures that the ordering of the Filters is automatically taken care of. In other words, you can not use this method to add your custom filter. In our project, `AuthTokenFilter` is a custom filter and not extending any of the filters provided by Spring Security. Some of the known(or provided) filters:  `ChannelProcessingFilter, SecurityContextPersistenceFilter, LogoutFilter, SessionManagementFilter...`   All list can be found in this link: https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/config/annotation/web/HttpSecurityBuilder.html#addFilter(javax.servlet.Filter)
+Adds a `Filter` that must be an instance of or extend one of the Filters provided within the Security framework. The method ensures that the ordering of the Filters is automatically taken care of. In other words, you can not use this method to add your custom filter. In our project, `AuthTokenFilter` is a custom filter and not extending any of the filters provided by Spring Security. Some of the known(or provided) filters: `ChannelProcessingFilter, SecurityContextPersistenceFilter, LogoutFilter, SessionManagementFilter...` All list can be found in this link: https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/config/annotation/web/HttpSecurityBuilder.html#addFilter(javax.servlet.Filter)
 
 - `http.addFilterBefore` :
 
-Allows adding a `Filter` before one of the known `Filter` classes.  The known `Filter` instances are either a `Filter` listed in `addFilter(filter)` (click the link above) or a `Filter` that has already been added using `addFilterAfter`  or `addFilterBefore` 
+Allows adding a `Filter` before one of the known `Filter` classes. The known `Filter` instances are either a `Filter` listed in `addFilter(filter)` (click the link above) or a `Filter` that has already been added using `addFilterAfter` or `addFilterBefore`
 
 In other words, we are free to insert our custom filter.
 
 - `http.addFilterAfter` :
 
-Allows adding a `Filter` before one of the known `Filter` classes.  The known `Filter` instances are either a `Filter` listed in `addFilter(filter)` (click the link above) or a `Filter` that has already been added using `addFilterAfter`  or `addFilterBefore` 
+Allows adding a `Filter` before one of the known `Filter` classes. The known `Filter` instances are either a `Filter` listed in `addFilter(filter)` (click the link above) or a `Filter` that has already been added using `addFilterAfter` or `addFilterBefore`
 
 In other words, we are free to insert our custom filter.
 
@@ -942,7 +993,7 @@ The only part is to test this configuration with the protected resource(s)/contr
 
 This controller will return simple value to demonstrate only valid jwt can access it.
 
-````java
+```java
 @RestController
 @RequestMapping("/api")
 public class ProtectedController {
@@ -954,7 +1005,7 @@ public class ProtectedController {
         return ResponseEntity.ok("Hello Logged-In User:" + currentPrincipalName + ", you can access this resource, because JWT was valid");
     }
 }
-````
+```
 
 First login into the system and get the JWT:
 
@@ -980,7 +1031,7 @@ Hello Logged-In User:test, you can access this resource, because JWT was valid
 
 > Quick note: We don't setup anything related to the CSRF protection. Because CSRF protection is only needed for state changing operation(s). And also in the spring security `CsrfFilter` will not be applied when http method is one of the following ones:
 >
-> `"GET", "HEAD", "TRACE", "OPTIONS"` 
+> `"GET", "HEAD", "TRACE", "OPTIONS"`
 
 With invalid JWT, you will get the response:
 
@@ -1000,8 +1051,8 @@ For invalid JWT, look at the console:
  JwtUtil : Invalid JWT signature: JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.
 ```
 
+For a final step, we can customize the default error response implementing `AuthenticationEntryPoint`. We can do that in another post.
 
+## Front-end Setup <a name="frontend-setup"></a>
 
-For a final step, we can customize the default error response implementing `AuthenticationEntryPoint`. We can do that in another post. 
-
-That's it for the backend side, we can continue with the frontend.
+Unfortunately, there is really hard to explain front-end implementation step by step. Because I don't have enough knowledge about front-end side. I will just give you an [github link](https://github.com/mehmetozanguven/spring-boot-jwt-frontend)
