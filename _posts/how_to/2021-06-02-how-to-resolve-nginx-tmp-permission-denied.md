@@ -6,7 +6,7 @@ categories: "how-to"
 author: "mehmetozanguven"
 ---
 
-ecently I have encountered this error. Problem is that: user that runs nginx service has no permission to access `/var/lib/nginx/tmp` file.
+Recently I have encountered this error. Problem is that: user that runs nginx service has no permission to access `/var/lib/nginx/tmp` file.
 
 Example:
 

@@ -1055,4 +1055,4 @@ For a final step, we can customize the default error response implementing `Auth
 
 ## Front-end Setup <a name="frontend-setup"></a>
 
-Unfortunately, there is really hard to explain front-end implementation step by step. Because I don't have enough knowledge about front-end side. I will just give you an [github link](https://github.com/mehmetozanguven/spring-boot-jwt-frontend)
+Unfortunately, there is really hard to explain front-end implementation step by step. Because I don't have enough knowledge about front-end side. I will just give you a [github link](https://github.com/mehmetozanguven/spring-boot-jwt-frontend)
