@@ -8,10 +8,6 @@ author: "mehmetozanguven"
 
 In this post, we are going to find out how to backup postgresql database with `pg_dump` utility.
 
-Topics:
-
-[TOC]
-
 ## What is the `pg_dump` utility
 
 PostgreSQL provides the `pg_dump` utility to simplify backing up a single database. This command
@@ -90,7 +86,7 @@ Dump data as INSERT commands (rather than COPY ). **This will make restoration v
 ## How to run .sql file in the postgresql
 
 ```bash
-$ psql -U postgres -d your_db_name -h localhost -p 5432 -a -f /path/to/sql
+$ psql -U postgres -d your_db_name -h 1.2.3.4 -p 5432 -a -f /path/to/sql
 ## LOCAL DB EXAMPLE
 $ psql -U postgres -d local_Db -h localhost -p 5432 -a -f /path/to/sql
 ```
