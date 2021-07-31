@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Check Sessions and Dist Storage in the PostgreSQL"
+title: "Check Sessions and Disk Storage in the PostgreSQL"
 date: 2021-08-01 12:45:31 +0530
 categories: "others"
 author: "mehmetozanguven"
