@@ -23,7 +23,7 @@ Topics are:
   - [**Create Entity class Product**](#product_entity)
 - [**What do we mean by JPA Context?**](#what_jpa_context_is)
 - [**Store Product Entity into Table**](#entity_to_table)
-  - [**Persist is not an insert **](#persist_not_insert)
+  - [**Persist is not an insert**](#persist_not_insert)
 - [**Run the project**](#run_the_project)
 
 ## Github Link <a name="github_link"></a>
