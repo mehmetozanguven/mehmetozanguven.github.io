@@ -6,7 +6,7 @@ categories: "jpa"
 author: "mehmetozanguven"
 ---
 
-In this post, we are going to find out **"what our the options to provide automatic Id generation instead of setting manually". We will look at the generation strategies.**
+In this post, we are going to find out **"what are the options to provide automatic Id generation instead of setting manually". We will look at the generation strategies.**
 
 To use generation strategies, we should use `@GeneratedValue` annotation which has two properties:
 
@@ -20,7 +20,7 @@ Topics are:
 - [**Generation Type - Table**](#generation_type_table)
   - [**Overwrite the default column names**](#overwrite_col_names)
 - [**Generation Type - Identity**](#generation_type_identity)
-- [**Generic Generator - When Integer generator is not enough**](#generic_generator)
+- [**Generic Generator - When Integer/Long generator is not enough**](#generic_generator)
 
 
 ## Github Link <a name="github_link"></a>
@@ -45,7 +45,7 @@ I will only talk about the `GenerationType.TABLE` and `Generation.IDENTITY`. The
 
 In this case, we need separate table, id generation. By default in the JPA, Id generation table should have two columns namely **sequence_name with type VARCHAR(100)** & **next_val with type INT**.
 
-In the `@GeneratedValue` we will give the id generation table name.
+In the `@GeneratedValue`, we will give the id generation table name.
 
 Let's do it an example:
 
