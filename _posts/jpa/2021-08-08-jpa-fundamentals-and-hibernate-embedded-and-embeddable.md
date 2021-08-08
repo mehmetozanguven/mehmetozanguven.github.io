@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "JPA Fundamentals & Hibernate - 4) @Embeddable and @Embedded"
-date: 2021-08-06 12:45:31 +0530
+date: 2021-08-08 19:45:31 +0530
 categories: "jpa"
 author: "mehmetozanguven"
 ---
