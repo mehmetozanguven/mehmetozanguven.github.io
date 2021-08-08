@@ -22,7 +22,6 @@ Topics are:
 - [**Generation Type - Identity**](#generation_type_identity)
 - [**Generic Generator - When Integer/Long generator is not enough**](#generic_generator)
 
-
 ## Github Link <a name="github_link"></a>
 
 If you only need to see the code, here is the [github link](https://github.com/mehmetozanguven/jpa_fundamentals_and_hibernate/tree/master/id-generation)
@@ -35,7 +34,7 @@ We have four strategies: (represent as enum values)
 
 > If you use Hibernate, Hibernate will choose the appropriate strategy depending on the database. If you use MySQL, hibernate will choose different strategy rather than PostgreSQL
 
-- `GenerationType.IDENTITY`:  If we use this type, we already set the auto-increment feature when we were creating our sql table.
+- `GenerationType.IDENTITY`: If we use this type, we already set the auto-increment feature when we were creating our sql table.
 - `GenerationType.TABLE`: If we use this type, there is another table which is used as a generator.
 - `GenerationType.SEQUENCE`: Similar to `TABLE`, difference is that implementation will use the sequence in the sql.
 
@@ -113,13 +112,13 @@ First let's look at the tables:
 
 ```sql
 select * from product ;
- id |  name  | price | expiration_date 
+ id |  name  | price | expiration_date
 ----+--------+-------+-----------------
   1 | Cheese |   5.4 | 2021-08-01
 (1 row)
 
 select * from id_generation ;
- sequence_name | next_val 
+ sequence_name | next_val
 ---------------+----------
  product       |      100
 (1 row)
@@ -130,56 +129,56 @@ select * from id_generation ;
 
 In the application console, there will be many queries run by the hibernate:
 
-````wiki
-Hibernate: 
+```wiki
+Hibernate:
     select
-        tbl.next_val 
+        tbl.next_val
     from
-        id_generation tbl 
+        id_generation tbl
     where
         tbl.sequence_name=? for update
             of tbl
-Hibernate: 
-    insert 
+Hibernate:
+    insert
     into
         id_generation
-        (sequence_name, next_val)  
+        (sequence_name, next_val)
     values
         (?,?)
-Hibernate: 
+Hibernate:
     update
-        id_generation 
+        id_generation
     set
-        next_val=?  
+        next_val=?
     where
-        next_val=? 
+        next_val=?
         and sequence_name=?
-Hibernate: 
+Hibernate:
     select
-        tbl.next_val 
+        tbl.next_val
     from
-        id_generation tbl 
+        id_generation tbl
     where
         tbl.sequence_name=? for update
             of tbl
-Hibernate: 
+Hibernate:
     update
-        id_generation 
+        id_generation
     set
-        next_val=?  
+        next_val=?
     where
-        next_val=? 
+        next_val=?
         and sequence_name=?
-Hibernate: 
-    insert 
+Hibernate:
+    insert
     into
         product
-        (expiration_date, name, price, id) 
+        (expiration_date, name, price, id)
     values
         (?, ?, ?, ?)
 
 Process finished with exit code 0
-````
+```
 
 ### Overwrite the default column names <a name="overwrite_col_names"></a>
 
@@ -187,9 +186,9 @@ If you want to use different column names rather than `sequence_name` & `next_va
 
 ## Generation Type - Identity <a name="generation_type_identity"></a>
 
-- First we need to re-create product  table  and also  indicate auto increment column.
+- First we need to re-create product table and also indicate auto increment column.
 
-> In the PostgreSQL,  `SERIAL` pseudo-type is used to define auto-increment columns in tables.
+> In the PostgreSQL, `SERIAL` pseudo-type is used to define auto-increment columns in tables.
 >
 > Actually in the PostgreSQL, a **sequence** is a special kind of database object that generates a sequence of integers. When creating a new table, the sequence can be created through the `SERIAL` pseudo-type.
 >
@@ -197,14 +196,12 @@ If you want to use different column names rather than `sequence_name` & `next_va
 > CREATE TABLE table_name(
 >     id SERIAL
 > );
-> 
+>
 > -- serial and also primary key
 > CREATE TABLE table_name(
 >     id SERIAL PRIMARY KEY,
 > );
 > ```
->
-> 
 
 Here is the table creation query:
 
@@ -246,7 +243,7 @@ public class Product {
 ```
 
 - The rest is the save new entity:
-> In this case, I don't need to call setter of id field, this will be done by automatically
+  > In this case, I don't need to call setter of id field, this will be done by automatically
 
 ```java
 public static void main(String[] args) {
@@ -272,7 +269,7 @@ public static void main(String[] args) {
 
 ```sql
 testdatabase=# select * from product ;
- id |  name  | price | expiration_date 
+ id |  name  | price | expiration_date
 ----+--------+-------+-----------------
   1 | Cheese |   5.4 | 2021-08-01
   2 | Cheese |   5.4 | 2021-08-01
@@ -287,7 +284,7 @@ If integer generator is not enough, you should create random string for each id 
 
 Let's do that:
 
-- First drop and re-create product table: 
+- First drop and re-create product table:
 
 > In this case, id field will be varchar
 
@@ -326,11 +323,10 @@ public class Product {
 
 ```sql
 select * from product ;
-                id                |  name  | price | expiration_date 
+                id                |  name  | price | expiration_date
 ----------------------------------+--------+-------+-----------------
  ff8080817b01e5a6017b01e5a8f30000 | Cheese |   5.4 | 2021-08-01
 (1 row)
 ```
-
 
 Last but not least, wait for the next post ...
