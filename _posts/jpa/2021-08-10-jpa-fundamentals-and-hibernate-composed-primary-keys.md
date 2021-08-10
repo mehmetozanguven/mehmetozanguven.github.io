@@ -45,7 +45,7 @@ CREATE TABLE department
 
 We have options to create composite key:
 
-### Create composite key with `@IdClass` way <a name="create_with_idclass"></a>
+### Create Composed Keys with `@IdClass` <a name="create_with_idclass"></a>
 
 - In the entity class, annotate all the primary keys field with `@Id`
 - Create a class which represents the composed key
