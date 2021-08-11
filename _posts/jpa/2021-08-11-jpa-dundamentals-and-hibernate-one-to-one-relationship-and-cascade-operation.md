@@ -42,7 +42,7 @@ CREATE table address
     number VARCHAR(100),
 	street VARCHAR(100),
 	city VARCHAR(100),
-    company INT
+    company INT --foreign key
 );
 ```
 
@@ -264,7 +264,7 @@ Update the Detail class and comment the `entityManager.persist(product);` :
 @Entity
 @Table(name = "detail")
 public class Detail {
-    // persist product also, when we call persist(detail)
+    // persist product also, when we call persist(Detail)
     @OneToOne(cascade = CascadeType.PERSIST)
     private Product product;
 }
@@ -391,7 +391,7 @@ In the console, hibernate will run the following query:
         product0_.id=?
 ```
 
-If we change to the `LAZY` and the run the main method:
+If we change to the `LAZY` and then run the main method:
 
 ```java
 @Entity
