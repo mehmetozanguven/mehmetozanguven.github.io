@@ -14,7 +14,7 @@ url: "" # the base hostname & protocol for your site
 twitter_username: mehmetozanguven
 github_username: mehmetozanguven
 paginate: 5
-theme-dark: true #Set to true to change to dark website theme
+theme-dark: false #Set to true to change to dark website theme
 
 plugins: [jekyll-paginate, kramdown]
 # Build settings
