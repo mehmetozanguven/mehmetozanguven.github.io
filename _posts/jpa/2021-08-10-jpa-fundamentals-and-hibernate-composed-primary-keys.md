@@ -10,24 +10,21 @@ In this article, we are going to find out **how to create composite keys** in JP
 
 > Composite key is the key which composed of multiple columns.
 
-Topics are:
+<nav class="custom-table-of-contents">
+<hr class="horizontal-line">
+  <h4 class="table-of-contents-title">Contents</h4>
+  * this unordered seed list will be replaced by toc as unordered list
+  {:toc}
+ <hr class="horizontal-line">
+</nav>
 
-- [**Github Link**](#github_link)
-- [**SQL Setup**](#sql_setup)
-- [**Create entities**](#create_entities)
-  - [**Create composite key with `@IdClass` way**](#create_with_idclass)
-    - [**Annotate all the primary keys field with `@Id`**](#create_with_idclass_annotate)
-    - [**Create a Composed key class**](#create_with_idclass_composed_key)
-    - [**Annotate entity class with `@IdClass`**](#create_with_idclass_annotate_entity)
-  - [**Create Composed Keys with Embeddable**](#create_with_embeddable)
-
-## Github Link <a name="github_link"></a>
+## Github Link
 
 If you only need to see the code, here is the [github link](https://github.com/mehmetozanguven/jpa_fundamentals_and_hibernate/tree/master/composed-keys)
 
 Let's say we have table called `departmant` and it has composed primary keys (for column code and number).
 
-## SQL Setup <a name="sql_setup"></a>
+## SQL Setup
 
 Run the following sql query:
 
@@ -41,11 +38,11 @@ CREATE TABLE department
 );
 ```
 
-## Create entities <a name="create_entities"></a>
+## Create entities
 
 We have options to create composite key:
 
-### Create Composed Keys with `@IdClass` <a name="create_with_idclass"></a>
+### Create Composed Keys with `@IdClass`
 
 - In the entity class, annotate all the primary keys field with `@Id`
 - Create a class which represents the composed key
@@ -53,7 +50,7 @@ We have options to create composite key:
   - Also this class must implements `Serializable` interface (JPA specification)
 - Annotate entity class with `@IdClass(YourComposedClass.class)`
 
-#### Annotate all the primary keys field with `@Id` <a name="create_with_idclass_annotate"></a>
+#### Annotate all the primary keys field with `@Id`
 
 ```java
 @Entity
@@ -69,7 +66,7 @@ public class Department {
 }
 ```
 
-#### Create a Composed key class <a name="create_with_idclass_composed_key"></a>
+#### Create a Composed key class
 
 Fields in the composed key class must match with the fields annotated with `@Id` in the entity class
 
@@ -81,7 +78,7 @@ public class DepartmentPK implements Serializable {
 }
 ```
 
-#### Annotate entity class with `@IdClass` <a name="create_with_idclass_annotate_entity"></a>
+#### Annotate entity class with `@IdClass`
 
 ```java
 @IdClass(DepartmentPK.class)
@@ -122,7 +119,7 @@ select * from department ;
 (1 row)
 ```
 
-### Create Composed Keys with Embeddable <a name="create_with_embeddable"></a>
+### Create Composed Keys with Embeddable
 
 Almost the same procedure as the `@Embeddable /@Embedded` in the previous blog. Only difference is that we should use `@EmbeddedId` and embeddable object must implements Serializable interface
 

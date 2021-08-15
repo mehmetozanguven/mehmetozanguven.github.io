@@ -8,24 +8,21 @@ author: "mehmetozanguven"
 
 > In the OneToMany setup, `Many` sides must have the foreign key and it is the owner of the relatonship
 
-Topics are:
+<nav class="custom-table-of-contents">
+<hr class="horizontal-line">
+  <h4 class="table-of-contents-title">Contents</h4>
+  * this unordered seed list will be replaced by toc as unordered list
+  {:toc}
+ <hr class="horizontal-line">
+</nav>
 
-- [**Github Link**](#github_link)
-- [**SQL Setup**](#sql_setup)
-- [**Create one-to-many relationship without foreign key**](#one_to_many_without_foreign_key)
-- [**Best way to model a one-to-many relationship**](#best_model_for_one_to_many)
-- [**Bi-Directional one-to-many mapping**](#bi_directional_mapping)
-  - [**Problems with Bi-Directional Mapping**](#problems_with_bi_directional)
-
-## Github Link <a name="github_link"></a>
+## Github Link
 
 If you only need to see the code, here is the [github link](https://github.com/mehmetozanguven/jpa_fundamentals_and_hibernate/tree/master/one-to-many-and-many-to-one)
 
-## SQL Setup <a name="sql_setup"></a>
+## SQL SetupWe will have `Employee` and `Department` tables and Department can have many employee but employee can belong to the one department.
 
-We will have `Employee` and `Department` tables and Department can have many employee but employee can belong to the one department.
-
-## Create one-to-many relationship without foreign key <a name="one_to_many_without_foreign_key"></a>
+## Create one-to-many relationship without foreign keyut_foreign_key"></a>
 
 In the one-to-many relationship, many side will have the foreign key. But before implementing with foreign key, let's look at the what will happen when there is no foreign key:
 
@@ -155,7 +152,7 @@ We got an exception, because we don't want Hibernate update to our database. If 
        </properties>
 ```
 
-## Best way to model a one-to-many relationship <a name="best_model_for_one_to_many"></a>
+## Best way to model a one-to-many relationshipe_to_many"></a>
 
 In this case, we will have two tables called `person & document` and person can have many documents but one document belongs to the only one person.
 
@@ -290,7 +287,7 @@ If we want to find all documents relaton the person Ozan, then we can use the JP
 
 > I will create an article for the JPQL
 
-## Bi-Directional one-to-many mapping <a name="bi_directional_mapping"></a>
+## Bi-Directional one-to-many mappingpping"></a>
 
 If possible, please use the best way approach.
 
@@ -367,7 +364,7 @@ Set<Documents> docs = person.getDocuments()
 
 But this approach has some problems
 
-### Problems with Bi-Directional Mapping <a name="problems_with_bi_directional"></a>
+### Problems with Bi-Directional Mappingdirectional"></a>
 
 - Because we have no choose load documents without Person entity, we can not be able to limit the number of documents loaded. Therefore we can not be able to paginate.
 - Because we are loading documents via Person entity, we can not be able to sort them based on different properties.

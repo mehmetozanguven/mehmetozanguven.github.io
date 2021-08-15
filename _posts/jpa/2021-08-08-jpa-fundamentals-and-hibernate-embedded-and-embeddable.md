@@ -8,20 +8,19 @@ author: "mehmetozanguven"
 
 In this post, we are going to learn **when and how to use embaddable object in Java and JPA**.
 
-Topics are:
+<nav class="custom-table-of-contents">
+<hr class="horizontal-line">
+  <h4 class="table-of-contents-title">Contents</h4>
+  * this unordered seed list will be replaced by toc as unordered list
+  {:toc}
+ <hr class="horizontal-line">
+</nav>
 
-- [**Github Link**](#github_link)
-- [**When to use Embeddable Object**](#when_to_use)
-- [**SQL Setup**](#sql_setup)
-- [**JPA Setup**](#jpa_setup)
-  - [**Create embeddable class**](#create_embeddable_class)
-  - [**Embed class to an entity**](#embed_class)
-
-## Github Link <a name="github_link"></a>
+## Github Link
 
 If you only need to see the code, here is the [github link](https://github.com/mehmetozanguven/jpa_fundamentals_and_hibernate/tree/master/embeddable-and-embedded)
 
-## When to use Embeddable Object <a name="when_to_use"></a>
+## When to use Embeddable Object
 
 The main reason to use embeddable object is to split up large entity classes. In the database world, a large table (one with many columns) is okey. Breaking up to this table to many separate tables make things getting worse. On the other, in the software world, we try to have small classes which responsible only one thing. **`@Embedded/@Embeddable` is used when we want to split entity classes into smaller units without creating many separate tables.**
 
@@ -39,7 +38,7 @@ But `Address` has no value in the database if there is no `Company`, but `Compan
 
 Let's implement this feature.
 
-## SQL Setup <a name="sql_setup"></a>
+## SQL Setup
 
 First create table called `company`
 
@@ -54,9 +53,9 @@ CREATE table company
 );
 ```
 
-## JPA Setup <a name="jpa_setup"></a>
+## JPA Setup
 
-### Create embeddable class <a name="create_embeddable_class"></a>
+### Create embeddable class
 
 We need to create an embeddable class (we are saying that this class is part of an entity)
 
@@ -70,7 +69,7 @@ public class Address {
 }
 ```
 
-### Embed class to an entity <a name="embed_class"></a>
+### Embed class to an entity
 
 The rest is to embed to class to an entity. (using `@Embedded` )
 

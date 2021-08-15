@@ -8,11 +8,13 @@ author: "mehmetozanguven"
 
 In this post, we are going to learn **how to create many-to-many relationship in JPA**.
 
-Topics are:
-
-- [**Github Link**](#github_link)
-- [**One directional Relationship**](#one_directional)
-- [**Bi-Directional Relationship**](#bi_drectional)
+<nav class="custom-table-of-contents">
+<hr class="horizontal-line">
+  <h4 class="table-of-contents-title">Contents</h4>
+  * this unordered seed list will be replaced by toc as unordered list
+  {:toc}
+ <hr class="horizontal-line">
+</nav>
 
 ## Github Link <a name="github_link"></a>
 
@@ -47,7 +49,7 @@ As the other relationship (one-to-one and one-to-many), we have two options:
 - One directional relationship
 - Bi-directional relationship
 
-## One directional Relationship <a name="one_directional"></a>
+## One directional Relationship
 
 In the many-to-many relationship, we don't have exact owner of the relation. Therefore we should specify one side as the owner which will include both `@ManyToMany` and `@JoinTable` annotations.
 

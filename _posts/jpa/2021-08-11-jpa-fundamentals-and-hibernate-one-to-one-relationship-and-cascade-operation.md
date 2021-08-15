@@ -8,24 +8,19 @@ author: "mehmetozanguven"
 
 In this article, we are going to learn **how to construct a one-to-one relationship between entities in the JPA and when to use Cascade operation**
 
-Topics are:
+<nav class="custom-table-of-contents">
+<hr class="horizontal-line">
+  <h4 class="table-of-contents-title">Contents</h4>
+  * this unordered seed list will be replaced by toc as unordered list
+  {:toc}
+ <hr class="horizontal-line">
+</nav>
 
-- [**Github Link**](#github_link)
-- [**SQL Setup**](#sql_setup)
-- [**One-To-One relationship with `@SecondaryTable` annotation**](#one_to_one_with_secondary_table)
-- [**One-to-one relationship with `@OneToOne` annotation**](#one_to_one_with_annotation)
-  - [**Uni-Directional One-To-One**](#unidirectional_one_to_one)
-  - [**Why we did call persist two times?**](#two_persist_calls)
-    - [**Cascade.Persist**](#cascade_persist)
-  - [**How to change Foreign Key Name**](#change_foreign_key_name)
-  - [**Bi-Directional One-To-One**](#bidirectional_one_to_one)
-- [**Fetch Type**](#fetch_type)
-
-## Github Link <a name="github_link"></a>
+## Github Link 
 
 If you only need to see the code, here is the [github link](https://github.com/mehmetozanguven/jpa_fundamentals_and_hibernate/tree/master/one-to-one-relation)
 
-## SQL Setup <a name="sql_setup"></a>
+## SQL Setup
 
 We will have two tables `company` and `address` (Actually `address` should be an embeddable object instead of separate table, but this is just an example to understand one-to-one relationship)
 
@@ -46,7 +41,7 @@ CREATE table address
 );
 ```
 
-## One-To-One relationship with `@SecondaryTable` annotation <a name="one_to_one_with_secondary_table"></a>
+## One-To-One relationship with `@SecondaryTable` annotation
 
 In generally, you will use `@OneToOne` annotation to construct the relationship. But there is another way to construct one to one relation even without creating Address entity class using `@SecondaryTable` annotation.
 
@@ -151,7 +146,7 @@ select * from address;
 
 You can add two or more secondary tables.
 
-## One-to-one relationship with `@OneToOne` annotation <a name="one_to_one_with_annotation"></a>
+## One-to-one relationship with `@OneToOne` annotation
 
 Let's create another two tables called `product` and `detail`
 
@@ -181,7 +176,7 @@ Relationship in the JPA can be represented in two different ways:
   - Only one class knowns about the other
 - Bidirectional way
 
-### Uni-Directional One-To-One <a name="unidirectional_one_to_one"></a>
+### Uni-Directional One-To-One
 
 In that case, class which has a foreign key will know the other class. (In our case it is Detail Class)
 
@@ -241,7 +236,7 @@ testdatabase=# select * from detail;
 (1 row)
 ```
 
-### Why we did call persist two times? <a name="two_persist_calls"></a>
+### Why we did call persist two times?
 
 It is possible to persist only detail after setting the product? Like this:
 
@@ -256,7 +251,7 @@ entityManager.getTransaction().commit();
 
 **The answer is no, because Product we are trying to refer will not be part of the context.** However JPA provides an alternative solution to this problem. If you want to add Product to the context without calling `persist` , you should use `Cascade` attribution on the `@OneToOne` annotation.
 
-#### Cascade.Persist <a name="cascade_persist"></a>
+#### Cascade.Persist
 
 Update the Detail class and comment the `entityManager.persist(product);` :
 
@@ -270,7 +265,7 @@ public class Detail {
 }
 ```
 
-### How to change Foreign Key Name <a name="change_foreign_key_name"></a>
+### How to change Foreign Key Name
 
 If we should have created the table like this, JPA couldn't have found the foreign key in the detail table, because it wouldn't be matched with default style:
 
@@ -305,7 +300,7 @@ public class Detail {
 }
 ```
 
-### Bi-Directional One-To-One <a name="bidirectional_one_to_one"></a>
+### Bi-Directional One-To-One
 
 If we want o implement bi-directional:
 
@@ -359,7 +354,7 @@ public class Main {
 }
 ```
 
-## Fetch Type <a name="fetch_type"></a>
+## Fetch Type
 
 A JPA association can be **fetched lazily or eagerly**. The fetching strategy is controlled via the fetch attribute of the `@OneToMany , @OneToOne , @ManyToOne , or @ManyToMany`
 

@@ -13,24 +13,19 @@ Before diving into the series, make sure that:
 - **You know the what is the maven**
 - **You have experience with PostgreSQL (MySQL and others are also okey)**
 
-Topics are:
+<nav class="custom-table-of-contents">
+<hr class="horizontal-line">
+  <h4 class="table-of-contents-title">Contents</h4>
+  * this unordered seed list will be replaced by toc as unordered list
+  {:toc}
+ <hr class="horizontal-line">
+</nav>
 
-- [**Github Link**](#github_link)
-- [**Create Project**](#create_project)
-- [**Persistence.xml**](#persistence_xml)
-- [**PostgreSQL Configuration**](#postgresql_configuration)
-- [**Entity**](#entity)
-  - [**Create Entity class Product**](#product_entity)
-- [**What do we mean by JPA Context?**](#what_jpa_context_is)
-- [**Store Product Entity into Table**](#entity_to_table)
-  - [**Persist is not an insert**](#persist_not_insert)
-- [**Run the project**](#run_the_project)
-
-## Github Link <a name="github_link"></a>
+## Github Link
 
 If you only need to see the code, here is the [github link](https://github.com/mehmetozanguven/jpa_fundamentals_and_hibernate/tree/master/entity-and-context)
 
-## Create Project <a name="create_project"></a>
+## Create Project
 
 First create new java project with the following dependencies:
 
@@ -57,7 +52,7 @@ After that you should create a xml(usually called `persistence.xml`) file to wri
 
 > If you are familiar with Spring Framework, you may notice that there is no xml file for JPA setup. Actually Spring Data provides one level of abstraction over the JPA. At the end, when you use Spring Framework, you only need to specify the database address in your properties files.
 
-## Persistence.xml <a name="persistence_xml"></a>
+## Persistence.xml
 
 With the persistence.xml file we can do the following things:
 
@@ -98,7 +93,7 @@ Here is the xml file for the postgresql: (you can search for the mysql on the in
 
 > By default JPA persistence-unit includes all annotated managed classes found in its root. If we want to add classes that are located somewhere else, we can reference them in the persistence.xml file.
 
-## PostgreSQL Configuration <a name="postgresql_configuration"></a>
+## PostgreSQL Configuration
 
 Because we will use the local postgresql, we should create a sql tables in the postgresql
 
@@ -137,13 +132,13 @@ testdatabase=# select * from product ;
 
 ```
 
-## Entity <a name="entity"></a>
+## Entity
 
 In JPA, we will map the Java Class(es) with the table(s) is called **entity**.
 
 Or in other words, entities are the objects what we store in the database.
 
-### Create Entity class Product <a name="product_entity"></a>
+### Create Entity class Product
 
 ```java
 package entities;
@@ -178,13 +173,13 @@ public class Product {
 >
 > If the both column name and the field name is the same, you don't need to specify the @Column annotation
 
-## What do we mean by JPA Context? <a name="what_jpa_context_is"></a>
+## What do we mean by JPA Context?
 
 Entity Manager is responsible to manage entities. What it manages is the context of the entities.
 
 JPA implementation is creating own its context. Context is actually collection of instances. Those instances are some type of managed objects. For the JPA, we call it "entities".
 
-## Store Product Entity into Table <a name="entity_to_table"></a>
+## Store Product Entity into Table
 
 To save, update or delete our entities, we should need an instance of entity manager.
 
@@ -218,13 +213,13 @@ public class Main {
 - We must set id, because in the beginning, we determined that we are responsible for assigning ids.
 - Every "change operation" in the JPA, should be represented in the transactions. You should get the current transaction `entityManager.getTransaction()` and then begin transaction `...getTransaction().begin()`. After all you should commit the transaction `....getTransaction().commit()` . In the case of failure you should catch the exception and the rollback.
 
-### Persist is not an insert <a name="persist_not_insert"></a>
+### Persist is not an insert
 
 - `entityManager.persist(product);` **is used to add the instance in the context.**
 - Calling persist method is not directly an insert to the database.
 - When the transaction is finished by the calling of `entityManager.getTransaction().commit()`, the context (managed by the entity manager) will be mirrored to the database.
 
-## Run the project <a name="run_the_project"></a>
+## Run the project
 
 After you run the main method, look at the console and the table
 

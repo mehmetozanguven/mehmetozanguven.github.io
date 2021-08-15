@@ -10,12 +10,15 @@ In this article, we are going to learn **how to create relationship using `@Embe
 
 **`@AssociativeOverride` is used to override mappings of multiple relationship properties. To override a mapping defined by a mapped superclass or a relationship mapping from an embeddable class, `@AssociationOverride` is applied to the entity class.**
 
-Topics are:
+<nav class="custom-table-of-contents">
+<hr class="horizontal-line">
+  <h4 class="table-of-contents-title">Contents</h4>
+  * this unordered seed list will be replaced by toc as unordered list
+  {:toc}
+ <hr class="horizontal-line">
+</nav>
 
-- [**Github Link**](#github_link)
-- [**AssociationOverride**](#AssociationOverride)
-
-## Github Link <a name="github_link"></a>
+## Github Link
 
 If you only need to see the code, here is the [github link](https://github.com/mehmetozanguven/jpa_fundamentals_and_hibernate/tree/master/association-override)
 
@@ -90,7 +93,7 @@ But the problem is how to create an relationship over the `deparment_id` using e
 >
 > In our example, `department_id` is the one which creates the relationship between entities.
 
-## AssociationOverride <a name="AssociationOverride"></a>
+## AssociationOverride
 
 - It is used to override a mapping for an entity relationship.
 

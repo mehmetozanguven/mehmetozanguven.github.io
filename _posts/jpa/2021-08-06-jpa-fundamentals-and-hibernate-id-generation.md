@@ -13,20 +13,20 @@ To use generation strategies, we should use `@GeneratedValue` annotation which h
 - strategy: define generation strategy
 - generator: id generator
 
-Topics are:
+<nav class="custom-table-of-contents">
+<hr class="horizontal-line">
+  <h4 class="table-of-contents-title">Contents</h4>
+  * this unordered seed list will be replaced by toc as unordered list
+  {:toc}
+ <hr class="horizontal-line">
+</nav>
 
-- [**Github Link**](#github_link)
-- [**GeneratedValue.Strategy**](#generate_strategy)
-- [**Generation Type - Table**](#generation_type_table)
-  - [**Overwrite the default column names**](#overwrite_col_names)
-- [**Generation Type - Identity**](#generation_type_identity)
-- [**Generic Generator - When Integer/Long generator is not enough**](#generic_generator)
 
-## Github Link <a name="github_link"></a>
+## Github Link
 
 If you only need to see the code, here is the [github link](https://github.com/mehmetozanguven/jpa_fundamentals_and_hibernate/tree/master/id-generation)
 
-## GeneratedValue.Strategy <a name="generate_strategy"></a>
+## GeneratedValue.Strategy
 
 We have four strategies: (represent as enum values)
 
@@ -40,7 +40,7 @@ We have four strategies: (represent as enum values)
 
 I will only talk about the `GenerationType.TABLE` and `Generation.IDENTITY`. The rest is up to you.
 
-## Generation Type - Table <a name="generation_type_table"></a>
+## Generation Type - Table
 
 In this case, we need separate table, id generation. By default in the JPA, Id generation table should have two columns namely **sequence_name with type VARCHAR(100)** & **next_val with type INT**.
 
@@ -180,11 +180,11 @@ Hibernate:
 Process finished with exit code 0
 ```
 
-### Overwrite the default column names <a name="overwrite_col_names"></a>
+### Overwrite the default column names
 
 If you want to use different column names rather than `sequence_name` & `next_val`, you can use the `@TableGenerator` annotation.
 
-## Generation Type - Identity <a name="generation_type_identity"></a>
+## Generation Type - Identity
 
 - First we need to re-create product table and also indicate auto increment column.
 
@@ -276,7 +276,7 @@ testdatabase=# select * from product ;
 (2 rows)
 ```
 
-## Generic Generator - When Integer generator is not enough <a name="generic_generator"></a>
+## Generic Generator - When Integer generator is not enough
 
 If integer generator is not enough, you should create random string for each id field. You can do that with `this.id = UUID.randomUUID().toString();` but this approach is not recommended. Instead you can use Hibernate specific implementation.
 
