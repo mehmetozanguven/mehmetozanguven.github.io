@@ -8,17 +8,19 @@ author: "mehmetozanguven"
 
 In this article, we are going to look **how to represent the inheritance relationship in the JPA** and **how to use `@MapperSuperclass` annotation**
 
-<nav style="font-weight: bold;">
-  <h4>Topics are:</h4>
+<nav class="custom-table-of-contents">
+<hr class="horizontal-line">
+  <h4 class="table-of-contents-title">Contents</h4>
   * this unordered seed list will be replaced by toc as unordered list
   {:toc}
+ <hr class="horizontal-line">
 </nav>
 
 ## Github Link
 
 If you only need to see the code, here is the [github link](https://github.com/mehmetozanguven/jpa_fundamentals_and_hibernate/tree/master/inheritance-strategies)
 
------
+---
 
 We have three inheritance strategies in the JPA and these strategies are defined in the top level class using `@Inheritance` annotation. `@Inheritance` specifies three strategies:
 
