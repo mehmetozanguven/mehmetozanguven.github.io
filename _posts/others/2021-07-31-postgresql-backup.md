@@ -8,6 +8,14 @@ author: "mehmetozanguven"
 
 In this post, we are going to find out how to backup postgresql database with `pg_dump` utility.
 
+<nav class="custom-table-of-contents">
+<hr class="horizontal-line">
+  <h4 class="table-of-contents-title">Contents</h4>
+  * this unordered seed list will be replaced by toc as unordered list
+  {:toc}
+ <hr class="horizontal-line">
+</nav>
+
 ## What is the `pg_dump` utility
 
 PostgreSQL provides the `pg_dump` utility to simplify backing up a single database. This command
