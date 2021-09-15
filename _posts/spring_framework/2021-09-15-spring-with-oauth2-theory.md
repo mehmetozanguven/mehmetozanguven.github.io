@@ -235,7 +235,7 @@ Of course, OAuth2 is not bulletproof solution. There can be some security proble
 - Stolen client credentials: If someone stoles the client credentials (assume that your google credentials, you are developing spring boot application with Sign On with Google, was stolen by someone else), we are basically in the dead situation :)
 - Replaying token: If someone intercepts the request, then they can also intercepts the tokens
 
-## Conclusions
+## Conclusion
 
 In this article, we looked at the what is the OAuth2 and theory of the OAuth2 itself.
 
