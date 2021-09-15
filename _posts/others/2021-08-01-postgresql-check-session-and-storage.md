@@ -6,14 +6,6 @@ categories: "others"
 author: "mehmetozanguven"
 ---
 
-<nav class="custom-table-of-contents">
-<hr class="horizontal-line">
-  <h4 class="table-of-contents-title">Contents</h4>
-  * this unordered seed list will be replaced by toc as unordered list
-  {:toc}
- <hr class="horizontal-line">
-</nav>
-
 ## Check Session
 
 - If you want to list the current session for your database(s), you can use the following sql query:
