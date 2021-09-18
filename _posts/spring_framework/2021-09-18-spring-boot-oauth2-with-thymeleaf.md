@@ -119,7 +119,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 }
 ```
 
-- `oauth2login()` simply adds new authentication filter called `OAuth2LoginAuthenticationFilter`
+- `oauth2login()` simply adds new authentication filter called `OAuth2LoginAuthenticationFilter`. (responsible for authentication)
+- `oauth2login()` also adds another filter called `OAuth2AuthorizationRequestRedirectFilter`. (responsible for redirection of the endpoint of the authorization server)
 
 > I have also written about the spring security filter chains and also created custom filter in the spring application. Link => [https://mehmetozanguven.github.io/spring/2020/12/30/spring-security-5-custom-filter.html](https://mehmetozanguven.github.io/spring/2020/12/30/spring-security-5-custom-filter.html)
 
