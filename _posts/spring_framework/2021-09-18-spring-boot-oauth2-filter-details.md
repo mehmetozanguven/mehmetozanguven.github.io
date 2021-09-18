@@ -251,7 +251,7 @@ public class OAuth2AuthorizationRequestRedirectFilter extends OncePerRequestFilt
 }
 ```
 
-While creating the `OAuth2AuthorizationRequest`, Spring Security expects the redirect URL in the following form:
+While creating the `OAuth2AuthorizationRequest`, Spring Security expects the Authorization Server's redirect URL in the following form:
 
 ```wiki
 "{baseUrl}/{action}/oauth2/code/{registrationId}"
@@ -273,7 +273,7 @@ After successful login with Google, user will be redirected to the http://localh
 
 In the response there will be request's parameter called **`code`** and spring security will use the `request.parameter(code)` value to get access token.
 
-In this time, request won't be intercepted by the `OAuth2AuthorizationRequestRedirectFilter` because request URI (`/login/oauth2/code/google`) does not match base URI :
+In this time, request won't be intercepted by the `OAuth2AuthorizationRequestRedirectFilter` because request URI (`/login/oauth2/code/google`) does not match with the base URI :
 
 ```java
 public class OAuth2AuthorizationRequestRedirectFilter extends OncePerRequestFilter {
@@ -314,17 +314,17 @@ Because Filter now has the fully authenticated object, it can run the `successfu
 
 ```java
 protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
-			Authentication authResult) throws IOException, ServletException {
-		SecurityContextHolder.getContext().setAuthentication(authResult); // 1
-		if (this.logger.isDebugEnabled()) {
-			this.logger.debug(LogMessage.format("Set SecurityContextHolder to %s", authResult));
-		}
-		this.rememberMeServices.loginSuccess(request, response, authResult);
-		if (this.eventPublisher != null) {
-			this.eventPublisher.publishEvent(new InteractiveAuthenticationSuccessEvent(authResult, this.getClass()));
-		}
-		this.successHandler.onAuthenticationSuccess(request, response, authResult); // 2
-	}
+  Authentication authResult) throws IOException, ServletException {
+  SecurityContextHolder.getContext().setAuthentication(authResult); // 1
+  if (this.logger.isDebugEnabled()) {
+    this.logger.debug(LogMessage.format("Set SecurityContextHolder to %s", authResult));
+  }
+  this.rememberMeServices.loginSuccess(request, response, authResult);
+  if (this.eventPublisher != null) {
+    this.eventPublisher.publishEvent(new InteractiveAuthenticationSuccessEvent(authResult, this.getClass()));
+  }
+  this.successHandler.onAuthenticationSuccess(request, response, authResult); // 2
+}
 ```
 
 1.  Fully authenticated object will be stored in the `SecurityContext`
@@ -341,7 +341,7 @@ I hope, it is clear right now.
 
 - `/oauth2/authorization/{registrationId}` is the endpoint which redirection to the endpoint of the Authorization Server will be applied. (Redirection will be applied by the `OAuth2AuthorizationRequestRedirectFilter` )
 
-- Spring security expects redirect URI in this format: (therefore when you set the redirect URIs in the console.cloud.google or other providers such as Github, Facebook, you should consider it)
+- Spring security expects Authorization Server redirect URI in this format: (therefore when you set the redirect URIs in the console.cloud.google or other providers such as Github, Facebook, you should consider it)
 
 ```wiki
 "{baseUrl}/{action}/oauth2/code/{registrationId}"
