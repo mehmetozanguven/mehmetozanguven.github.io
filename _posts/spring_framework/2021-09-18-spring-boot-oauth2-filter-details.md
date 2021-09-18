@@ -263,7 +263,7 @@ While creating the `OAuth2AuthorizationRequest`, Spring Security expects the red
 
 **That's was the reason why we set redirect URL: `http://localhost:8080/login/oauth2/code/google` in the google console.**
 
-## What happens after successful creation?
+## What happens after successful login?
 
 Let's assume you allow the client to use your Google accounts. Here are the steps:
 
