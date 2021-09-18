@@ -8,6 +8,14 @@ author: "mehmetozanguven"
 
 In this article, we will implement a basic signle sign on application using Spring boot. We will use Thymeleaf for the first example, then we will implement with Javascript framework called Quasar (based on VueJs)
 
+<nav class="custom-table-of-contents">
+<hr class="horizontal-line">
+  <h4 class="table-of-contents-title">Contents</h4>
+  * this unordered seed list will be replaced by toc as unordered list
+  {:toc}
+ <hr class="horizontal-line">
+</nav>
+
 A single sign-on (SSO) application is one in which we authenticate through an authorization server, and then the app keeps we logged-in, using a refresh token.
 
 In our application we will use Google as the authorization and resource servers
@@ -294,3 +302,5 @@ spring.security.oauth2.client.registration.google.client-secret=your_secret_key
 ```
 
 - You can get the Authenticated object from `SecurityContext`
+
+In the next blog, we will do practical implementation with Javascript Framework called Quasar (Based on VueJs)
