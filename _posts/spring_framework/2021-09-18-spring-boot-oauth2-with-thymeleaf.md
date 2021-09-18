@@ -6,7 +6,7 @@ categories: "spring"
 author: "mehmetozanguven"
 ---
 
-In this article, we will implement a basic signle sign on application using Spring boot. We will use Thymeleaf for the first example, then we will implement with Javascript framework called Quasar (based on VueJs)
+In this article, we will implement a basic single sign on application using Spring boot. We will use Thymeleaf for the first example, then we will implement with Javascript framework called Quasar (based on VueJs)
 
 <nav class="custom-table-of-contents">
 <hr class="horizontal-line">
