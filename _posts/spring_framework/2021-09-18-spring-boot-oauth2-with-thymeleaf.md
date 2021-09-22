@@ -6,7 +6,7 @@ categories: "spring"
 author: "mehmetozanguven"
 ---
 
-In this article, we will implement a basic single sign on application using Spring boot. We will use Thymeleaf for the first example, then we will implement with Javascript framework called Quasar (based on VueJs)
+In this article, we will implement a basic single sign on application using Spring boot. We will use Thymeleaf for html pages
 
 <nav class="custom-table-of-contents">
 <hr class="horizontal-line">
@@ -303,5 +303,3 @@ spring.security.oauth2.client.registration.google.client-secret=your_secret_key
 ```
 
 - You can get the Authenticated object from `SecurityContext`
-
-In the next blog, we will do practical implementation with Javascript Framework called Quasar (Based on VueJs)
