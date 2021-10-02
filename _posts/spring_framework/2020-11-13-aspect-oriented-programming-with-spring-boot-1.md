@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Aspect Oriented Programming(AOP) with Spring Boot - 1"
-date:   2020-11-13 17:45:31 +0530
+title: "Aspect Oriented Programming(AOP) with Spring Boot - 1"
+date: 2020-11-13 17:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
 ---
@@ -10,7 +10,7 @@ author: "mehmetozanguven"
 
 In this post, we are going to look at what is AOP and how your spring application matches with AOP concepts using Spring AOP module. After that we are going to look at the what is AspectJ, differences between Spring AOP and AspectJ.
 
-> Note: Spring AOP Example in topic 5 is not the fully compliant example. I will hopefully write another post for only spring aop and aspectJ example.
+> Note: Spring AOP Example in this topic is not the fully compliant example. I will hopefully write another post for only spring aop and aspectJ example.
 
 Today topics are:
 
@@ -24,7 +24,7 @@ Today topics are:
 
 ## 1. What is AOP and What problem AOP is trying to solve?
 
-- From the [wikipeadia](https://en.wikipedia.org/wiki/Aspect-oriented_programming) : **Aspect oriented programming** is a programming paradigm that aims to increase modularity by allowing the *separation of cross-cutting concerns.* It does so by adding additional behavior(an **advice**) to existing code without modifying the code itself.
+- From the [wikipeadia](https://en.wikipedia.org/wiki/Aspect-oriented_programming) : **Aspect oriented programming** is a programming paradigm that aims to increase modularity by allowing the _separation of cross-cutting concerns._ It does so by adding additional behavior(an **advice**) to existing code without modifying the code itself.
 
 > Note: Concern is a particular set of information that has an effect on the code of an computer programming. For example, business logic is a concern that effects our program execution.
 
@@ -46,25 +46,25 @@ public class UserLoginStatus{
 }
 // ..
 public class Controller{
-    
+
   public String accessibleEndpoint(HttpServletRequest req){
    	return "success"
   }
-    
+
   public String endpoint1(HttpServletRequest requestForEndpoint1){
     if (!UserLoginStatus.isLoggedInUser(..){
       return "error";
     }
     return "success"
   }
-        
+
   public String endpoint2(HttpServletRequest requestForEndpoint2){
     if (!UserLoginStatus.isLoggedInUser(..)){
       return "error";
     }
     return "success"
   }
-        
+
   public String endpoint3(HttpServletRequest requestForEndpoint3){
     if (!UserLoginStatus.isLoggedInUser(..)){
       return "error";
@@ -74,7 +74,7 @@ public class Controller{
 }
 ```
 
-Solution from the above may seem the correct one, because you have only one method(`isLoggedInUser(..)`) that determines whether user is logged in or not. However,  in that case, we are adding extra logic to our business which is not directly needed. In other words, for each business logic you have, you are extending with the security concern. At the end your business logic will be equal to **business logic + security concern**
+Solution from the above may seem the correct one, because you have only one method(`isLoggedInUser(..)`) that determines whether user is logged in or not. However, in that case, we are adding extra logic to our business which is not directly needed. In other words, for each business logic you have, you are extending with the security concern. At the end your business logic will be equal to **business logic + security concern**
 
 - Let's say after that update, you decided to log all endpoints. Then I assumed that you updated your application like this one:
 
@@ -87,42 +87,42 @@ public class UserLoginStatus{
 // ..
 public class Controller{
   private static final Logger LOGGER = LoggerFactory...;
-    
+
   public String accessibleEndpoint(HttpServletRequest req){
     final String methodName = "accessibleEndpoint";
     LOGGER.info("log for method: {} and reques: {} ", methodName, req);
    	return "success"
   }
-    
+
   public String endpoint1(HttpServletRequest requestForEndpoint1){
     final String methodName = "endpoint1";
     LOGGER.info("log for method: {} and reques: {} ", methodName, req);
     if (!UserLoginStatus.isLoggedInUser(..){
-      LOGGER.info("not logged in user");  
+      LOGGER.info("not logged in user");
       return "error";
     }
-    LOGGER.info("another log")      
+    LOGGER.info("another log")
     return "success"
   }
-        
+
   public String endpoint2(HttpServletRequest requestForEndpoint2){
-    final String methodName = ... 
-    LOGGER.info("log for method: {} and reques: {} ", methodName, req);    
+    final String methodName = ...
+    LOGGER.info("log for method: {} and reques: {} ", methodName, req);
     if (!UserLoginStatus.isLoggedInUser(..)){
       return "error";
     }
-    LOGGER.info("another log")  
+    LOGGER.info("another log")
     return "success"
   }
-        
+
   public String endpoint3(HttpServletRequest requestForEndpoint3){
-    final String methodName = ...  
-    LOGGER.info("log for method: {} and reques: {} ", methodName, req);    
+    final String methodName = ...
+    LOGGER.info("log for method: {} and reques: {} ", methodName, req);
     if (!UserLoginStatus.isLoggedInUser(..)){
-      LOGGER.info("not logged in user");    
+      LOGGER.info("not logged in user");
       return "error";
     }
-    LOGGER.info("another log")    
+    LOGGER.info("another log")
     return "success"
   }
 }
@@ -130,7 +130,7 @@ public class Controller{
 
 As you can see, right now for each business logic you have, you are extending with logging concern. At the end your business logic will be equal to **business logic + security concern + logging concern**
 
-It is clear that solutions like the above are not the feasible. It would be nice if there is central class that handles all these concerns (which are not directly related to our business logic). 
+It is clear that solutions like the above are not the feasible. It would be nice if there is central class that handles all these concerns (which are not directly related to our business logic).
 
 **That's the AOP is trying to solve. AOP allows centralized implementation of cross-cutting concerns. Because without AOP, they can not be implemented in a single place.**
 
@@ -138,26 +138,26 @@ It is clear that solutions like the above are not the feasible. It would be nice
 
 Actually all terms are related to each. So understand **what aspect does mean** will also allows us to understand other concepts as well.
 
-- **Aspect**: The class that implements the cross cutting concern. For instance `LoggingAspect` implements logging feature for us. 
+- **Aspect**: The class that implements the cross cutting concern. For instance `LoggingAspect` implements logging feature for us.
   - Aspect contains **pointcut and advice**. In other words **Aspect = pointcut + advice**
-- **Pointcut**: where the aspect is applied. (for instance, run the logging aspect inside the controller package, but not repository package)
+- **Pointcut**: where the aspect is applied. (for instance, apply the logging aspect inside the controller package, but not repository package)
 - **Advice**: what code to be executed.
 - **Joinpoint**:
   - **Jointpoints** is the point in the control flow of a program. (Executing method for an example is a joinpoint)
   - To determine which method was called, we use **joinpoint**.
   - **Advices** can be presented with information about the joinpoint. For example: method name, class name etc.
 
-There are more definitions than these. But for now let's look the how we can implement aspect in spring framework.
+There are more definitions than these. But for now let's look at the how we can implement aspect in spring framework.
 
 ## 3. Spring AOP
 
 - It is another module from spring framework to work with aspect oriented programming.
 - It is implemented in pure Java. There is no need for a special compilation process.
-- Spring AOP currently supports only method execution join points (advising the execution of methods on Spring beans). 
+- Spring AOP currently supports only method execution join points (advising the execution of methods on Spring beans).
 
 > Keep reading, you will understand what is method execution
 
-- Spring AOP defaults to using standard J2SE *dynamic proxies* for AOP proxies. This enables any interface (or set of interfaces) to be proxied.
+- Spring AOP defaults to using standard J2SE _dynamic proxies_ for AOP proxies. This enables any interface (or set of interfaces) to be proxied.
 - Spring's Proxy based AOP can only intercept `public` methods
 - Also you can force the Spring AOP to use CGLIB proxies.
 
@@ -167,13 +167,13 @@ Before doing some examples, let's quick recap what is proxy pattern.
 
 - Proxy is a structural design pattern that allows us to create an intermediary object that acts as a real object. A proxy receives client requests, does some work such as access control, caching, security things and then passes the request to a real objects.
 
-Let's say you have an service which returns user's image/icon  from database. After some time, you have decided to cache those images to response as much as quickly.  Before caching those requests, you have a code structure like this:
+Let's say you have an service which returns user's image/icon from database. After some time, you have decided to cache those images to response as much as quickly. Before caching those requests, you have a code structure like this:
 
 ```java
 public UserImageDTO{
     private Long id;
     private Image userImage;
-    
+
 }
 
 public interface UserImageService{
@@ -201,18 +201,18 @@ After using proxy pattern for caching those requests:
 public UserImageServiceProxyImpl implements UserImageService{
     private UserImageService userImageService;
     private Map<Long, Image> cacheImages;
-    
+
     public UserImageServiceProxyImpl(){
         cacheImages = new HashMap<>();
         this.userImageService = new UserImageServiceImpl();
     }
-    
+
     @Override
     public Image returnUserImageById(long id){
         if (cacheImages.size() >= 1000){
             removeFirstElementFromCache();
         }
-        
+
         if (cacheImages.get(id) == null){
             Image userImage = userImageService.returnUserImageById(id);
             addNewImageToCache(userImage);
@@ -233,7 +233,7 @@ As you noticed, client does not know whether it is talking with proxy object or 
 
 And using proxy, you are caching those images before returning to the client, and also there is second check. You are checking that your cache size is not grater than 1000.
 
-Remember that, with these strategy you can also catch the errors from real object, or you can check the client's parameters etc.. 
+Remember that, with these strategy you can also catch the errors from real object, or you can check the client's parameters etc..
 
 **AOP does this in more concrete and dynamic way.**
 
@@ -283,7 +283,7 @@ For two controllers it is easy to do that without aop:
 @RestController
 public class HelloController {
     private static final Logger LOGGER = LoggerFactory.getLogger(HelloController.class);
-    
+
     @GetMapping("/hello")
     public String helloController(){
         final String methodName = "helloController";
@@ -332,7 +332,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component // make sure that class is annotated with component, otherwise spring can not find your aspect
 public class LoggingAspect {
-  
+
 }
 ```
 
@@ -400,7 +400,7 @@ You have declared an aspect for your homeController. After that just run the pro
 ##### Around (`@Around`)
 
 - Wraps around the method
-- Only the one can prevent the original method from being called. (this can also be done by throwing exception at `@Before` advice, but at the end it will be propagated to the caller)
+- Only the one who can prevent the original method from being called. (this can also be done by throwing exception at `@Before` advice, but at the end it will be propagated to the caller)
 - Only advice that can catch exceptions and it will not propagated to the caller.
 - Only advice that can modify return value.
 - We use `ProceedingJoinPoint` which extends `JoinPoint` in that advice. This class includes method `proceed()`that allows us to continue the original method call.
@@ -417,26 +417,26 @@ You have declared an aspect for your homeController. After that just run the pro
 
 We can also use wild-cards for parts of the expression:
 
-- Wild-card for return type: `*`
 - Wild-card for method name : `*`
+- Wild-card for return type: `*`
 - Wild-card for parameters: `..`
 
 ```java
 // expression for any method name which takes any parameter and any return type
-"execution(* *(..))""
+"execution(* *(..))"
 ```
 
 > There are also other pointcut expressions such as `within, args`. For more info you can check the [spring-aop-pointcut-tutorial](https://www.baeldung.com/spring-aop-pointcut-tutorial) from Bealdung.
 
 #### Some pointcut expressions
 
--  the execution of any method:
+- the execution of any method:
 
 ```java
 "execution(* *(..))"
 ```
 
--  the execution of any method with a name beginning with "set":
+- the execution of any method with a name beginning with "set":
 
 ```java
 "execution(* set*(..))"
@@ -507,7 +507,7 @@ First update the `homeController()`:
 @RestController
 public class HomeController {
     private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
-    
+
     @GetMapping("/")
     public String homeController(){
         final String methodName = "home";
@@ -517,7 +517,7 @@ public class HomeController {
 }
 ```
 
-Then update the `LoggingAspect` 
+Then update the `LoggingAspect`
 
 ```java
 @Aspect
@@ -547,14 +547,14 @@ public class LoggingAspect {
 }
 ```
 
-Then after hit the localhost:8080 
+Then after hit the localhost:8080
 
 ```wiki
 2020-11-08 15:26:32.146  INFO 8401 --- [nio-8080-exec-1] c.s.springaop.aspects.LoggingAspect      : aspect BEFORE advice
 
 2020-11-08 15:26:32.155  INFO 8401 --- [nio-8080-exec-1] c.s.springaop.controller.HomeController  : Log for method : home
 
-2020-11-08 15:26:32.160 ERROR 8401 --- [nio-8080-exec-1] c.s.springaop.aspects.LoggingAspect      : aspect AFTER-THROWING: 
+2020-11-08 15:26:32.160 ERROR 8401 --- [nio-8080-exec-1] c.s.springaop.aspects.LoggingAspect      : aspect AFTER-THROWING:
 java.lang.RuntimeException: Exception inside home controller
 	at com.springexamples.springaop.controller.HomeController.homeController(HomeController.java:15) ~[classes/:na]
 // ...
@@ -603,8 +603,6 @@ After hit the localhost:8080
 
 That's it. No error log messages, and in the browser you will have seen **homeNotFound** response. Because `@Around` advice is the only advice that can change response of the calling method.
 
-
-
 ## What is AspectJ and AspectJ vs Spring AOP
 
 - **AspectJ** is an implementation of aspect-oriented programming for java.
@@ -613,7 +611,7 @@ You most probably are interesting of AspectJ rather than Spring-AOP because:
 
 - AspectJ is faster than Spring-AOP
 - Aspect is more powerful. You can add more points in your program than Spring-AOP allows you to do.
-- It is compatible with Spring-AOP. 
+- It is compatible with Spring-AOP.
   - Spring-AOP uses the same syntax with AspectJ
     - `@Aspect`, `@Before`, `@After` and `@Pointcut` works in the AspectJ also.
     - Pointcut expression that you wrote for Spring-AOP can also work with AspectJ.
@@ -622,7 +620,7 @@ You most probably are interesting of AspectJ rather than Spring-AOP because:
 
 > Bytecode is the code that is executed by the JVM(Java Virtual Machine)
 
-Weaving can be done: 
+Weaving can be done:
 
 1. When classes are loaded (**Load Time Weaving**)
 2. When code is compiled (**Compile Time Weaving**)
@@ -633,18 +631,18 @@ In general weaving can be defined in this picture:
 
 ### Load Time Weaving
 
-- It is a term for weaving happens when classes are loaded. 
+- It is a term for weaving happens when classes are loaded.
 - In other words, **aspect are woven when classes are loaded**.
 
 I am not going into detail of the configuration setup for load time weaving. You can learn more from this [link](https://www.eclipse.org/aspectj/doc/released/devguide/ltw-configuration.html). For instance, you need to enable **aspectj java agent** for load time weaving. That Java agents can modify the bytecode at load time.
 
 ### Compile Time Weaving
 
-- It is a term for weaving happens when classes are compiled. 
+- It is a term for weaving happens when classes are compiled.
 - In other words, **compiler weaves Aspects into the Bytecode**
-- To allow compiler for weaving stuff, **you need to replace Java compiler with AspectJ compiler** 
+- To allow compiler for weaving stuff, **you need to replace Java compiler with AspectJ compiler**
 
-You can enable compile time weaving only updating the `pom.xml` . There is no need such as java agent. 
+You can enable compile time weaving only updating the `pom.xml` . There is no need such as java agent.
 
 And also I am not going into detail of the configuration setup for compile time weaving. You can look at the eclipse AspectJ developer guide from this [link](https://www.eclipse.org/aspectj/doc/released/) or you can search for also maven plugin `aspectj-maven-plugin`
 
