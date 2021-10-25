@@ -210,7 +210,7 @@ Spring Security forces us to return object with type of `OAuth2User` if we are g
 
 Spring Security forces us to return object with type of `OidcUser` (which extends `OAuth2User`) if we are going to login with oauth2 with OpenID Connect 1.0. 
 
-> ## What is OpenID Connect ?
+> **What is OpenID Connect?**
 >
 > OpenID Connect 1.0 is a simple identity layer on top of the OAuth 2.0 protocol. 
 
