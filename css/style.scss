@@ -501,6 +501,9 @@ pre {
   }
 }
 @include media-query($on-palm) {
+  .site-title {
+    font-size: 40px;
+  }
   .footer-col {
     float: none;
     width: -webkit-calc(100% - (#{$spacing-unit} / 2));
