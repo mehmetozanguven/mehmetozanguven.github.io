@@ -14,6 +14,14 @@ Let's implement oauth2 practical implementation with Spring Boot using PostgreSQ
 
 At the end our clients will be able to login our web application both Basic Authentication (default security layer implemented by Spring Security) and OAuth2 (using Google Authorization)
 
+<nav class="custom-table-of-contents">
+<hr class="horizontal-line">
+  <h4 class="table-of-contents-title">Contents</h4>
+  * this unordered seed list will be replaced by toc as unordered list
+  {:toc}
+ <hr class="horizontal-line">
+</nav>
+
 There are three urls in our web application:
 
 ```java
@@ -146,6 +154,9 @@ public class UserDTO {
 }
 ```
 
+## Github Link
+
+If you only need to see the code, here is the [github link](https://github.com/mehmetozanguven/spring-security-examples/tree/master/spring-security-oauth2)
 
 
 We will first implement OAuth2, then we are going to update with Basic Authentication. Then, let's start with oAuth2:
