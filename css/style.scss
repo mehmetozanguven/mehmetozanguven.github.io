@@ -504,6 +504,10 @@ pre {
   .site-title {
     font-size: 40px;
   }
+  pre,
+  code {
+  font-size: 12px;
+  }
   .footer-col {
     float: none;
     width: -webkit-calc(100% - (#{$spacing-unit} / 2));
