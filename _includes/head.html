@@ -5,7 +5,7 @@
 
   <title>{% if page.title %}{{ page.title | escape_once }}{% else %}{{ site.title | escape_once }}{% endif %}</title>
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ "/css/font-awesome.min.css" | prepend: site.baseurl }}">
   <link rel="stylesheet" href="{{ "/css/google_pt_sans.css" | prepend: site.baseurl }}">
 
   <link rel="stylesheet" href="{{ "/css/style.css" | prepend: site.baseurl }}">
