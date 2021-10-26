@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring Boot with OAuth2, Postgresql, Thymeleaf with Form based Authentication
+title: Spring Boot OAuth2, Postgresql, Thymeleaf with Form based Authentication
 date: 2021-10-25 22:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
