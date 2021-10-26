@@ -10,7 +10,7 @@ Recently, I decided to learn containers (specifically Podman) to simply run my a
 
 And also I though that it is time to write some blogs about container :)
 
-Because many of us using terminologies such as container, container images interchangeably (and more). But there are differences between them. Let's start with the basic question: "what the Container is"
+We are using terminologies such as container, container images interchangeably (and more). But there are differences between them. Let's start with the basic question: "what the Container is"
 
 <nav class="custom-table-of-contents">
 <hr class="horizontal-line">
