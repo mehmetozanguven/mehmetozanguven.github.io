@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: Container/Podman
+title: Containerization | Podman
 permalink: /container-docker-podman/
 tagline: "Container&Podman"
 category: "container"
