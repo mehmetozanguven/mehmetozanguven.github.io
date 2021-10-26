@@ -12,6 +12,14 @@ And also I though that it is time to write some blogs about container :)
 
 Because many of us using terminologies such as container, container images interchangeably (and more). But there are differences between them. Let's start with the basic question: "what the Container is"
 
+<nav class="custom-table-of-contents">
+<hr class="horizontal-line">
+  <h4 class="table-of-contents-title">Contents</h4>
+  * this unordered seed list will be replaced by toc as unordered list
+  {:toc}
+ <hr class="horizontal-line">
+</nav>
+
 ## What is the Container ?
 
 > Basically, a container is just a simple Linux process
