@@ -99,7 +99,7 @@ WORKDIR /path/to/workdir
 
 `CMD` lets us define a default command to run when container starts.
 
-## Sample Dockerfile Example
+## Dockerfile Example
 
 
 ```dockerfile
