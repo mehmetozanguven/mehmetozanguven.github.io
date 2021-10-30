@@ -8,6 +8,14 @@ author: "mehmetozanguven"
 
 In this quick tutorial, let's learn how to catch all exception(s) in Spring Boot. And most probably you want to return customized exception when something wrongs in your web application. Even if there are many ways to implement this feature, in this blog I am going to talk about the solution using `@ControllerAdvice`
 
+<nav class="custom-table-of-contents">
+<hr class="horizontal-line">
+  <h4 class="table-of-contents-title">Contents</h4>
+  * this unordered seed list will be replaced by toc as unordered list
+  {:toc}
+ <hr class="horizontal-line">
+</nav>
+
 ## What is the ControllerAdvice in Spring?
 
 A controller advice allows us to handle exception(s) across the whole application, not just to an individual controller.
