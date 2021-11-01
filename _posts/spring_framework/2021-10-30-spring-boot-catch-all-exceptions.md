@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring Boot how to catch all exceptions
+title: How to catch all exceptions in Spring Boot
 date: 2021-10-30 12:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
