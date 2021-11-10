@@ -20,11 +20,11 @@ Even we have Java 17 version right now, industries still are using Java 8 & 11 e
 
 First we should answer the "why java needs new api for dates"?
 
-## Reason for new date api
+## Reason(s) for new date api
 
 We can group the reasons into the three categories:
 
-- **Thread safety**: `Date` & ̀ Calender` aren't thread-safe. Developers should think twice when they are dealing with concurrency problems. The new API avoids this issue because new classes are immutable.
+- **Thread safety**: `Date` & ̀`Calender` aren't thread-safe. Developers should think twice when they are dealing with concurrency problems. The new API avoids this issue because new classes are immutable.
 - **Difficult to understand**: Legacy APIs are hard to understand and their designs are quite poor. The new APIs clearly define different use cases for `Date`and `Time`
 - **Zoned Date**: In the legacy APIs, to work with time-zone logics we must have to write additional code blocks. The new APIs handles zoned date more clear and easy way.
 
