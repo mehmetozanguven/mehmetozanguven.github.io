@@ -13,7 +13,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://mehmetozanguven.github.io" # the base hostname & protocol for your site
 twitter_username: mehmetozanguven
 github_username: mehmetozanguven
-paginate: 5
+paginate: 10
 theme-dark: false #Set to true to change to dark website theme
 
 plugins: [jekyll-paginate, kramdown, jekyll-sitemap]
