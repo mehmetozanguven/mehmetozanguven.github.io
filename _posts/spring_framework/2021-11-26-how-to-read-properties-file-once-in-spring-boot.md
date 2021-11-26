@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to read properties file in the Spring Boot application only once
+title: How to read properties file only once in the Spring Boot application
 date: 2021-11-26 13:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
