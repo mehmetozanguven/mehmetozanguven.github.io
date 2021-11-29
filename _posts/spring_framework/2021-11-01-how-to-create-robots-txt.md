@@ -1,11 +1,10 @@
 ---
 layout: post
-title: How to create robots.txt endpoint in Spring Boot
+title: How to create robots.txt controller in Spring Boot
 date: 2021-11-01 13:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
 ---
-
 
 Let's learn how to create robots.txt file for your spring boot or spring mvc project. Having robots.txt file tells search engine crawlers, such as google, which URLs the crawler can access on your website.
 
@@ -22,7 +21,6 @@ public class RobotsTxtController {
     }
 }
 ```
-
 
 - With `@ResponseBody`, we are binding method return value to the web response body. In other words, we are just saying, don't return view from this endpoint.
 - With `String TEXT_PLAIN_VALUE = "text/plain";`, we are saying that we will return text file.
