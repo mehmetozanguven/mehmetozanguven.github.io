@@ -6,7 +6,7 @@ categories: "spring"
 author: "mehmetozanguven"
 ---
 
-Let's quickly learn how to create sitemap.xml endpoint for your spring boot project.
+Let's quickly learn how to generate sitemap.xml endpoint for your spring boot project. We will create a sitemap controller to handle sitemap.xml requests.
 
 > A _sitemap_ is a way of organizing a website, identifying the URLs and the data under each section.
 
