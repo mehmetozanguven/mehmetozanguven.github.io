@@ -6,6 +6,8 @@ categories: "spring"
 author: "mehmetozanguven"
 ---
 
+Do you want to know how to read specific properties file according to the environment variable in Spring boot? Let's explore how to read properties file in a different way that Spring already provides.
+
 You probably know that Spring Framework provides convenient way to read property from correspond properties file(s). But Spring's solution only works in the Spring context. Sometimes you may need to get property value outside of the Spring context. For instance you may need to load properties file inside an utility class.
 
 Let's say we have property file called **user_auth.properties** both for local and test environments.
