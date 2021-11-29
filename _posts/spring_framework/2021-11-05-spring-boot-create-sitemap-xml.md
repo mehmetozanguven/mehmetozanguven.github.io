@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to create sitemap.xml endpoint in Spring Boot
+title: How to create sitemap.xml controller in Spring Boot
 date: 2021-11-05 13:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
