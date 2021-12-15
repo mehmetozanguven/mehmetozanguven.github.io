@@ -104,7 +104,7 @@ store:
 
 Let's continue with the example,
 
-## Httpd Container
+## Example: Httpd Container
 
 We can pull httpd images from the docker repo:
 
