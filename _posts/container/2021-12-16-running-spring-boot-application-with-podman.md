@@ -50,7 +50,7 @@ ea58ea6b40766c62afad735d5b6918a214c6491cf56ecec81df2783133d13c1
 
 # list the images
 
-[mehmetozanguven@fedora iplocation-dev]$ podman images
+$ podman images
 REPOSITORY                     TAG         IMAGE ID      CREATED             SIZE
 localhost/yourName             latest      ea58ea6b4076  About a minute ago  719 MB
 docker.io/library/openjdk      11          e273ff3d8df8  5 days ago          671 MB
