@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Running PostgreSQL with Podman
-date: 2021-12-15 21:45:31 +0530
+date: 2021-12-15 17:45:31 +0530
 categories: "container"
 author: "mehmetozanguven"
 ---
