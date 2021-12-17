@@ -6,7 +6,7 @@ categories: "container"
 author: "mehmetozanguven"
 ---
 
-Instead of running postman locally, we can easily run with Podman. Here are the basic steps you should follow.
+Instead of running postgresql locally, we can easily run with Podman. Here are the basic steps you should follow.
 
 <nav class="custom-table-of-contents">
 <hr class="horizontal-line">
