@@ -104,6 +104,14 @@ $ psql -U postgres -d local_Db -h localhost -p 5432 -a -f /path/to/sql
 - `-a`: all echo
 - `-f`: path to SQL script
 
+## How to backup from your Docker/Podman Container to your host
+
+If you want to backup your database when yu are running inside containers, you may use the following command:
+
+```bash
+$ podman exec -it {your_docker_name} pg_dump -U postgres -W -h localhost > your_db_name > backup_file_name.bak
+```
+
 ## To Load Backup File
 
 - Drop the previous database and create the empty database again:
