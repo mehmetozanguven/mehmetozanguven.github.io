@@ -129,7 +129,7 @@ $ psql databasename < backup_file_name.bak
 
 ### To Load Backup/File when PostgreSQL running as container (Podman/Docker)
 
-- After dropping and re-creating database, copy the backup folder inside the container:
+- After dropping and re-creating database, copy the backup file inside the container:
 
 ```bash
 $ podman cp /path/to/sql {containerId}:/path/to/container/sql
