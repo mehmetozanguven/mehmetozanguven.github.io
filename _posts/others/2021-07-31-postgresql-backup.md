@@ -126,3 +126,17 @@ CREATE DATABASE databasename
 ```bash
 $ psql databasename < backup_file_name.bak
 ```
+
+### To Load Backup/File when PostgreSQL running as container (Podman/Docker)
+
+- After dropping and re-creating database, copy the backup folder inside the container:
+
+```bash
+$ podman cp /path/to/sql {containerId}:/path/to/container/sql
+```
+
+- Then run the following psql command inside the container:
+
+```bash
+$ psql -U postgres -W -h localhost {db_name} -p 5432 -a -f /path/to/container/sql
+```
