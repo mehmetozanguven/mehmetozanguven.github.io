@@ -32,7 +32,7 @@ In our application we will use Google as the authorization and resource servers
 
 If you remember the my previous blog, the client will only needs to send client ID and client secret. Then, Google can identify our web application(the client). And also our client won't manage its users.
 
-I will not go into the details of how to setup your google (via console.cloud.google.com) to use as OAuth. There are dons of tutorial on Internet.
+I will not go into the details of how to setup your google (via console.cloud.google.com) to use as OAuth. There are tons of tutorial on Internet.
 
 > Just make sure that:
 >
@@ -189,7 +189,7 @@ Creating clientRegistration is not enough, we should also tell the spring boot a
 
 To setup ClienRegistration, Spring Security uses `ClientRegistrationRepository`
 
-<img src="./pictures/client_registration_repository.png" alt="client_registration_repository.png" />
+<img src="/assets/spring/oauth2/thymeleaf/client_registration_repository.png" alt="client_registration_repository.png" />
 
 > Actually `ClientRegistrationRepository` is similar to `UserDetailsService`. As you recall `UserDetailsService` will try to find `UserDetails`. We can apply the same login in here: `ClientRegistrationRepository` tries to find `ClientRegistration`
 
