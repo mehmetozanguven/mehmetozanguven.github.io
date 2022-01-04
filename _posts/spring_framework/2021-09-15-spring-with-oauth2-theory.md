@@ -118,7 +118,7 @@ After the step1, the client will call the AuthSever with the **code(first token)
 Let's be clear:
 
 - The first code is a proof that the user directly interacted with the AuthServer.The client receives this code and use it again to authenticate and to obtain an access token(second token)
-- The client uses the second to access resources on the resource server.
+- The client uses the second token to access resources on the resource server.
 
 You may ask "why AuthServer didn't return the token(access token) from the step 1? If AuthServer was return the token for the first time, the client wouldn't need to call the second time":
 
