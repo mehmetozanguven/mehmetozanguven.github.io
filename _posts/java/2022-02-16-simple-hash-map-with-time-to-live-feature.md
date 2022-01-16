@@ -160,6 +160,6 @@ And also while getting element from the cache:
 > LocalDateTime.now().isAfter(expiryDate);
 > ```
 
-You may also remove all the expired keys while you are putting new item in the cache. However iterating over all hashmap may lead to the performance issue. That's why I decided to check item in the get method.
+You may also remove all the expired keys while you are putting new item in the cache. However iterating over all hashmap may lead to the performance issue. That's why I decided to check expiration date in the get method.
 
 At the end, you can use this simple java classes to create simple cache in your application.
