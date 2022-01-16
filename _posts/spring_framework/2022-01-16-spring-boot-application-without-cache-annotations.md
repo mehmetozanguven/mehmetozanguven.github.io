@@ -6,7 +6,7 @@ categories: "spring"
 author: "mehmetozanguven"
 ---
 
-Almost every blog(s) on the Internet for caching operation in the Spring Boot are using `@Cacheable`, ` @CacheEvit`, `@CachePut` vs... In this blog we are going to implement cache without using annotations instead we will create&use service class to get records from cache.
+Almost every blog(s) on the Internet for caching operation in the Spring Boot are using `@Cacheable`, `@CacheEvit`, `@CachePut` vs... In this blog we are going to implement cache without using annotations instead we will create&use service class to get records from cache.
 
 <nav class="custom-table-of-contents">
 <hr class="horizontal-line">
