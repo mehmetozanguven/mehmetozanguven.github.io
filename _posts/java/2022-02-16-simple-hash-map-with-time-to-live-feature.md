@@ -148,7 +148,7 @@ public class SimpleExpiredCacheImpl<K, V> implements SimpleCache<K, V>
 
 Before putting the item(s) to the cache, we are wrapping with the new object called `CacheValue` which includes expiration date = now + expirationInMs.
 
-And also while getting element from the cache, we first are getting element from the cache,
+And also while getting element from the cache:
 
 - If it is not found, then we are just returning Optional.empty();
 
