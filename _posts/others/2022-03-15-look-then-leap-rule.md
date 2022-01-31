@@ -150,7 +150,7 @@ Let's write some code about look-and-leap-rule (it will be practical implementat
 
 ### Github Link
 
-If you only need to see the code itself, here is the link
+If you only need to see the code itself, here is the [link](https://github.com/mehmetozanguven/optimal-stopping-look-then-leap-rule)
 
 ### Create basic class to represent applicants
 
