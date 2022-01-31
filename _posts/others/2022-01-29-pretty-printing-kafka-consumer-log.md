@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Util script for pretty printing kafka consumer log"
+title: "Utility script for pretty printing kafka consumer log"
 date: 2022-01-29 10:45:31 +0530
 categories: "others"
 author: "mehmetozanguven"
