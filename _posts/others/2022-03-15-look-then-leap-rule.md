@@ -132,11 +132,11 @@ Before diving into the code let me to illustrate the problem with basic pictures
 
 Let's image that we have 20 applicants
 
-<img src="/assets/look_then_leap_rule/look_and_leap_rule_applicants.png" alt="look_and_leap_rule_applicants" />
+<img src="/assets/others/look_then_leap_rule/look_and_leap_rule_applicants.png" alt="look_and_leap_rule_applicants" />
 
 According to the our formula $N/e=20/2.71=7.35 ≃ 7$ , we must collect data about first 7 candidates and find the best one among them:
 
-<img src="/assets/look_then_leap_rule/look_phase.png" alt="look_phase.png" />
+<img src="/assets/others/look_then_leap_rule/look_phase.png" alt="look_phase.png" />
 
 Now it is time to find the first one which is higher score than 45 (7th applicant)
 
