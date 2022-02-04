@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Optimal Stopping - Look-then-Leap Rule and Practical Implementation with Java"
-date: 2022-03-15 12:45:31 +0530
+date: 2022-02-04 12:45:31 +0530
 categories: "others"
 author: "mehmetozanguven"
 ---
