@@ -6,7 +6,7 @@ categories: "spring"
 author: "mehmetozanguven"
 ---
 
-Let's look at the Filter Chain, more specially `AuthenticationFilter` in the Spring Security. And also I am going to implement custom filter. This custom filter will include my custom authentication method because I do not want to use BasicAuthentication anymore!!
+Let's look at the Filter Chain, more specifically `AuthenticationFilter` in the Spring Security. And also I am going to implement custom filter. This custom filter will include my custom authentication method because I do not want to use BasicAuthentication anymore!!
 
 At the end of this post, you hopefully can be able to implement any custom authentication logic from top to the bottom using Spring Security.
 
