@@ -155,6 +155,8 @@ Now filter class is done, but there is no AuthenticationManager, I should define
 
 To create Manager, I will just override one method inside the `WebSecurityConfigurerAdapter` and annotate it with `@Bean`
 
+> Override `authenticationManagerBean()` to expose the AuthenticationManager from the WebSecurityConfigurerAdapter to be exposed as a Bean.
+
 ```java
 package com.mehmetozanguven.springsecuritycustomfilter.config;
 
