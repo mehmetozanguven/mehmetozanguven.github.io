@@ -311,7 +311,6 @@ public class ProjectBeanConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
