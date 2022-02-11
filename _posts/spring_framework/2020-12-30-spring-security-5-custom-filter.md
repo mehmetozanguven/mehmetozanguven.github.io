@@ -153,9 +153,9 @@ Now filter class is done, but there is no AuthenticationManager, I should define
 
 ### Creating the AuthenticationManager <a name="create_auth_manager"></a>
 
-To create Manager, I will just override one method inside the `WebSecurityConfigurerAdapter` and annotate it with `@Bean`
+To create Manager, I will just override one method inside the `WebSecurityConfigurerAdapter`
 
-> Override `authenticationManagerBean()` to expose the AuthenticationManager from the WebSecurityConfigurerAdapter to be exposed as a Bean.
+> Override `authenticationManagerBean()` to expose the AuthenticationManager from the WebSecurityConfigurerAdapter
 
 ```java
 package com.mehmetozanguven.springsecuritycustomfilter.config;
@@ -166,7 +166,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class ProjectBeanConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
-    @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
@@ -215,11 +214,14 @@ public class MyCustomAuthentication extends UsernamePasswordAuthenticationToken 
 Now let's update the filter class:
 
 ```java
-@Component
 public class MyCustomAuthenticationFilter implements Filter {
+    private static final Logger logger = LoggerFactory.getLogger(MyCustomAuthenticationFilter.class.getSimpleName());
 
-    @Autowired
     private AuthenticationManager authenticationManager;
+
+    public MyCustomAuthenticationFilter(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+    }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -251,7 +253,6 @@ As you recall from the previous blog, you must determine when this provider must
 ```java
 package com.mehmetozanguven.springsecuritycustomfilter.security.providers;
 
-@Component
 public class MyCustomAuthenticationProvider implements AuthenticationProvider {
 
 	//...
@@ -272,7 +273,6 @@ public class MyCustomAuthenticationProvider implements AuthenticationProvider {
 The left is to define the authentication logic:
 
 ```java
-@Component
 public class MyCustomAuthenticationProvider implements AuthenticationProvider {
     private final String secretKey = "password";
 
@@ -296,8 +296,9 @@ Add this custom provider to the configuration:
 @Configuration
 public class ProjectBeanConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private MyCustomAuthenticationProvider customAuthenticationProvider;
+    public MyCustomAuthenticationProvider myCustomAuthenticationProvider() {
+        return new MyCustomAuthenticationProvider();
+    }
 
     /**
      * Configure the custom provider
@@ -306,7 +307,7 @@ public class ProjectBeanConfiguration extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(customAuthenticationProvider);
+        auth.authenticationProvider(myCustomAuthenticationProvider());
     }
 
     @Override
@@ -327,8 +328,9 @@ At the beginning of the post, I have decided to use my filter instead of the Bas
 @Configuration
 public class ProjectBeanConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private MyCustomAuthenticationFilter customAuthenticationFilter;
+    public MyCustomAuthenticationFilter myCustomAuthenticationFilter() throws Exception {
+        return new MyCustomAuthenticationFilter(authenticationManagerBean());
+    }
 
 	// ...
 
@@ -340,8 +342,7 @@ public class ProjectBeanConfiguration extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.addFilterAt(customAuthenticationFilter, BasicAuthenticationFilter.class);
-        http.authorizeRequests().anyRequest().permitAll();
+        http.addFilterAt(myCustomAuthenticationFilter(), BasicAuthenticationFilter.class);
     }
 }
 ```
@@ -410,11 +411,13 @@ As you can see, response seems ugly, let's modify it .
 As I said previously, instead of wrapping the ServletRequest with HttpServletRequest, you can use it directly via extending `OncePerRequestFilters`
 
 ```java
-@Component
 public class MyCustomAuthenticationFilter extends OncePerRequestFilter {
 
-    @Autowired
     private AuthenticationManager authenticationManager;
+
+    public MyCustomAuthenticationFilter(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+    }
 
     @Override
     public void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws IOException, ServletException {
