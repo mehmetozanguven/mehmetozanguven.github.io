@@ -489,6 +489,16 @@ After all Filter will get the result from the Manager.
 public class UsernamePasswordAuthFilter extends OncePerRequestFilter {
 
     private AuthenticationManager authenticationManager;
+    private OtpRepository otpRepository;
+    private AuthorizationTokenHolder authorizationTokenHolder;
+
+    public UsernamePasswordAuthFilter(AuthenticationManager authenticationManager,
+                                      OtpRepository otpRepository,
+                                      AuthorizationTokenHolder authorizationTokenHolder) {
+        this.authenticationManager = authenticationManager;
+        this.otpRepository = otpRepository;
+        this.authorizationTokenHolder = authorizationTokenHolder;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest,
