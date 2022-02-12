@@ -338,11 +338,13 @@ UserDetailsService:
 ```java
 package com.mehmetozanguven.springsecuritymultipleproviders.service;
 
-@Service
 public class PostgresqlUserDetailsService implements UserDetailsService {
 
-    @Autowired
     private UserRepository userRepository;
+
+    public PostgresqlUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -358,6 +360,11 @@ Configuration:
 ```java
 @Configuration
 public class ProjectBeanConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Bean
+    public PostgresqlUserDetailsService userDetailsService() {
+        return new PostgresqlUserDetailsService(userRepository);
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -379,7 +386,6 @@ This filter will be called when path is `/login`
 ```java
 public class UsernamePasswordAuthFilter extends OncePerRequestFilter {
 
-    @Autowired
     // but I didn't defined any manager YET !!!
     // let's define the one inside the configuration
     private AuthenticationManager authenticationManager;
@@ -427,7 +433,6 @@ public class ProjectBeanConfiguration extends WebSecurityConfigurerAdapter {
 	// ...
 
     @Override
-    @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
@@ -483,7 +488,6 @@ After all Filter will get the result from the Manager.
 ```java
 public class UsernamePasswordAuthFilter extends OncePerRequestFilter {
 
-    @Autowired
     private AuthenticationManager authenticationManager;
 
     @Override
@@ -548,13 +552,9 @@ Right now, I need two AuthenticationProvider for each Authentication processes (
 ```java
 package com.mehmetozanguven.springsecuritymultipleproviders.service.providers;
 
-@Component
 public class UsernamePassswordAuthProvider implements AuthenticationProvider {
 
-    @Autowired
     private PostgresqlUserDetailsService postgresqlUserDetailsService;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
@@ -587,10 +587,8 @@ public class UsernamePassswordAuthProvider implements AuthenticationProvider {
 ```java
 package com.mehmetozanguven.springsecuritymultipleproviders.service.providers;
 
-@Component
 public class OtpAuthProvider implements AuthenticationProvider {
 
-    @Autowired
     private OtpRepository otpRepository;
 
     @Override
@@ -618,17 +616,19 @@ The left is to add these providers to the configuration
 ```java
 @Configuration
 public class ProjectBeanConfiguration extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private UsernamePassswordAuthProvider usernamePassswordAuthProvider;
+    public UsernamePassswordAuthProvider usernamePassswordAuthProvider() {
+        return new UsernamePassswordAuthProvider(...);
+    }
 
-    @Autowired
-    private OtpAuthProvider otpAuthProvider;
+    public OtpAuthProvider otpAuthProvider(){
+        return new OtpAuthProvider(...);
+    }
 
     // ...
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(usernamePassswordAuthProvider)
-            .authenticationProvider(otpAuthProvider);
+        auth.authenticationProvider(usernamePassswordAuthProvider())
+            .authenticationProvider(otpAuthProvider());
     }
 }
 ```
@@ -638,14 +638,15 @@ public class ProjectBeanConfiguration extends WebSecurityConfigurerAdapter {
 ```java
 @Configuration
 public class ProjectBeanConfiguration extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private UsernamePasswordAuthFilter usernamePasswordAuthFilter;
+    public UsernamePasswordAuthFilter usernamePasswordAuthFilter() throws Exception {
+        return new UsernamePasswordAuthFilter(...);
+    }
 
     // ...
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.addFilterAt(usernamePasswordAuthFilter, BasicAuthenticationFilter.class);
+        http.addFilterAt(usernamePasswordAuthFilter(), BasicAuthenticationFilter.class);
     }
 }
 ```
@@ -664,7 +665,6 @@ package com.mehmetozanguven.springsecuritymultipleproviders.service.filters;
 
 public class TokenAuthFilter extends OncePerRequestFilter {
 
-    @Autowired
     private AuthenticationManager authenticationManager;
 
     @Override
@@ -729,9 +729,9 @@ Now AuthenticationManager will call the correct authentication provider for that
 ### Second filter Authentication Provider <a name="second_filter_provider"></a>
 
 ```java
-@Component
+
 public class TokenAuthProvider implements AuthenticationProvider {
-    @Autowired
+
     private AuthorizationTokenHolder authorizationTokenHolder;
 
     @Override
@@ -763,27 +763,28 @@ public class ProjectBeanConfiguration extends WebSecurityConfigurerAdapter {
     // ...
 
     // second filter and provider
-    @Bean
     public TokenAuthFilter tokenAuthFilter() {
         // not using Autowired to avoid circular dependency issue
         return new TokenAuthFilter();
     }
-    @Autowired
-    private TokenAuthProvider tokenAuthProvider;
+
+    public TokenAuthProvider tokenAuthProvider() {
+        return new TokenAuthProvider(...);
+    }
 
 	// ...
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(usernamePassswordAuthProvider)
-                .authenticationProvider(otpAuthProvider)
-                .authenticationProvider(tokenAuthProvider);
+        auth.
+                ...
+                .authenticationProvider(tokenAuthProvider());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.addFilterAt(usernamePasswordAuthFilter, BasicAuthenticationFilter.class)
-            .addFilterAfter(tokenAuthFilter, BasicAuthenticationFilter.class);
+        http.addFilterAt(usernamePasswordAuthFilter(), BasicAuthenticationFilter.class)
+            .addFilterAfter(tokenAuthFilter(), BasicAuthenticationFilter.class);
     }
 }
 ```
