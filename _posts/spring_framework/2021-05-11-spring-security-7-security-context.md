@@ -257,7 +257,7 @@ Reason is that default strategy for the `SecurityContextHolder` is the **MODE_TH
 ## **SecurityContextHolder** (<a name="securityContextHolder"></a> )
 
 - It is just a class to manage `SecurityContext`
-- `SecurityContextHolder` implements 3 strategies to manager `SecurityContext`
+- `SecurityContextHolder` implements strategies to manage `SecurityContext`
   - Default one **MODE_THREADLOCAL** (Store information and make it accessible for the specific thread, only thread_1 stores a value on the thread local, thread_2 can not access it, only available for thread_1)
   - **MODE_INHERITABLETHREADLOCAL** (Copy the securityObject from the parent thread to the child thread)
 
