@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Create simple hash map with expiration(time-to-live) feature"
-date: 2022-02-16 10:45:31 +0530
+date: 2022-02-16 +0530
 categories: "java"
 author: "mehmetozanguven"
 ---
