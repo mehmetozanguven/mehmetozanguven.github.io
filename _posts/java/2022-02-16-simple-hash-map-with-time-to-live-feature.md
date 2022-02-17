@@ -41,7 +41,7 @@ public class SimpleExpiredCacheImpl<K, V> implements SimpleCache<K, V>
 {
     private static final Logger logger = LoggerFactory.getLogger(SimpleExpiredCacheImpl.class);
     private static final String DEFAULT_CACHE_NAME = SimpleExpiredCacheImpl.class.getSimpleName();
-    private static final long DEFAULT_CACHE_TIMEOUT = 60000L; // one min in mis
+    private static final long DEFAULT_CACHE_TIMEOUT = 60000L; // one min in ms
     private static final long DEFAULT_MAX_SIZE = 100000L;
 
     private Map<K, CacheValue<V>> simpleCache;
