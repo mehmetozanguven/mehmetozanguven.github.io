@@ -166,7 +166,6 @@ public class HomePageController {
 
 ```java
 @Component
-@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -283,7 +282,6 @@ There are many ways to resolve this error. I will just show two of them.
 
 ```java
 @Component
-@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsFilter corsFilter() {
@@ -311,7 +309,6 @@ Create a `WebMvcConfigurer` bean
 
 ```java
 @Component
-@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
