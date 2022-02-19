@@ -40,9 +40,9 @@ First let's define what do we mean by different origin?
 
 Two origins are different if they have:
 
-- a different scheme (`HTTP` OR `HTTPS`)
-- a different domain (`sample.com` VS `api.sample.com` VS `another.com`)
-- a different port (`sample.com:8081` VS `sample.com:8080`)
+- different scheme (`HTTP` OR `HTTPS`)
+- different domain (`sample.com` VS `api.sample.com` VS `another.com`)
+- different port (`sample.com:8081` VS `sample.com:8080`)
 
 ### Why do we need a Cors policy ? <a name="why_we_need_cors_policy" />
 
