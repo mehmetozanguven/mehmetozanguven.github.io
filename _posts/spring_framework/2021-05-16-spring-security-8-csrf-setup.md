@@ -305,7 +305,7 @@ Please look at the action, it is the our changePassword endpoint (which of cours
 
 ow, when you are logged-in the application, please open the `attacker.html` page in the browser chrome/firefox etc.. then click the button **See Contact Information**
 
-After clicking the button, you will be redirected to the page `http://localhost:8080/changePassword` with this page:
+After clicking the button, you will be redirected to the page `http://localhost:8080/changePassword` with this output:
 
 ```html
 Your password was changed. New Password: attackNewPassword
