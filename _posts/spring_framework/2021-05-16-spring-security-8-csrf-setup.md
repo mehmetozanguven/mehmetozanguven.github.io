@@ -37,7 +37,7 @@ If you only need to see the code, here is the [github link](https://github.com/m
 
 ## What is the CSRF(Cross site request forgery) attack <a name="csrf_attacks"></a>
 
-- Cross-site request forgery is a web security which an attacker can trick a user into clicking a malicious link that triggers undesirable or unexpected side effects.
+- Cross-site request forgery is a web security vulnerability which an attacker can trick a user into clicking a malicious link that triggers undesirable or unexpected side effects.
 - This attack allows an attacker to induce users to perform actions that they do not intend to perform.
 - In a successful CSRF attack might change user email/password address on the system.
 - Usually GET requests is used by an attacker. Because GET requests are the only type of HTTP request that contains the entire of the request's contents in a URL.
@@ -102,7 +102,7 @@ post parameter
 
 - Secure websites use anti-CSRF cookies to verify that POST requests originate from pages hosted on the
   same web domain.
-- However using cookies are not the only solution form CSRF attack, because an attacker can steal csrf token
+- However using cookies are not the only solution for CSRF attack, because an attacker can steal csrf token
   and use it for subsequent requests. **Therefore we need a solution such as only send the cookie which was
   initiated by the webserver. Solution for that is SameSite=Strict**
 
