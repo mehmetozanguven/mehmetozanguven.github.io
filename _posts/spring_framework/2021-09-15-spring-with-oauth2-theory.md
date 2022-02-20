@@ -227,7 +227,7 @@ When the client has a refresh token, the client sends a request with the followi
 
 In response, the authorization server returns a new access token and a new refresh token.
 
-## Security In OAuth2
+## Security in OAuth2
 
 Of course, OAuth2 is not bulletproof solution. There can be some security problem while using OAuth2:
 
