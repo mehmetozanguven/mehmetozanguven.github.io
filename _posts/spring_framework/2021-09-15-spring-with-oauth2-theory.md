@@ -239,7 +239,7 @@ Of course, OAuth2 is not bulletproof solution. There can be some security proble
 
 In this article, we looked at the what is the OAuth2 and theory of the OAuth2 itself.
 
-We looked at different implementation of OAuth2:
+We looked at the different implementations of OAuth2:
 
 - Authorization Grant Type: Most common used one. You will use this one when implementing Single Sign On with Gmal/Github/Facebook etc..
 - Password grant type: Used when the authServer is maintained by the same organization. Also it is less secure than the Authorization Grant Type
