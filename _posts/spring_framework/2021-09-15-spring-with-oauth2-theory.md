@@ -22,7 +22,7 @@ OAuth 2.0 is the industry-standard protocol for authorization.
 
 OAuth 2.0 focuses on client developer simplicity while providing specific authorization flows for web applications, desktop applications, mobile phones, and living room devices.
 
-Overall **OAuth2 primary purpose is to allow a third-party website or app access to a resource**
+Overall **OAuth2 primary purpose is to allow a third-party website or app to access to a resource**
 
 > Quick Notes:
 >
@@ -33,7 +33,7 @@ Overall **OAuth2 primary purpose is to allow a third-party website or app access
 
 There must be a reason to use one tool instead of another. OAuth2 can be useful because:
 
-- We don't need to store user's credential (I mean, user's password) in our system.
+- We don't want to store user's credential (I mean, user's password) in our system.
 - If we have many small application (let's say N applications) and if each application can be accessed with authenticated users, then we will have N separate tables to store each logged-in users/customers
 
 If you look at the picture below, same client username and password is stored in the three different applications with independently. If you work in the organization, this will be hard to maintain.
@@ -51,8 +51,8 @@ Therefore it would be better if we isolated the responsibility for credential ma
 It is essential to know components of OAuth2 before diving into implementation.
 
 - The **resource server**: The application which is hosting resources owned by users. Resources can be users' data.
-- The **user (resource owner)**: The individual who owns resources. A user represents the username and password to identify themselves.
-- The **client**: The application that accesses the resources owned by the user on their behalf.
+- The **user (resource owner)**: The individual who owns resources. A user represents the username and password to identify itself.
+- The **client**: The application that accesses the resources owned by the user on user behalf.
   - The client uses ClientID and a secret key to identify itself. But these are not the same as the user credentials.
 - The **authorization server**: The application that authorizes the client to access the user's resources. When the authorization server decides that a client is authorized to access, it creates(or issues) a token.
   - Then client uses this token to prove to the resource server that it was authorized by the authorization server.
