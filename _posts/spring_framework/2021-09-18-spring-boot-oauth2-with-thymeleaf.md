@@ -191,7 +191,7 @@ To setup ClienRegistration, Spring Security uses `ClientRegistrationRepository`
 
 <img src="/assets/spring/oauth2/thymeleaf/client_registration_repository.png" alt="client_registration_repository.png" />
 
-> Actually `ClientRegistrationRepository` is similar to `UserDetailsService`. As you recall `UserDetailsService` will try to find `UserDetails`. We can apply the same login in here: `ClientRegistrationRepository` tries to find `ClientRegistration`
+> Actually `ClientRegistrationRepository` is similar to `UserDetailsService`. As you recall `UserDetailsService` will try to find `UserDetails`. We can apply the same logic in here: `ClientRegistrationRepository` tries to find `ClientRegistration`
 
 We can use `InMemoryClientRegistrationRepository` (kind of `InMemoryUserDetailsService`) and put the google client inside it:
 
