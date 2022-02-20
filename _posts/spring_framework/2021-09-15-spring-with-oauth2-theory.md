@@ -134,7 +134,7 @@ To get an access token, client makes a call and sends:
 
 Overall, in the step 2, client makes a request to the AuthServer. And the request contains:
 
-- **`code`**: it is the Authorization code from the step 1. (It is prove that the user authenticated)
+- **`code`**: it is the Authorization code from the step 1. (It is a prove that the user authenticated)
 - **`client_id` and `client_secret` **, these are the client's credentials
 - **`redirect_url`**: same as the step 1
 - **`grant_type`**: this is the value of `authorization_code`. Defines the flow we want to follow.
