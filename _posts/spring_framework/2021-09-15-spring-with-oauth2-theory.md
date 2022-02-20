@@ -34,7 +34,7 @@ Overall **OAuth2 primary purpose is to allow a third-party website or app to acc
 There must be a reason to use one tool instead of another. OAuth2 can be useful because:
 
 - We don't want to store user's credential (I mean, user's password) in our system.
-- If we have many small application (let's say N applications) and if each application can be accessed with authenticated users, then we will have N separate tables to store each logged-in users/customers
+- If we have many small applications (let's say N applications) and if each application can be accessed with authenticated users, then we will have N separate tables to store each logged-in users/customers
 
 If you look at the picture below, same client username and password is stored in the three different applications with independently. If you work in the organization, this will be hard to maintain.
 
@@ -111,7 +111,7 @@ After successful authentication:
 
 #### Obtain an access token - Step 2
 
-Step 1 is proof that the user authenticated.
+Step 1 is a proof that the user authenticated.
 
 After the step1, the client will call the AuthSever with the **code(first token)** to get the token(second token).
 
