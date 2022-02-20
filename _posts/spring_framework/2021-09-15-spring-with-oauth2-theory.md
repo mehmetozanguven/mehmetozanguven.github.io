@@ -157,7 +157,7 @@ Now let's discuss **password grant type**.
 
 In this flow, the client collects the user credentials and uses these to authenticate and obtain an access token from the AuthServer
 
-This flow generally is used when the authServer is maintained by the same organization. In the same organization, if we use Authorization code grant type, then for each logged-in requests users will be re-directed to the login page of the organization and back again. Password grant type can be a good choice for these scenarious.
+This flow generally is used when the authServer is maintained by the same organization. In the same organization, if we use Authorization code grant type, then for each logged-in requests users will be re-directed to the login page of the organization and back again. Password grant type can be a good choice for these scenarios.
 
 There are two tasks to perform:
 
