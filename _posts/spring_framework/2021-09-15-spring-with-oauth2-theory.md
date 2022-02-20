@@ -187,7 +187,7 @@ Let's discuss **client credentials grant type**
 
 <img src="/assets/spring/oauth2/client_credentials_grant_type.png" alt="client_credentials_grant_type.png"/>
 
-As you can there is no actor like user in the flow.
+As you can see there is no actor like user in the flow.
 
 This flow can be useful when only machine-to-machine communication is required. There are two steps:
 
