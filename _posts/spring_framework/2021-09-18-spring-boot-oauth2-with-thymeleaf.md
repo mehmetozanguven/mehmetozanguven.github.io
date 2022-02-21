@@ -16,7 +16,7 @@ In this article, we will implement a basic single sign on application using Spri
  <hr class="horizontal-line">
 </nav>
 
-A single sign-on (SSO) application is one in which we authenticate through an authorization server, and then the app keeps we logged-in, using a refresh token.
+A single sign-on (SSO) application is one in which we authenticate through an authorization server, and then the app keeps us as logged-in, using a refresh token.
 
 In our application we will use Google as the authorization and resource servers
 
@@ -30,7 +30,7 @@ In our application we will use Google as the authorization and resource servers
 >
 > **Google = Authorization Server & Resource Server**
 
-If you remember the my previous blog, the client will only needs to send client ID and client secret. Then, Google can identify our web application(the client). And also our client won't manage its users.
+If you remember the my previous blog, the client will only needs to send client ID and client secret. Then, Google can identify our web application(the client). And also our client won't manage username & password for users.
 
 I will not go into the details of how to setup your google (via console.cloud.google.com) to use as OAuth. There are tons of tutorial on Internet.
 
