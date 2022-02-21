@@ -128,11 +128,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 <img src="/assets/spring/oauth2/thymeleaf/oauth2_filter.png" alt="oauth2_filter.png" />
 
-If we start application at this point, application will fail. Because we didn't specify any Authorization Server. For this we will use `ClientRegistration` interface.
+If we start application at this point, application will fail. Because we didn't specify any Authorization Server. For this we will use `ClientRegistration` class.
 
 ## ClientRegistration
 
-This interface represents the client in the OAuth2. For the client, we need to define:
+This class represents the client in the OAuth2. For the client, we need to define:
 
 - The client ID and secret
 - The grant type
