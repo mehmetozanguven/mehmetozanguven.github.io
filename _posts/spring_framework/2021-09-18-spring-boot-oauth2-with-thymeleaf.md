@@ -16,7 +16,7 @@ In this article, we will implement a basic single sign on application using Spri
  <hr class="horizontal-line">
 </nav>
 
-A single sign-on (SSO) application is one in which we authenticate through an authorization server, and then the app keeps us as logged-in, using a refresh token.
+A single sign-on (SSO) application is one in which we authenticate users through an authorization server, and then the app keeps us as logged-in, using a refresh token.
 
 In our application we will use Google as the authorization and resource servers
 
