@@ -6,7 +6,7 @@ categories: "spring"
 author: "mehmetozanguven"
 ---
 
-Let's implement oauth2 practical implementation with Spring Boot using PostgreSQL and Thymeleaf. In this application: 
+Let's implement oauth2 practical implementation with Spring Boot using PostgreSQL and Thymeleaf. In this application:
 
 - We will use PostgreSQL to store user information.
 - Thymeleaf for template engine
@@ -39,13 +39,9 @@ In the login page, there will be also sign in with Google button:
 
 <img src="/assets/spring/oauth2/with_form_based_auth/login_page.png" alt="login_page" />
 
-
-
 Here is the register page:
 
 <img src="/assets/spring/oauth2/with_form_based_auth/register.png" alt="register_page" />
-
-
 
 Here are the required dependencies for this project:
 
@@ -158,18 +154,17 @@ public class UserDTO {
 
 If you only need to see the code, here is the [github link](https://github.com/mehmetozanguven/spring-security-examples/tree/master/spring-security-oauth2)
 
-
 We will first implement OAuth2, then we are going to update with Basic Authentication. Then, let's start with oAuth2:
 
 ## Implementing OAuth2
 
-If you recall my previous blogs about Spring Security, I already drew the big picture of the [spring security](https://mehmetozanguven.github.io/spring/2020/12/29/spring-security-1-basic-concepts.html). Basically we need to define three things:
+If you recall my previous blogs about Spring Security, I already drew the big picture of the [spring security](https://mehmetozanguven.github.io/spring/2020/12/29/spring-security-1-basic-concepts.html). Basically we need to do three things:
 
 - Create ClientRegistration for google
 - Create UserService
 - Create Password Encoder
 
-But for OAuth2, we don't need to define passwordEncoder. 
+But for OAuth2, we don't need to define passwordEncoder.
 
 ### 1) Create ClientRegistration
 
@@ -204,25 +199,25 @@ With this configuration, we are basically saying that: "Hey Spring boot if you g
 
 ### 2) Create OAuth2 UserService
 
-While we were implementing basic authentication, Spring Security forced us to create object with type `UserDetails`. Same thing will be applied for the OAuth2 login. 
+While we were implementing basic authentication, Spring Security forced us to create object with type `UserDetails`. Same thing will be applied for the OAuth2 login.
 
 Spring Security forces us to return object with type of `OAuth2User` if we are going to login with oauth2.
 
-Spring Security forces us to return object with type of `OidcUser` (which extends `OAuth2User`) if we are going to login with oauth2 with OpenID Connect 1.0. 
+Spring Security forces us to return object with type of `OidcUser` (which extends `OAuth2User`) if we are going to login with oauth2 with OpenID Connect 1.0.
 
 > **What is OpenID Connect?**
 >
-> OpenID Connect 1.0 is a simple identity layer on top of the OAuth 2.0 protocol. 
+> OpenID Connect 1.0 is a simple identity layer on top of the OAuth 2.0 protocol.
 
-At the end `OAuth2UserService` should return `OAuth2User`or `OidcUser`.  
+At the end `OAuth2UserService` should return `OAuth2User`or `OidcUser`.
 
 OAuth2 UserService will apply the followings:
 
-- Gets the information from google authorization, such as gmail address.
-- Checks whether this email is in the database.
-- If user isn't defined in the database: 
-  - Creates a new record for that user 
-  - Saves new user to the database.
+- Get the information from google authorization, such as gmail address.
+- Check whether this email is in the database.
+- If user isn't defined in the database:
+  - Create a new record for that user
+  - Save new user to the database.
   - Return appropriate object
 - If user is already defined in the database
   - Return appropriate object
@@ -234,11 +229,12 @@ Here is the class for openId (we are going to override `loadUser` method):
 ```java
 // An implementation of an {OAuth2UserService} that supports OpenID Connect 1.0 Provider's.
 public class OidcUserService implements OAuth2UserService<OidcUserRequest, OidcUser> {
-    
+
     public OidcUser loadUser(OidcUserRequest userRequest) throws OAuth2AuthenticationException {
     }
 }
 ```
+
 Here is the our oidcServer (every time user allows to login with Google, `loadUser()` method will be called):
 
 ```java
@@ -326,7 +322,7 @@ public class UserService {
 
 We have two providers:
 
-``` java
+```java
 public enum Provider {
     LOCAL("local"), GOOGLE("google");
 	// ...
@@ -335,35 +331,35 @@ public enum Provider {
 
 `GoogleOAuth2Request` is a kind of utility method to obtain email from oauth2 provider:
 
- ```java
- public class GoogleOAuth2Request {
- 
-     private String registrationId;
-     private Map<String, Object> attributes; // attributes from Google AuthServer
- 
-     public GoogleOAuth2Request(String registrationId, Map<String, Object> attributes) {
-         this.registrationId = registrationId;
-         this.attributes = attributes;
-     }
- 
-     public String getId() {
-         return (String) attributes.get("sub");
-     }
- 
-     public String getName() {
-         return (String) attributes.get("name");
-     }
- 
-     public String getEmail() {
-         // returns gmail
-         return (String) attributes.get("email");
-     }
- 
-     public String getImageUrl() {
-         return (String) attributes.get("picture");
-     }
- }
- ```
+```java
+public class GoogleOAuth2Request {
+
+    private String registrationId;
+    private Map<String, Object> attributes; // attributes from Google AuthServer
+
+    public GoogleOAuth2Request(String registrationId, Map<String, Object> attributes) {
+        this.registrationId = registrationId;
+        this.attributes = attributes;
+    }
+
+    public String getId() {
+        return (String) attributes.get("sub");
+    }
+
+    public String getName() {
+        return (String) attributes.get("name");
+    }
+
+    public String getEmail() {
+        // returns gmail
+        return (String) attributes.get("email");
+    }
+
+    public String getImageUrl() {
+        return (String) attributes.get("picture");
+    }
+}
+```
 
 `SecureUser`is an implementation of `OidcUser`:
 
@@ -435,8 +431,6 @@ public class UserDTO {
 }
 ```
 
-
-
 ### 1) Create UserDetailsService
 
 We should create another service but in this time, this service must implement `UserDetailsService`:
@@ -492,7 +486,7 @@ public class SecureUser implements OidcUser, UserDetails {
 
 We should create a bean from our custom user details service. Then Spring Boot can be able to use our implementation instead of the default one:
 
-``` java
+```java
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -565,7 +559,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 ## Testing the application
 
-I have created new user from register form. If I run select query for  `users` table:
+I have created new user from register form. If I run select query for `users` table:
 
 ```sql
 select * from users;
@@ -574,7 +568,7 @@ id       | 1
 email    | mehmetozanguven@gmail.com
 provider | GOOGLE
 role     | READ
-password | 
+password |
 -[ RECORD 2 ]----------------------------------------------------------
 id       | 2
 email    | ozan@ozan.com
@@ -593,11 +587,11 @@ Finally here is the `/home` page via local provider:
 
 In this blog, we implemented both OAuth2 and form based login in the same application. We implemented both authentication processes step by step. Both authentication processes force us to return specific type of user. In OAuth2, Spring security forces us to return user object with type of OidcUser. In form based authentication, Spring Security forces us to return user object with UserDetails.
 
- For OAuth2:
+For OAuth2:
 
 1. Create client registraion and put into the client repository.
 2. Create oauth2 service for google sign in, service must also provide support for open ID. (Spring Security provides `OidcUserService` base class for that)
-3. Register custom oauth2 service via `.userInfoEndpoint().oidcUserService(myOidcService);` 
+3. Register custom oauth2 service via `.userInfoEndpoint().oidcUserService(myOidcService);`
 4. Checks the user is in the database (via gmail address or something else). If it is in the db, return from db, otherwise, create a new record for that user.
 
 For Login form based authentication:
@@ -606,7 +600,5 @@ For Login form based authentication:
 2. Register UserDetailsService (basically create custom user details service as a bean)
 3. Because we are creating custom user details service, we must also create password encoder
 4. OidcUserServiceSetup form based authentication in the security configuration.
-
-
 
 Wait for the next blog ...
