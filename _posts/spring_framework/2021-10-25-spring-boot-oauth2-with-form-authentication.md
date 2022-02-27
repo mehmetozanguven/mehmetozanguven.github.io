@@ -213,7 +213,7 @@ At the end `OAuth2UserService` should return `OAuth2User`or `OidcUser`.
 
 OAuth2 UserService will apply the followings:
 
-- Get the information from google authorization, such as gmail address.
+- Get the information from google, such as gmail address.
 - Check whether this email is in the database.
 - If user isn't defined in the database:
   - Create a new record for that user
