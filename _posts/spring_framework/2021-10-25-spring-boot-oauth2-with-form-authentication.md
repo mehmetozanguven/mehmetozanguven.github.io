@@ -168,12 +168,11 @@ But for OAuth2, we don't need to define passwordEncoder.
 
 ### 1) Create ClientRegistration
 
-Let's create a `SecurityConfiguration`:
+Let's create configuration class called `OAuth2Configuration`:
 
 ```java
 @Configuration
-@EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class OAuth2Configuration {
     private static final String CLIENT_SECRET = "your_client_secreut";
     private static final String CLIENT_ID = "your_client_id";
 
@@ -239,24 +238,33 @@ Here is the our oidcServer (every time user allows to login with Google, `loadUs
 
 ```java
 @Service
-public class MyOidcService extends OidcUserService {
+public class MyOidcUserService extends OidcUserService {
     private static final Logger logger = LoggerFactory.getLogger(MyOidcService.class);
 
     @Autowired
     private UserService userService;
+
+    // Our OAuth2UserService will apply:
+    /**
+     * Get the information from the google, such as gmail adress (+)
+     *
+     * Check whether gmail address is in the database (+)
+     * If user isn't defined in the database:
+     *  Create a new record for that user
+     *  Save the new user to the database
+     *  Return appropriate object
+     * If user is already defined in the database:
+     *  Return appropriate object
+     */
 
     @Override
     public OidcUser loadUser(OidcUserRequest userRequest) throws OAuth2AuthenticationException {
         OidcUser oidcUser = super.loadUser(userRequest);
         try {
             return userService.findUser(userRequest, oidcUser);
-        } catch (AuthenticationException ex) {
-            throw ex;
-        } catch (Exception ex) {
+        } catch (Exception ex)  {
             logger.error("Error", ex);
-            // Throwing an instance of AuthenticationException will trigger the
-            // OAuth2AuthenticationFailureHandler
-            throw new OAuth2CustomException(ex.getMessage());
+            throw new OAuth2AuthenticationException(ex.getMessage());
         }
     }
 }
@@ -272,7 +280,6 @@ Before diving into `userService`, let's first register `MyOidcServer`in the secu
 
 ```java
 @Configuration
-@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private static final String CLIENT_SECRET = "your_client_secreut";
     private static final String CLIENT_ID = "your_client_id";
@@ -309,7 +316,7 @@ public class UserService {
 
         Optional<UserDTO> userInDb = findByUsername(googleOAuth2Request.getEmail());
         if (userInDb.isEmpty()) {
-            logger.info("new user with email: {}", googleOAuth2Request.getEmail());
+            logger.info("New user from the google with email: {}", googleOAuth2Request.getEmail());
             UserDTO userDTO = createNewUser(googleOAuth2Request.getEmail(), Provider.GOOGLE);
             saveNewUser(userDTO);
             return SecureUser.createUser(oidcUser, userDTO);
@@ -488,7 +495,6 @@ We should create a bean from our custom user details service. Then Spring Boot c
 
 ```java
 @Configuration
-@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     // ...
@@ -505,7 +511,6 @@ Because we are implementing custom user details service. We must also create pas
 
 ```java
 @Configuration
-@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     // ...
     @Bean
@@ -524,7 +529,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 ```java
 @Configuration
-@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     // ...
     @Override
@@ -537,13 +541,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         // configure logout functionality,
         // after logout has occurred, redirects user to the "/"
-        http.logout(logout -> logout
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl(Urls.INDEX)
-                .deleteCookies("JSESSIONID")
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-        );
+        http.logout(logout -> {
+            logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+            logout.logoutSuccessUrl(Urls.INDEX);
+            logout.deleteCookies("JSESSIONID");
+            logout.invalidateHttpSession(true);
+            logout.clearAuthentication(true);
+        });
 
         // oauth2 configuration,
         // after successful login, redirects user to the "/home"
