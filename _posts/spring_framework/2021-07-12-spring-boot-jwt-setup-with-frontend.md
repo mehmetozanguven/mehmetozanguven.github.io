@@ -8,43 +8,13 @@ author: "mehmetozanguven"
 
 In this post, we are going to setup spring boot rest project with using JWT. we will also integrate the our spring boot application with the frontend (in this case I am going to use VueJS).
 
-Topics are:
-
-- [**Github Link**](#github_link)
-- [**Project Setup**](#project_Setup)
-  - [**Dependencies**](#dependencies)
-  - [**PostgreSQL Setup**](#postgresql_setup)
-- [**What is the JSON Web Token (JWT)**](#what_is_jwt)
-- [**Security Configuration**](#security_configuration)
-  - [**CORS Policy setup**](#cors_setup)
-  - [**UserDetailsService**](#user_details_service)
-  - [**BCryptPasswordEncoder Bean**](#password_encoder)
-  - [**Allow Register and Login Endpoints**](#allow_register_and_login_endpoints)
-- [**Implementing Register Endpoint**](#implement_register_endpoint)
-  - [**Validate Register Request**](#validate_register_request)
-  - [**Delegate Request to the RegisterService & Wrap the Service Response**](#delegate_to_register_service)
-- [**Implementing Register Service**](#implement_register_service)
-  - [**Check the Username**](#check_username)
-  - [**Encrypt user's password & save into db**](#save_to_db)
-    - [**Error Invalid CSRF token found**](#csrf_invalid_token)
-- [**Implementing Login Endpoint**](#implement_login_endpoint)
-  - [**Validate Login Request**](#validate_login_request)
-  - [**Delegate Request to the LoginService & Wrap the Service Response**](#delegate_to_login_service)
-- [**Implementing Login Service**](#implement_login_service)
-  - [**Delegate the request to the `AuthenticationManager`**](#delegate_to_auth_manager)
-  - [**Set the fully authenticated user to the security context**](#set_auth_user)
-  - [**Generate JWT with Username**](#generate_jwt)
-  - [**Return the login response**](#return_login_response)
-- [**Implementing AuthTokenFilter**](#implement_auth_filter)
-  - [**Intercept the all incoming requests**](#intercept_all_requests)
-  - [**Get JWT from the request**](#get_jwt_from_request)
-  - [**Validate JWT**](#validate_jwt)
-  - [**Get the username from JWT and find the authenticated user**](#get_username_from_jwt)
-  - [**Forward the request to the next filter**](#forward_request_to_next_filter)
-- [**Adding AuthTokenFilter to our application**](#add_auth_filter_to_app)
-  - [**Reason for `addFilterBefore`**](#filter_before)
-- [**Create Dummy Protected Controller**](#dummy_controller)
-- [**Front-end Setup**](#frontend-setup)
+<nav class="custom-table-of-contents">
+<hr class="horizontal-line">
+  <h4 class="table-of-contents-title">Contents</h4>
+  * this unordered seed list will be replaced by toc as unordered list
+  {:toc}
+ <hr class="horizontal-line">
+</nav>
 
 ## Github Link <a name="github_link"></a>
 
@@ -104,7 +74,6 @@ Because we have two different origins (one for running on localhost:8080-spring 
 
 ```java
 @Configuration
-@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	// ...
     @Bean
@@ -121,27 +90,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new CorsFilter(source);
     }
 	// ...
-}
-```
-
-### Make CSRF token accessible via Cookies <a name ="csrf_cookie_setup"></a>
-
-I will allow spring to set csrf token in the cookie, otherwise I can't send the csrf token for the following requests.
-
-> Actually in the front-end, I will store the JWT in the local-storage, therefore I could disable csrf protection at all. You can just reference my project to see "how to enable CSRF with rest communication"
-
-```java
-@Configuration
-@EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-	// ...
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf(c -> {
-            c.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-        });
-        // ...
-    }
 }
 ```
 
@@ -247,7 +195,6 @@ After that we need to specify which endpoint(s) should not be protected by Sprin
 
 ```java
 @Configuration
-@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -467,44 +414,7 @@ Let's try to send a request:
 $ curl -X POST  -H "Content-Type: application/json" -d '{ "username": "test",  "password": "1234"}'  http://localhost:8080/api/register
 ```
 
-You will not see any response. Check the logs in the console:
-
-```wiki
- o.s.security.web.csrf.CsrfFilter         : Invalid CSRF token found for http://localhost:8080/api/register
- // ...
-org.springframework.security.access.AccessDeniedException: Access is denied
-	at org.springframework.security.access.vote.AffirmativeBased.decide(AffirmativeBased.java:84) ~[spring-security-core-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.access.intercept.AbstractSecurityInterceptor.beforeInvocation(AbstractSecurityInterceptor.java:233) ~[spring-security-core-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	// ..
-```
-
-Spring Security will protect all endpoints(state-changing operations) for CSRF attacks by default. But we can allow the Spring Security to pass the register endpoint.
-
-#### Error Invalid CSRF token found <a name="csrf_invalid_token"></a>
-
-If you remember my previous post about [CSRF protection](https://mehmetozanguven.github.io/spring/2021/05/16/spring-security-8-csrf-setup.html) , you have a chance to disable CSRF protection for specific endpoint(s)
-
-Just update security configuration:
-
-```java
-@Configuration
-@EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
-    // ...
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf(c -> {
-            c.ignoringAntMatchers("/api/register");
-        });
-
-       // ...
-    }
-}
-```
-
-Re-run the project and send the request again, response will be:
+Response will be:
 
 ```json
 { "messsage": "User was saved", "registered": true }
@@ -542,29 +452,6 @@ java.lang.RuntimeException: User has already in db
 ```
 
 ## Implementing Login Endpoint <a name="implement_login_endpoint"></a>
-
-### Disable CSRF protection
-
-First, I will disable the CSRF protection for the login endpoint.
-
-> Because disabling csrf protection in the login endpoint may cause security vulnerabilities I am not sure about doing that.
->
-> Disabling csrf in the login endpoint could be more dangerous rather than disabling on the register endpoint! Do your research then disable (or not disable) CSRF protection.
-
-```java
-@Configuration
-@EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-	// ...
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf(c -> {
-            c.ignoringAntMatchers(allowedEndpoints());
-        });
-        // ...
-    }
-}
-```
 
 The login endpoint have to perform the following actions:
 
@@ -637,7 +524,6 @@ We should first create an AuthenticationManager bean. For that we can use defaul
 
 ```java
 @Configuration
-@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	// ...
     @Bean
@@ -951,7 +837,6 @@ We can add filter before `UsernamePasswordAuthenticationFilter.class`
 
 ```java
 @Configuration
-@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	// ...
     @Bean
