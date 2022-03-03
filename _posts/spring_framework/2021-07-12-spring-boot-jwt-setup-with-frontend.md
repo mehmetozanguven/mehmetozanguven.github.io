@@ -914,10 +914,6 @@ $ curl -X GET  -H "Content-Type: application/json" -H "Authorization: Bearer {{J
 Hello Logged-In User:test, you can access this resource, because JWT was valid
 ```
 
-> Quick note: We don't setup anything related to the CSRF protection. Because CSRF protection is only needed for state changing operation(s). And also in the spring security `CsrfFilter` will not be applied when http method is one of the following ones:
->
-> `"GET", "HEAD", "TRACE", "OPTIONS"`
-
 With invalid JWT, you will get the response:
 
 ```json
