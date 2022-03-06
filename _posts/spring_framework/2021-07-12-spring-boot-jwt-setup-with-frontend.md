@@ -98,11 +98,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 UserDetailsService will only get the username from the authentication provider and send it to the `userRepository` to get one User from database.
 
 ```java
-@Service
 public class MyUserDetailService implements UserDetailsService {
     private final UserRepository userRepository;
 
-    public MyUserDetailService(@Autowired UserRepository userRepository) {
+    public MyUserDetailService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -160,6 +159,12 @@ We also must override the default configuration when we create custom UserDetail
 ```java
 @Configuration
 public class SecurityConfiguration {
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new MyUserDetailsService(userRepository);
+    }
+
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -774,8 +779,11 @@ In this time, we don't need to call authenticationManager. Using the UserDetails
 
 ```java
 public class AuthTokenFilter extends OncePerRequestFilter {
-    @Autowired
-    private  MyUserDetailService userDetailsService;
+    private final UserDetailsService myUserDetailsService;
+
+    public AuthTokenFilter(UserDetailsService myUserDetailsService) {
+        this.myUserDetailsService = myUserDetailsService;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -841,7 +849,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	// ...
     @Bean
     public AuthTokenFilter authTokenFilter() {
-        return new AuthTokenFilter();
+        return new AuthTokenFilter(userDetailsService());
     }
 
     @Override
