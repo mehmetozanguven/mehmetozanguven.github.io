@@ -10,8 +10,6 @@ Adding robots.txt and/or sitemap.xml can be cumbersome for the modern javascript
 
 In this short blog, I will show you how to add robots.txt and sitemap.xml to your Quasar framework (based on VueJs)
 
-> Note: I am not creating sitemap or robots.txt file automatically.
-
 <nav class="custom-table-of-contents">
 <hr class="horizontal-line">
   <h4 class="table-of-contents-title">Contents</h4>
