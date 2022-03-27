@@ -22,7 +22,7 @@ In this short blog, I will show you how to add robots.txt and sitemap.xml to you
 
 ## How to add robots.txt into Quasar project
 
-1. First create new file called **robots.txt** and put these contents:
+- First create new file called **robots.txt** and put these contents:
 
 ```text
 User-agent: *
@@ -31,13 +31,13 @@ Allow: /
 Sitemap: https://yourWebsite.com/sitemap.xml
 ```
 
-2. Then put that file into the `/public` folder of your project.
+- Then put that file into the `/public` folder of your project.
 
 After you run the Quasar project(or in the production build), you can access the robots.txt file by sending request to **https://yourWebsite.com/robots.txt**
 
 ## How to add sitemap.xml into Quasar project
 
-1. First create **sitemap.xml** file. You can use sitemap.xml generator sites. Or you can use the following templates (replace the **loc**s with your router)
+- First create **sitemap.xml** file. You can use sitemap.xml generator sites. Or you can use the following templates (replace the **loc**s with your router)
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -70,7 +70,7 @@ After you run the Quasar project(or in the production build), you can access the
 </urlset>
 ```
 
-2. Then put that file into the `/public` folder of your project.
+- Then put that file into the `/public` folder of your project.
 
 After you run the Quasar project(or in the production build), you can access the sitemap.xml file by sending request to **https://yourWebsite.com/sitemap.xml**
 
