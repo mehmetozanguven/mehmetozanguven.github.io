@@ -4,6 +4,7 @@ title: Spring Security -- 4) Implementing Custom Authentication Provider
 date: 2020-12-30 19:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
+permalink: spring-security-4-authentication-provider
 ---
 
 In this post, I am going to answer to this question "what is the **Authentication Provider**" and I am going to implement a project includes custom authentication provider.
