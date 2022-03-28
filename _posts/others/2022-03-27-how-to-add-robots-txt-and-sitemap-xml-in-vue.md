@@ -35,7 +35,7 @@ After you run the Quasar project(or in the production build), you can access the
 
 ## How to add sitemap.xml into Quasar project
 
-- First create **sitemap.xml** file. You can use sitemap.xml generator sites. Or you can use the following templates (replace the **loc**s with your router)
+- First create **sitemap.xml** file. You can use sitemap.xml generator sites. Or you can use the following template (replace the **loc**s with your router)
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
