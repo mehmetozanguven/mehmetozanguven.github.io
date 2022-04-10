@@ -383,6 +383,11 @@ pre {
   font-family: "Josefin Sans";
   font-weight: 300;
   padding-top: 5em;
+  font-weight: bold;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 1em;
 }
 .page-title {
   text-transform: uppercase;
@@ -506,7 +511,7 @@ pre {
   }
   pre,
   code {
-  font-size: 12px;
+    font-size: 12px;
   }
   .footer-col {
     float: none;
