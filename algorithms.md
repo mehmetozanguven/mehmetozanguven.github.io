@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: algorithms
+title: Algorithms
 permalink: /algorithms/
 tagline: "Algorithms Notes"
 category: "algorithms"
