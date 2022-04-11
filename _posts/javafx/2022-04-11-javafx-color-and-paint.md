@@ -22,7 +22,7 @@ Color color = new Color(r, g, b, a);
 Color color = Color.color( r, g, b, a );
 ```
 
-> You should use the factory method. In that way you can use the same objects for the same color (there is no reason to create new objects for the same color).
+> **You should use the factory method. In that way you can use the same objects for the same color (there is no reason to create new objects for the same color).**
 >
 > Also color objects are immutable, which means there is no way to change a color after it has been constructed.
 
