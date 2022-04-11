@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "JavaFx Color and Paint"
+title: "JavaFX Color and Paint"
 date: 2022-04-11 12:45:31 +0530
 categories: "javafx"
 author: "mehmetozanguven"
