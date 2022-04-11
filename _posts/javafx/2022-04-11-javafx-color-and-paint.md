@@ -6,6 +6,14 @@ categories: "javafx"
 author: "mehmetozanguven"
 ---
 
+<nav class="custom-table-of-contents">
+<hr class="horizontal-line">
+  <h4 class="table-of-contents-title">Contents</h4>
+  * this unordered seed list will be replaced by toc as unordered list
+  {:toc}
+ <hr class="horizontal-line">
+</nav>
+
 ## Color
 
 Computer color uses an **RGB color system** which means that color on the a computer screen is specified by three numbers called **color components**, giving the level of **red, green and blue** in the color
