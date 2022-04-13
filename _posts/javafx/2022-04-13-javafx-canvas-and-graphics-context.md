@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "JavaFx Canvas and GraphicsContext"
+title: "JavaFX Canvas and GraphicsContext"
 date: 2022-04-13 12:45:31 +0530
 categories: "javafx"
 author: "mehmetozanguven"
