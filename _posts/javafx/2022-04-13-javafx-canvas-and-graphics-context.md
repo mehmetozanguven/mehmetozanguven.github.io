@@ -8,14 +8,6 @@ author: "mehmetozanguven"
 
 The screen of a computer is a grid of little squares called **pixels**. The color of each pixel can be set individually, and drawing on the screen just means setting the colors of individual pixels.
 
-<nav class="custom-table-of-contents">
-<hr class="horizontal-line">
-  <h4 class="table-of-contents-title">Contents</h4>
-  * this unordered seed list will be replaced by toc as unordered list
-  {:toc}
- <hr class="horizontal-line">
-</nav>
-
 Every visible GUI component is drawn by coloring pixels, and every component has a coordinate system that maps (x, y) coordinates to points within the component.
 
 Most components draw themselves, but there is one JavaFX component on which we can draw anything we want by calling correct methods. Such **drawing surface** components are called **Canvas**
