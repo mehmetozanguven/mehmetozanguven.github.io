@@ -8,6 +8,18 @@ author: "mehmetozanguven"
 
 Recently I have encountered this error. And I can not send any request even I have setup `corsConfiguration.setAllowedOrigins("*")` . Response was only saying => `Invalid CORS request`
 
+<br />
+<br />
+
+---
+
+Checkout my udemy course **[https://www.udemy.com/course/learning-spring-security-fundamentals/](https://www.udemy.com/course/learning-spring-security-fundamentals/?referralCode=04AD7C0E89610E136C69)** if you really want to know fundemantals of the Spring Security and more ...
+
+---
+
+<br />
+<br />
+
 Solution is that if you setup your cors configuration through CorsFilter you should set the allowed methods.
 
 Here is the example:
