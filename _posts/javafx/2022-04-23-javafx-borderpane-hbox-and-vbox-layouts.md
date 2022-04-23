@@ -89,7 +89,7 @@ We can apply margin to all child nodes while construction the borderPane, or we 
 BorderPane.setMargin( child, insets );
 ```
 
-## HBox and VBox
+## HBox and VBox
 
 - HBox and Vbox are used to define components in a horizontal row or vertical row. They are both subclass of Pane
 - We can use HBox layout in the bottom or top place of the BorderPane and we can use VBox layout in the left and right place of the BorderPane.
