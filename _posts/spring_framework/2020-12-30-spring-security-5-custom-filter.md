@@ -11,11 +11,12 @@ Let's look at the Filter Chain, more specifically `AuthenticationFilter` in the 
 <br />
 <br />
 
-----
+---
 
-**UPDATE (2022-03-08): I know that many developers are looking to my blog posts about SpringSecurity. To help you further and help you to understand better, I have also created course on Udemy. Here is the link:** **[https://www.udemy.com/course/learning-spring-security-fundamentals/](https://www.udemy.com/course/learning-spring-security-fundamenta1ls/?referralCode=04AD7C0E89610E136C69)**. **Also if you like my contents, you can also support me with taking the course. THANK YOU !!**
+**UPDATE (2022-03-08): I know that many developers are looking to my blog posts about SpringSecurity. To help you further and help you to understand better, I have also created course on Udemy. Here is the link:** **[https://www.udemy.com/course/learning-spring-security-fundamentals/](https://www.udemy.com/course/learning-spring-security-fundamentals/?couponCode=9887DC6B5A693BDEEE75)**. **Also if you like my contents, you can also support me with taking the course. THANK YOU !!**
 
 ---
+
 <br />
 <br />
 At the end of this post, you hopefully can be able to implement any custom authentication logic from top to the bottom using Spring Security.
