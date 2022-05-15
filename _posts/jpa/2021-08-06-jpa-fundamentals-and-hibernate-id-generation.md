@@ -21,7 +21,6 @@ To use generation strategies, we should use `@GeneratedValue` annotation which h
  <hr class="horizontal-line">
 </nav>
 
-
 ## Github Link
 
 If you only need to see the code, here is the [github link](https://github.com/mehmetozanguven/jpa_fundamentals_and_hibernate/tree/master/id-generation)
@@ -313,6 +312,27 @@ public class Product {
 
     @Id
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDHexGenerator")
+    @GeneratedValue(generator = "uuid")
+    private String id;
+    // ....
+}
+```
+
+### Warning - UUIDHexGenerator does not generate IETF RFC 4122 compliant UUID values
+
+If you get the following warning while initializing your application:
+
+```text
+...  WARN 26489 --- [           main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+```
+
+Please change the strategy to:
+
+```java
+public class Product {
+
+    @Id
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     @GeneratedValue(generator = "uuid")
     private String id;
     // ....
