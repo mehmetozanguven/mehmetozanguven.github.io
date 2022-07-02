@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Threads in Java"
-date: 2022-07-12 +0530
+date: 2022-07-02 +0530
 categories: "java"
 author: "mehmetozanguven"
 ---
