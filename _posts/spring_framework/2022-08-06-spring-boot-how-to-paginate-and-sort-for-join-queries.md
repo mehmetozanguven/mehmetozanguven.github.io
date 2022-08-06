@@ -219,6 +219,8 @@ public class PaginateLeftJoinQueriesApplication {
 
 Now let's talk about (complex!) queries and paginate them.
 
+## Complex queries with pagination and sorting
+
 Let's assume that we want to get all school entries with total number of student and also we want to use paginate function within Spring framework.
 
 Because we want to the total number of student which is extra column, we can't do that in the School entity. Fortunately JPA provides nice feature:
