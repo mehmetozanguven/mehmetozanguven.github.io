@@ -58,7 +58,7 @@ First please create new spring boot project with the following dependencies:
 
 ## Creating entities
 
-For the basic project, we will have School entity and Student entity. And our relationship between Student and School is the many-to-one. (Many stundents can belong to the one School)
+For the basic project, we will have School entity and Student entity. And our relationship between Student and School is the many-to-one. (Many students can belong to the one School)
 
 School entity:
 
@@ -223,7 +223,7 @@ Now let's talk about (complex!) queries and paginate them.
 
 Let's assume that we want to get all school entries with total number of student and also we want to use paginate function within Spring framework.
 
-Because we want to the total number of student which is extra column, we can't do that in the School entity. Fortunately JPA provides nice feature:
+Because we want to get the total number of student which is extra column, we can't do that in the School entity. Fortunately JPA provides nice feature:
 
 In the query, we can return new object and this object doesn't need to be entity. Let's create class for the object:
 
@@ -237,7 +237,7 @@ public class SchoolWithStudentCount {
 }
 ```
 
-This is very simple class which includes and total number of student in the school. But because we are mainly dealing with School and because SchoolWithStudentCount is not entity we can't create new repository like `public interface SchoolRepository extends JpaRepository<SchoolWithStudentCount, Long>`, this will give us an exception.
+This is very simple class which includes total number of student in the school. But because we are mainly dealing with School and because SchoolWithStudentCount is not entity we can't create new repository like `public interface SchoolRepository extends JpaRepository<SchoolWithStudentCount, Long>`, this will give us an exception.
 
 Instead of creating new repository, we can add query method in the SchoolRepository:
 
