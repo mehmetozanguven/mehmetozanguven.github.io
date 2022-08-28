@@ -28,6 +28,14 @@ http {
 }
 ```
 
+But before doing that we need to globally give permission for **SELinux**
+
+```bash
+sudo setenforce 0
+```
+
+> Security-Enhanced Linux (SELinux) is a security architecture for linux systems that allows to have more control over who can access the system
+
 ```bash
 sudo chown -Rf yourUserName:yourUserName /var/lib/nginx
 ```
