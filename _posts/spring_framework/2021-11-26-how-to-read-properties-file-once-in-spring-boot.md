@@ -114,12 +114,12 @@ public class EnvironmentProperties {
 
 After that we can use the `EnvironmentProperties` to load appropriate **user_auth.properties**.
 
-If environment value is`Environment.LOCAL`, then `UserAuthProperties` will load the property in the path: `local/user_auth.properties`.
+If environment value is`Environment.LOCAL`, then `SecureUserProperties` will load the property in the path: `local/user_auth.properties`.
 
-If environment value is`Environment.PROD`, then `UserAuthProperties` will load the property in the path: `prod/user_auth.properties`.
+If environment value is`Environment.PROD`, then `SecureUserProperties` will load the property in the path: `prod/user_auth.properties`.
 
 ```java
-public class UserAuthProperties {
+public class SecureUserProperties {
 
     public interface PropertyKeys {
         String HEADER_NAME = "header.name";
@@ -129,19 +129,19 @@ public class UserAuthProperties {
     private static final String PROPERTY_NAME = "user_auth.properties";
     private static final EnvironmentProperties environmentProperties = EnvironmentProperties.getInstance();
 
-    private static UserAuthProperties singletonInstance;
+    private static SecureUserProperties singletonInstance;
 
     private Properties userAuthProperties;
 
 
-    public static synchronized UserAuthProperties getInstance() {
+    public static synchronized SecureUserProperties getInstance() {
         if (singletonInstance == null) {
             singletonInstance = new SecureUserProperties();
         }
         return singletonInstance;
     }
 
-    private UserAuthProperties()  {
+    private SecureUserProperties()  {
         logger.info("Loading properties file: {}", PROPERTY_NAME);
         try{
             loadUserAuthProperties();
@@ -194,8 +194,8 @@ If I run the project from the IDEA, console output will be:
 22:09:59.251 [main] INFO  c.m.r.p.EnvironmentProperties - Environment value is empty. Defaulting local
 22:09:59.251 [main] INFO  c.m.r.p.EnvironmentProperties - Loaded environment properties
 
-22:09:59.251 [main] INFO  c.m.r.p.UserAuthProperties - Loading properties file: user_auth.properties
-22:09:59.252 [main] INFO  c.m.r.p.UserAuthProperties - Loaded properties file: user_auth.properties
+22:09:59.251 [main] INFO  c.m.r.p.SecureUserProperties - Loading properties file: user_auth.properties
+22:09:59.252 [main] INFO  c.m.r.p.SecureUserProperties - Loaded properties file: user_auth.properties
 ```
 
 That's it, using Singleton pattern, we can access our properties anywhere in the codebase.
