@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring Boot OAuht2 Implementation with Thymeleaf
+title: Spring Boot OAuth 2 Implementation with Thymeleaf
 date: 2021-09-18 22:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
