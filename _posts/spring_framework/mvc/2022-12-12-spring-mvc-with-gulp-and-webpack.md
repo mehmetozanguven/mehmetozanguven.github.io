@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Modern Spring Boot v3 with Thymeleaf, Tailwind and AlpineJS"
+title: "Modern Spring Boot v3 with Thymeleaf, TailwindCSS and AlpineJS"
 date: 2022-12-12 17:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
