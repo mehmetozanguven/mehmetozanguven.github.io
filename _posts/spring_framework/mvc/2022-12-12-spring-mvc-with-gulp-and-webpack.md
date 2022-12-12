@@ -711,7 +711,7 @@ Alpine.start();
 
 Re-run the project and open the home page, you can see the log statement "Alpine works !!"
 
-As a final note, because you now have **node_modules & node** directories, IntelliJ will try to create an index anything for these files(to be able search you queries quickly). If you want to disable this:
+As a final note, because you now have **node_modules & node** directories, IntelliJ will try to create an index anything files inside these directories(to be able search you queries quickly). If you want to disable this:
 
 - Open Project Structure -> Modules
 - Mark node and node_modules as **excluded folders**
