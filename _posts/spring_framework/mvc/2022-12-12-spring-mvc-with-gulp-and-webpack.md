@@ -178,6 +178,8 @@ Because gulp & webpack will build the appropriate HTML, JS & CSS files, we have 
 
 With this configuration, if you run `mvn clean install -DskipTests`, then target directory will not contain any html, js or css files
 
+> Do not forget the reload your maven configuration !!
+
 ## Add maven-frontend-plugin
 
 This plugin [https://github.com/eirslett/frontend-maven-plugin](https://github.com/eirslett/frontend-maven-plugin) will allow us to download Node and NPM locally for our project and we can be able run the npm command while building our application with maven
