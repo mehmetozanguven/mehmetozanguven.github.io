@@ -108,7 +108,7 @@ $primary-color: #57f357;
 
 > If you skip this step, you will probably be lost in the configuration !!
 
-We have to disable thymeleaf cache in the local environment. **Otherwise your changes won't be reflected to the browser.** Update the application-local.properties (for local environment). Update the properties file:
+We have to disable thymeleaf cache in the local environment. **Otherwise your changes won't be reflected to the browser.** Update the application-local.properties :
 
 ```properties
 spring.thymeleaf.cache=false
