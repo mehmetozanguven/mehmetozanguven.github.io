@@ -524,7 +524,7 @@ function copyJsModern(done) {
 
 Now the rest is just to find an answer to a question "how to run these internal task"
 
-- Create watch task for gulp:
+- Create watching task for gulp:
 
 We will define this task as default.
 
@@ -600,7 +600,7 @@ At this stage, you can be able to run your spring application without any error.
 
 After that your browser will open the **http://localhost:3002**.
 
-> To check everything works as expected, while application is running, change anything in the index.html, index.scss or index.js file. You should see the changes immediately.
+> To check everything works as expected => while application is running, change anything in the index.html, index.scss or index.js file. You should see the changes immediately.
 
 To build the application, just stop npm command and run: `mvn clean install -Prelease -DskipTests` and run the jar file: `java -jar target/jar_name.jar`
 
@@ -711,7 +711,7 @@ Alpine.start();
 
 Re-run the project and open the home page, you can see the log statement "Alpine works !!"
 
-As a final note, because you now have node_modules directory, IntelliJ will try to create an index anything in the node_modules. If you want to disable this:
+As a final note, because you now have **node_modules & node** directories, IntelliJ will try to create an index anything for these files(to be able search you queries quickly). If you want to disable this:
 
 - Open Project Structure -> Modules
 - Mark node and node_modules as **excluded folders**
