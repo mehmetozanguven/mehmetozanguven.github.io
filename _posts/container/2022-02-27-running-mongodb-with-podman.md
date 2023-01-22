@@ -26,6 +26,10 @@ Create a directory to store MongoDB data so that in case you delete the containe
 ```bash
 sudo mkdir data
 cd data
+
+# location
+$ pwd
+$ /home/mehmetozanguven/mongodb_docker/data
 ```
 
 ## Create MongoDB instance without authentication
