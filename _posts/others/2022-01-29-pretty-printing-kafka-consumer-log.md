@@ -4,6 +4,7 @@ title: "Utility script for pretty printing kafka consumer log"
 date: 2022-01-29 10:45:31 +0530
 categories: "others"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/pretty-printing-kafka-log/"
 ---
 
 Recently, I had to listen kafka consumer log to identity bug I have found in my web application. But listening kafka consumer logs via console output was a pain and reading logs on the console was so hard. Then I was just starting to search "how to pretty print for the kafka logs". After all search, finally I created a util python script to listen the logs.

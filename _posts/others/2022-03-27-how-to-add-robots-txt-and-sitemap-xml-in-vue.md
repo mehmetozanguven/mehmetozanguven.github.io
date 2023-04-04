@@ -4,6 +4,7 @@ title: "How to add robots.txt and sitemap.xml into Quasar(VueJs) Framework"
 date: 2022-03-27 12:45:31 +0530
 categories: "others"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/how-to-add-robots-txt-and-sitemap-xml-into-quasar-framework/"
 ---
 
 Adding robots.txt and/or sitemap.xml can be cumbersome for the modern javascript framework such as VueJs, React or Angular etc..

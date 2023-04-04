@@ -4,6 +4,7 @@ title: "gulpjs for backend developers"
 date: 2022-12-11 12:45:31 +0530
 categories: "others"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/gulpjs-for-backend-developers/"
 ---
 
 This mini tutorial is especially for backend developers who implement also frontend part of the application inside the one package. Today, gulp seems outdated. However it still can be used in **many mini saas project** instead of learning new frontend framework. For instance you may use gulp with your Spring MVC project to increase development time.

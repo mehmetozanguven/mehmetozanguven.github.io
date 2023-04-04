@@ -4,6 +4,7 @@ title: "BackUp PostgreSQL with pg_dump"
 date: 2021-07-31 12:45:31 +0530
 categories: "others"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/backup-postgresql-with-pg-dump/"
 ---
 
 In this post, we are going to find out how to backup postgresql database with `pg_dump` utility.

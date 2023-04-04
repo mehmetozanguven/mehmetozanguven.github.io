@@ -4,6 +4,7 @@ title: "Check Sessions and Disk Storage in the PostgreSQL"
 date: 2021-08-01 12:45:31 +0530
 categories: "others"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/check-sessions-and-disk-storage-in-postgresql/"
 ---
 
 ## Check Session
