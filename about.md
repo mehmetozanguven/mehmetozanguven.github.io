@@ -2,6 +2,7 @@
 layout: page
 title: About Me
 permalink: /about/
+newUrl: "https://mehmetozanguven.com/about/"
 ---
 
 <h2>Hi, I'm a Software Engineer Mehmet Ozan Guven</h2>
