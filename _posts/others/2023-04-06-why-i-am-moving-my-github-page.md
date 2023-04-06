@@ -21,7 +21,7 @@ In addition, I am excited to announce that my new website templates will include
 Actually I don't care seo too much. But in the end this website and the new one will suffer from seo perspective. To be able move seemsly, I decided to move all blogs part by part and while moving the any blog i am adding the following links into old one:
 
 - `<link rel="canonical" href="https://mehmetozanguven.com/">`
-- `<meta http-equiv="refresh" content="0; url={{ page.newUrl }}">` newUrl points to the mehmetozanguven.com/...
+- `<meta http-equiv="refresh" content="0; url=page.newUrl">` newUrl points to the mehmetozanguven.com/...
 
 ---
 
