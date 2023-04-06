@@ -6,7 +6,7 @@ categories: "others"
 author: "mehmetozanguven"
 ---
 
-After careful consideration, I have decided to move my GitHub page to my own domain, mehmetozanguven.com. This has been a long-standing idea that I have finally decided to act upon. It is time to take this step and make my online presence truly my own. Actually that was the main reason because mehmetozanguven.github.io isn't my domain at all belongs to the github.
+After careful consideration, I have decided to move my GitHub page to my own domain, [mehmetozanguven.com](https://mehmetozanguven.com/). This has been a long-standing idea that I have finally decided to act upon. It is time to take this step and make my online presence truly my own. Actually that was the main reason because mehmetozanguven.github.io isn't my domain at all belongs to the github.
 
 ## What will change ?
 
