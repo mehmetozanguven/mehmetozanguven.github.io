@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  "Apache Flink Series 4 — DataStream API"
-date:   2020-02-18 19:45:31 +0530
+title: "Apache Flink Series 4 — DataStream API"
+date: 2020-02-18 19:45:31 +0530
 categories: "apache-flink"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/apache-flink/datastream-api/"
 ---
 
 In this post, I am going to explain DataStream API in Flink.
@@ -20,10 +21,10 @@ Let’s dive into DataStream API with transformations in the Flink.
 - Most stream transformation are based on user-defined functions. Functions define how the elements of the input stream are transformed into elements of the output stream.
 - Most of the functions(maybe all of them, I am not sure) are designed as Single Abstract Method(SAM), therefore you can use lambda expression as well.
 - We can categorized transformation to 4 sections:
-    - Basic transformation
-    - KeyedStream transformation
-    - MultiStream transformation
-    - Distribution Transformation
+  - Basic transformation
+  - KeyedStream transformation
+  - MultiStream transformation
+  - Distribution Transformation
 
 ### Basic Transformation
 
@@ -35,7 +36,7 @@ Let’s dive into DataStream API with transformations in the Flink.
 
 ```java
 DataStream<Integer> dataStream = //... your data source kafka topic, file etc..
-  //MapFunction<I,O> accepts input (which is Integer in this example), 
+  //MapFunction<I,O> accepts input (which is Integer in this example),
   // and produces new datastream with the desired output(which is Integer also in this example)
 dataStream.map(new MapFunction<Integer, Integer>() {
     @Override
@@ -176,10 +177,11 @@ keyedStream.reduce(new ReduceFunction<Integer>(){
 - We can define keys for keyedStream in 3 ways
 
 ### 1. Field Positions
--  If the data type is tuple, keys can be defined by simply using the field position of the corresponding tuple element.
+
+- If the data type is tuple, keys can be defined by simply using the field position of the corresponding tuple element.
 
 ```java
-DataStream<Tuple3<Integer,String,Long>> input = 
+DataStream<Tuple3<Integer,String,Long>> input =
 // defined DataStream as Tuple which has 3 objects
 KeyedStream<Tuple3<Integer,String,Long>,Tuple> keyed = input.keyBy(0) // keyed stream with integer input of the tuple
 ```
@@ -196,7 +198,7 @@ public class LogObject{
 
 DataStream<LogObject> input = // ...
 
-KeyedStream<LogObject, String> keyed = input.keyBy("color") 
+KeyedStream<LogObject, String> keyed = input.keyBy("color")
 ```
 
 ### 3. KeySelector
@@ -219,8 +221,8 @@ KeyedStream<LogObject, String> keyed = input.keyBy(new KeySelector<LogObject, St
 - We use rich functions when there is a need to initialize a function before it processes the first record or to retrieve information about the context in which it is executed.
 - The name of the rich function starts with Rich followed by the transformation name RichMapFunction, RichFlatMapFunction etc…
 - When we are using rich function, we have 2 additional method:
-    - **open()** => is an initialization method for the rich function. It is called **once per task**.
-    - **close()**=> is an finalization method. It is called **once per task** after the last call of the transformation
+  - **open()** => is an initialization method for the rich function. It is called **once per task**.
+  - **close()**=> is an finalization method. It is called **once per task** after the last call of the transformation
 
 <br />
 
@@ -229,10 +231,10 @@ KeyedStream<LogObject, String> keyed = input.keyBy(new KeySelector<LogObject, St
 As already know, Flink applications are executed in parallel in a distributed environment.
 
 - Let’s remember how it happens:
-    - When a DataStream program is submitted to the JobManager(could be done via Dashboard or command line), the system creates a dataflow graph and prepares the operators for execution
-    - Each operator will be converted to the parallel tasks.
-    - Each task will process subset of the operator’s input stream
-    - The **#parallel tasks** of an operator is called **the parallelism of the operator**
+  - When a DataStream program is submitted to the JobManager(could be done via Dashboard or command line), the system creates a dataflow graph and prepares the operators for execution
+  - Each operator will be converted to the parallel tasks.
+  - Each task will process subset of the operator’s input stream
+  - The **#parallel tasks** of an operator is called **the parallelism of the operator**
 
 Now we can control this parallelism, when we are writing DataStream program. And also we can control parallelism of the execution environment or per individual operator.
 
@@ -261,4 +263,4 @@ If we submit this application with parallelism 16, then:
 - Mapper will run with 32 tasks
 - Filter will run with 2 tasks
 
-Last but not least, wait for the next post … 
+Last but not least, wait for the next post …

@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  "Apache Flink Series 1 — What is Apache Flink"
-date:   2020-02-15 19:45:31 +0530
+title: "Apache Flink Series 1 — What is Apache Flink"
+date: 2020-02-15 19:45:31 +0530
 categories: "apache-flink"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/apache-flink/what-is-apache-flink/"
 ---
 
 In this post, I will try to explain what is Apache Flink, what is used for, and features of Apache Flink.
@@ -48,7 +49,6 @@ You may think what is a operator in Flink, I will explain it in another post. Ri
 - Alternative to traditional approach to sync. data in different storage system. In traditional way there is periodic jobs called ETL(extract,transform,load). However they do not meet the latency requirements for many use cases.
 - Flink also can be used for data analytics applications.
 
-
 ## Features of Apache Flink
 
 - Exactly one state consistency guarantees
@@ -58,5 +58,5 @@ You may think what is a operator in Flink, I will explain it in another post. Ri
 - Ability to run with very little downtime
 - It also can be used for batch processor.
 - Provides Event-time and processing-time semantics
-    - Event-time semantics provide consistent and accurate results despite out of order events.
-    - Processing-time semantics (Processing time refers to the system time of the machine that is executing the respective operation) can be used for applications with very low latency
+  - Event-time semantics provide consistent and accurate results despite out of order events.
+  - Processing-time semantics (Processing time refers to the system time of the machine that is executing the respective operation) can be used for applications with very low latency

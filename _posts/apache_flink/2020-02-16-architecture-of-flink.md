@@ -1,26 +1,25 @@
 ---
 layout: post
-title:  "Apache Flink Series 3 — Architecture of Flink"
-date:   2020-02-16 19:45:31 +0530
+title: "Apache Flink Series 3 — Architecture of Flink"
+date: 2020-02-16 19:45:31 +0530
 categories: "apache-flink"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/apache-flink/architecture-of-flink/"
 ---
 
 In this post, I am going to explain “Components of Flink”, “Task Execution”, “Task Chaining”, “Data Transfer”, “Credit-Based Flow Control”, “State Management and State Backend”
 
-
 > You may see the all my notes about Apache Flink with this [link](/apache-flink/)
-
 
 Before starting, because of Flink is implemented in Java and Scale, all components run on JVM.
 
 ## Components of Flink
 
 - A Flink setup consists of 4 different components:
-    - **JobManager**
-    - **ResourceManager**
-    - **TaskManager**
-    - **Dispatcher**
+  - **JobManager**
+  - **ResourceManager**
+  - **TaskManager**
+  - **Dispatcher**
 
 ### JobManager
 
@@ -30,8 +29,8 @@ Before starting, because of Flink is implemented in Java and Scale, all componen
 - Once JobManager receives enough TaskManager slots, it distributes the tasks of the ExecutionGraph to the TaskManager that execute them.
 - During execution, the JobManager is responsible for all actions that require a central coordination such as coordination of checkpoints.
 - JobManager(and also application itself) consist of:
-    - JobGraph(also called logical dataflow)
-    - JAR file that contains all the required classes, libraries and other resources
+  - JobGraph(also called logical dataflow)
+  - JAR file that contains all the required classes, libraries and other resources
 
 ### ResourceManager
 
@@ -96,9 +95,7 @@ Simply put, this mechanism(credit-based flow) is to fully utilize the bandwidth 
 
 You may go to the this link to learn about details https://flink.apache.org/2019/06/05/flink-network-stack.html
 
-In this mechanism:
-    - A receiving task grants some credit to a sending task, #network buffers that are reserved to receive its data.
-    - Once a sender receives a credit notification, it ships as many buffers as it was granted.
+In this mechanism: - A receiving task grants some credit to a sending task, #network buffers that are reserved to receive its data. - Once a sender receives a credit notification, it ships as many buffers as it was granted.
 
 ## State Management and State Backend
 
@@ -131,10 +128,11 @@ In this example, task 1 receives record with key yellow, therefore task 1 can on
 ### State Backends
 
 This part should be explained in detail other post. In here, I am just giving abstract view of state backend mechanism.
+
 - A state backend is responsible for 2 things: local state management and checkpointing state to a remote location.
 - For local state management, we have 3 options:
-    - **The MemoryStateBackend** which holds data internally on the Java heap.
-    - **The FsStateBackend** which writes state snapshots into files.
-    - **The RocksDBStateBackend** which writes state snapshots into RocksDB database.
+  - **The MemoryStateBackend** which holds data internally on the Java heap.
+  - **The FsStateBackend** which writes state snapshots into files.
+  - **The RocksDBStateBackend** which writes state snapshots into RocksDB database.
 - **State checkpointing**:
-    - Because of TaskManager may fail at any point in time, its storage must be considered volatile. A state backend takes care of checkpointing the state of a task to a remote and persistent storage. The remote storage for checkpointing could be a distributed filesystem or a database system.
+  - Because of TaskManager may fail at any point in time, its storage must be considered volatile. A state backend takes care of checkpointing the state of a task to a remote and persistent storage. The remote storage for checkpointing could be a distributed filesystem or a database system.

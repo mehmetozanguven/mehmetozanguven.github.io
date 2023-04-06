@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  "Apache Flink Series 8 - State Backend & State Example"
-date:   2020-05-02 14:30:31 +0530
+title: "Apache Flink Series 8 - State Backend & State Example"
+date: 2020-05-02 14:30:31 +0530
 categories: "apache-flink"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/apache-flink/state-backend-and-example/"
 ---
 
 In this post, I am going to explain “what is state backend”, “which options do we have for state backend” , “how to configure state backend for your flink job” and “I am going to implement a project to show each state backend options”.
@@ -31,7 +32,7 @@ For state checkpointing:
 
 - Because TaskManager may fail at any point in time, its values can be considered as volatile. A state backend takes care of checkpointing the state of a task to the remote and persistent location. The remote location could be a distributed file system or a database system.
 
-In general, with State backend mechanism, we can determine the saving folder for job’s state, types of the state backend and more. 
+In general, with State backend mechanism, we can determine the saving folder for job’s state, types of the state backend and more.
 
 In Flink, we have 4 options for state backend:
 
@@ -41,8 +42,6 @@ In Flink, we have 4 options for state backend:
 4. Custom State Backend mechanism (I am not touching this one!!)
 
 Let’s talk about each of them one by one.
-
-
 
 ### The MemoryStateBackend (enabled by default)
 
@@ -113,13 +112,13 @@ Let’s talk about each of them one by one.
 
 <br />
 
-## State Example 
+## State Example
 
-Let’s create a flink example to see different state backend options more realistic way. 
+Let’s create a flink example to see different state backend options more realistic way.
 
-In this example, I going to use big csv file provided by [https://data.ibb.gov.tr](https://data.ibb.gov.tr/) and I am going to use the specific data set called [***INSTANT LOCATION AND SPEED INFORMATION OF IMM ISTAC VEHICLES\***](https://data.ibb.gov.tr/en/dataset/ibb-istac-araclarinin-anlik-konum-ve-hiz-bilgileri) ***(\***The dataset contains the location and speed information of trucks, vans, road sweepers, and road washing vehicles of ISTAC Inc., a subsidiary of the Istanbul Metropolitan Municipality.***).\***
+In this example, I going to use big csv file provided by [https://data.ibb.gov.tr](https://data.ibb.gov.tr/) and I am going to use the specific data set called [**\*INSTANT LOCATION AND SPEED INFORMATION OF IMM ISTAC VEHICLES\***](https://data.ibb.gov.tr/en/dataset/ibb-istac-araclarinin-anlik-konum-ve-hiz-bilgileri) **\*(\***The dataset contains the location and speed information of trucks, vans, road sweepers, and road washing vehicles of ISTAC Inc., a subsidiary of the Istanbul Metropolitan Municipality.**\*).\***
 
-This data set are divided by ten days for each month. I downloaded one part of the data set. However one part was too big to read on my local machine. Then I decided to the split data with pandas and then convert them to the txt file to read from Flink application. 
+This data set are divided by ten days for each month. I downloaded one part of the data set. However one part was too big to read on my local machine. Then I decided to the split data with pandas and then convert them to the txt file to read from Flink application.
 
 > Note: Flink may also be providing classes to transform csv file to datastream, but pandas way was more easy to do for me!!
 
@@ -162,10 +161,10 @@ First let's summarize how we define Managed KeyedState for our Flink Job:
 #### How do you define Managed KeyedState for your Flink Job?
 
 1. Decide which state primitives you want to use. (Could it be ValueState or ListState or others ?)
-2. State is accessed via `RuntimeContext` , therefore your function must extends `RichFunction` 
-3. Define correspond `StateDescriptor` to get a state value. For example if you decided to use `ListState`, you would define `ListStateDescriptor`. 
+2. State is accessed via `RuntimeContext` , therefore your function must extends `RichFunction`
+3. Define correspond `StateDescriptor` to get a state value. For example if you decided to use `ListState`, you would define `ListStateDescriptor`.
 4. Access your state, within an `void open(Configuration config) ` function.
-5. After all, you can get state's value via appropriate method call such as `.getAll(), .value()`  etc.. 
+5. After all, you can get state's value via appropriate method call such as `.getAll(), .value()` etc..
 
 <br />
 
@@ -182,8 +181,6 @@ $ mvn archetype:generate                               \
       -DarchetypeVersion=1.10.0
 ```
 
-
-
 - After setup, I will need a class for converting the file content to the correspond object. To do that first I created a class called `VehicleInstantData`which contains all the csv’s fields as attributes (with format String).
 
 ```java
@@ -199,7 +196,7 @@ public class VehicleInstantData implements Serializable
     private String day_year;
     private String day_mounth;
     private String day_day;
-    
+
     public static VehicleInstantData createFromSplittedArray(String[] splittedArray)
     {
         VehicleInstantData newData = new VehicleInstantData(
@@ -211,9 +208,9 @@ public class VehicleInstantData implements Serializable
         return newData;
     }
 
-  	private VehicleInstantData(String _id, String day_hour, String geohash, 
-                               String latitude, String longitude, 
-                               String vehicle_type, String speed, 
+  	private VehicleInstantData(String _id, String day_hour, String geohash,
+                               String latitude, String longitude,
+                               String vehicle_type, String speed,
                                String day_year, String day_mounth, String day_day) {
         this._id = _id;
         this.day_hour = day_hour;
@@ -231,11 +228,9 @@ public class VehicleInstantData implements Serializable
 }
 ```
 
-
-
 - To convert string file content to correspond object, I used map transformation
 
-````java
+```java
 public class MapToObjectTransformation implements MapFunction<String, VehicleInstantData>
 {
 
@@ -260,13 +255,11 @@ public class StreamCreator
         return dataSourceStream.map(new MapToObjectTransformation());
     }
 }
-````
-
-
+```
 
 - Now, I grouped the stream flow by vehicle types (I created a KeyedStream by VehicleTypes)
 
-````java
+```java
 public class StreamCreator
 {
     // ...
@@ -290,9 +283,7 @@ public class StreamingJob {
 		env.execute("Flink Streaming Java API Skeleton");
 	}
 }
-````
-
-
+```
 
 - After KeyedStream, I am going to map the fastest vehicle as a **SingleOutputStreamOperator**.
 
@@ -318,7 +309,7 @@ public class FastestVehicleMapper extends RichMapFunction<VehicleInstantData, Ve
                 "fastest-vehicle",
                 TypeInformation.of(VehicleInstantData.class)
         );
-        
+
         fastestVehicleState = getRuntimeContext().getState(valueStateDescriptor);
     }
 
@@ -326,7 +317,7 @@ public class FastestVehicleMapper extends RichMapFunction<VehicleInstantData, Ve
     public VehicleInstantData map(VehicleInstantData newVehicleData) throws Exception
     {
         VehicleInstantData previousVehicleData = this.fastestVehicleState.value();
-        
+
         if (previousVehicleData == null) // means there is nothing in the state
         {
             this.fastestVehicleState.update(newVehicleData);
@@ -338,7 +329,7 @@ public class FastestVehicleMapper extends RichMapFunction<VehicleInstantData, Ve
         }
     }
 
-    private VehicleInstantData updateStateAndReturnValue(VehicleInstantData newVehicleData, VehicleInstantData previousVehicleData) throws IOException 
+    private VehicleInstantData updateStateAndReturnValue(VehicleInstantData newVehicleData, VehicleInstantData previousVehicleData) throws IOException
     {
         if (Integer.parseInt(previousVehicleData.getSpeed()) < Integer.parseInt(newVehicleData.getSpeed()))
         {
@@ -353,8 +344,6 @@ public class FastestVehicleMapper extends RichMapFunction<VehicleInstantData, Ve
     }
 }
 ```
-
-
 
 - Finally, my main method:
 
@@ -384,13 +373,9 @@ public class StreamingJob {
 }
 ```
 
-
-
-- Now, our flink application is ready, take a jar your application via `mvn clean install` 
+- Now, our flink application is ready, take a jar your application via `mvn clean install`
 
 - Let's configure state backend
-
-  
 
 <br />
 
@@ -411,8 +396,6 @@ state.savepoints.dir: file:///home/path/to/savepoints_dir
 # ...
 ```
 
-
-
 ### Configure MemoryStateBackend for Our Flink Job
 
 Because `MemoryStateBackend` is a default option, we don't need to setup anything. I have just deployed the Job.
@@ -430,7 +413,7 @@ Here is the log file after I deployed the jar & submit the application:
 
 2020-05-03 18:29:25,294 INFO  org.apache.flink.configuration.GlobalConfiguration            - Loading configuration property: state.savepoints.dir, file:///home/mehmetozanguven/Desktop/ApacheTools/flink-1.10.0/state_backend/memory_state_backend/savepoints_dir
 
-2020-05-03 18:29:25,294 INFO  org.apache.flink.configuration.GlobalConfiguration            - Loading configuration property: 
+2020-05-03 18:29:25,294 INFO  org.apache.flink.configuration.GlobalConfiguration            - Loading configuration property:
 ```
 
 - Here is the MemoryStateBackend configuration:
@@ -438,8 +421,6 @@ Here is the log file after I deployed the jar & submit the application:
 ```reStructuredText
 2020-05-03 18:29:37,807 INFO  org.apache.flink.runtime.jobmaster.JobMaster                  - No state backend has been configured, using default (Memory / JobManager) MemoryStateBackend (data in heap memory / checkpoints to JobManager) (checkpoints: 'file:/home/mehmetozanguven/Desktop/ApacheTools/flink-1.10.0/state_backend/memory_state_backend/checkpoints_dir', savepoints: 'file:/home/mehmetozanguven/Desktop/ApacheTools/flink-1.10.0/state_backend/memory_state_backend/savepoints_dir', asynchronous: TRUE, maxStateSize: 5242880)
 ```
-
-
 
 #### TaskManager's Log File
 
@@ -460,15 +441,14 @@ Here is the log file after I deployed the jar & submit the application:
 
 - Update `flink-conf.yaml` file like this:
 
-````yaml
+```yaml
 # Flink will know that we are going to use FsStateBackend
-state.backend: filesystem 
+state.backend: filesystem
 
 state.checkpoints.dir: file:///home/mehmetozanguven/Desktop/ApacheTools/flink-1.10.0/state_backend/memory_state_backend/checkpoints_dir
 
 state.savepoints.dir: file:///home/mehmetozanguven/Desktop/ApacheTools/flink-1.10.0/state_backend/memory_state_backend/savepoints_dir
-
-````
+```
 
 <br />
 

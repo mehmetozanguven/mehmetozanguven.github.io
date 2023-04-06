@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  "Apache Flink Series 9 - How Flink & Standalone Cluster Setup Work?"
-date:   2020-05-04 01:30:31 +0530
+title: "Apache Flink Series 9 - How Flink & Standalone Cluster Setup Work?"
+date: 2020-05-04 01:30:31 +0530
 categories: "apache-flink"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/apache-flink/how-standalone-cluster-work/"
 ---
 
 In this post, I am going to explain, how Flink starts itself, and what happens when you submit your job to the Standalone Cluster setup

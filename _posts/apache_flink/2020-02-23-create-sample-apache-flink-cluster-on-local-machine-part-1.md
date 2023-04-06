@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  "Apache Flink Series 5 — Create Sample Apache Flink Cluster on Local Machine — Part 1"
-date:   2020-02-23 19:45:31 +0530
+title: "Apache Flink Series 5 — Create Sample Apache Flink Cluster on Local Machine — Part 1"
+date: 2020-02-23 19:45:31 +0530
 categories: "apache-flink"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/apache-flink/create-sample-apache-flink-cluster-part-1/"
 ---
 
 In this post, we are creating simple Flink cluster own local machine.
@@ -23,6 +24,7 @@ Don’t forget to download the latest version of Apache Flink https://archive.ap
 ## Step 1 Determine the cluster types
 
 We have 3 options:
+
 1. Local
 2. Cluster (standalone, YARN)
 3. Cloud (GCE, EC2)
@@ -34,6 +36,7 @@ You may ask how you are going to form a cluster with a single machine? For our e
 > Note: Ideally you should have one flink process instance per machines. Other solutions (like I said before) may lead(most probably) to memory problem(insufficient memory exception).
 
 Now, let me talk about the standalone mode a little bit:
+
 - Standalone setup expects that cluster consists of one master node and one or more worker nodes. And each node must have Java 1.8++ and ssh (sshd must be running on each node, therefore all nodes can communicate each other. In our example, we don’t need it.)
 - JAVA_HOME environment variable must be set on each node. Flink will use it.
 - Installation path for Apache Flink must be the same for each node/machine.
@@ -92,6 +95,7 @@ This setup part will answer these questions and more. But before that let’s po
 Most of the time you are going to deal with conf folder and your stream job.
 
 **conf** folder includes the following files:
+
 - **flink-conf.yaml** => holds the flink configuration. For example, you can set taskamanger memory, state backend type (rocksdb, memory etc..), parallelism of the job and more.
 - **log4j-cli/console/yarn.properties** => Flink uses log4j for logging mechanism as default. These files are related to logging mechanism
 - **logback-console/yarn.xml** => Flink also support logback if you want to use. (if you don’t delete log4j files, logback files will have no effect) These files are related to logging mechanism for logback.
@@ -101,6 +105,7 @@ Most of the time you are going to deal with conf folder and your stream job.
 - **zoo.cfg** => holds the configuration for Apache ZooKeeper, if you want to use.
 
 Let’s look at the default configuration:
+
 - **flink-conf.yaml (note that I removed the comment lines):** When we read this file, we see that jobmanager will start in the address localhost:6123
 
 ```log
@@ -112,7 +117,7 @@ jobmanager.rpc.address: localhost
 
 jobmanager.rpc.port: 6123
 
-# The heap size for the JobManager JVM 
+# The heap size for the JobManager JVM
 
 jobmanager.heap.size: 1024m
 
@@ -136,7 +141,7 @@ parallelism.default: 1
 
 ```log
 # this file contains the address of taskmanager
-# in this case, when we say ./start-cluster.sh, 
+# in this case, when we say ./start-cluster.sh,
 # this will trigger to start taskmanager in the ip address localhost
 
 localhost

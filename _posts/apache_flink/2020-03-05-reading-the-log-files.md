@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  "Apache Flink Series 6 —Reading the Log files"
-date:   2020-03-05 23:30:31 +0530
+title: "Apache Flink Series 6 —Reading the Log files"
+date: 2020-03-05 23:30:31 +0530
 categories: "apache-flink"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/apache-flink/reading-log-files/"
 ---
 
 In this post, we will look at the log files (both for TaskManager and JobManager) and try to understand what is going on Flink cluster.
@@ -179,7 +180,7 @@ TaskManagerRunner is the entry point for the TaskManager in standalone mode. Thi
 TaskManager id (called ResourceId) is generated in the method:
 
 ```java
-public final class 
+public final class
 org.apache.flink.runtime.clusterframework.types.ResourceId ... {/**
  * Generate a random resource id.
  *

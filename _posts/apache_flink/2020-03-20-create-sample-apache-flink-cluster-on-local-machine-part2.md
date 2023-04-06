@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  "Apache Flink Series 7 — Create Sample Apache Flink Cluster on Local Machine — Part 2"
-date:   2020-03-20 19:30:31 +0530
+title: "Apache Flink Series 7 — Create Sample Apache Flink Cluster on Local Machine — Part 2"
+date: 2020-03-20 19:30:31 +0530
 categories: "apache-flink"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/apache-flink/create-sample-apache-flink-cluster-part-2/"
 ---
 
 In this post, I will create simple stream job and submit the job to the flink cluster. You can find the project in [my github repo](https://github.com/mehmetozanguven/flink_examples/tree/master/SampleStream).
-
 
 This is the second part of the sub-series of my Flink posts.
 
@@ -77,7 +77,6 @@ As you can see, **step 1(execution environment setup) has already done by Flink�
 
 <br />
 
-
 ## Step 2 (write streams for data source)
 
 In this project, we will count the words in the arraylist (this list can be found on the [Flink’s github](https://github.com/apache/flink/blob/master/flink-examples/flink-examples-streaming/src/main/java/org/apache/flink/streaming/examples/wordcount/util/WordCountData.java)), then we will apply some transformations on it.
@@ -128,10 +127,10 @@ import com.sampleFlinkProject.steams.StreamCreator;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
-public class StreamingJob 
+public class StreamingJob
 {
 
-	public static void main(String[] args) throws Exception 
+	public static void main(String[] args) throws Exception
 	{
 		// set up the streaming execution environment
 		final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
@@ -239,6 +238,7 @@ public SingleOutputStreamOperator<Tuple2<String, Integer>> sumTheWordContainsSpe
 ```
 
 Now, let’s explain some important points:
+
 - `filteredStream.keyBy(1)` : means that group the stream according to the first position of the tuple which is the Integer part. And remember that our input stream data pattern is like that: (word, 1), (word2, 1) etc.. with grouping them by first field, actually I am taking all the elements.
 - `filteredStream.keyBy(1).sum(1)` : means that “sum” the keyed input stream according to the first position of the field which is the Integer part again. Therefore “sum” will be counting all the words in the stream. For example, if input values are (word, 2), (word2, 2), then our result will be double of the correct one.
 
@@ -251,6 +251,5 @@ In this series, we are just printing the result instead of writing to the Kafka,
 ```java
 summedStream.print();
 ```
-
 
 Last but not least, wait for the next post …

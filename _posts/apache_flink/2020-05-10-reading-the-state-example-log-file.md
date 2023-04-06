@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  "Apache Flink Series 10 -  Reading Log files for State Example"
-date:   2020-05-10 14:30:31 +0530
+title: "Apache Flink Series 10 -  Reading Log files for State Example"
+date: 2020-05-10 14:30:31 +0530
 categories: "apache-flink"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/apache-flink/reading-log-files-for-state-example/"
 ---
 
 In this post, I am going to read the log files from the application that I created in previous post. Here is the github [link](https://github.com/mehmetozanguven/flink_examples/tree/master/StateExample) and also previous post [link](https://mehmetozanguven.github.io/apache-flink/2020/05/02/state-backend-and-state-example.html)
@@ -17,8 +18,6 @@ Before reading, I updated the `taskmanager.numberOfTaskSlots` config. Because on
 taskmanager.numberOfTaskSlots: 8
 # ...
 ```
-
-
 
 To remember how standalone cluster works you may refer to **Apache Flink Series 9 - How Flink & Standalone Cluster Setup Work?**
 
@@ -61,9 +60,9 @@ public class StandaloneSessionClusterEntrypoint extends SessionClusterEntrypoint
  public StandaloneSessionClusterEntrypoint(Configuration configuration) {
   super(configuration);
  }
- 
+
  public static void main(String[] args) {
-  // print information about the environment 
+  // print information about the environment
   EnvironmentInformation.logEnvironmentInfo(LOG, StandaloneSessionClusterEntrypoint.class.getSimpleName(), args);
      // This signal handler / signal logger is based on Apache Hadoop's org.apache.hadoop.util.SignalLogger.
   SignalHandler.register(LOG);
@@ -84,7 +83,7 @@ public class StandaloneSessionClusterEntrypoint extends SessionClusterEntrypoint
      // loading configuration from flink-conf.yaml file
 
   Configuration configuration = loadConfiguration(entrypointClusterConfiguration);
-     // create the StandaloneSessionClusterEntrypoint instance 
+     // create the StandaloneSessionClusterEntrypoint instance
 
   StandaloneSessionClusterEntrypoint entrypoint = new StandaloneSessionClusterEntrypoint(configuration);
      // run the cluster with new cluster entry point
@@ -97,7 +96,7 @@ public class StandaloneSessionClusterEntrypoint extends SessionClusterEntrypoint
 - Let's back to the Job Manager's log file..
 - The Logs statements below show the environment that flink runs on it.
 
-````reStructuredText
+```reStructuredText
 2020-05-03 22:48:42,351 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint         -  OS current user: mehmetozanguven
 2020-05-03 22:48:42,351 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint         -  Current Hadoop/Kerberos user: <no hadoop dependency found>
 2020-05-03 22:48:42,351 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint         -  JVM: OpenJDK 64-Bit Server VM - AdoptOpenJDK - 11/11.0.6+10
@@ -116,18 +115,14 @@ public class StandaloneSessionClusterEntrypoint extends SessionClusterEntrypoint
 2020-05-03 22:48:42,352 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint         -     --executionMode
 2020-05-03 22:48:42,352 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint         -     cluster
 2020-05-03 22:48:42,352 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint         -  Classpath: /home/mehmetozanguven/Desktop/ApacheTools/flink-1.10.0/lib/flink-table_2.11-1.10.0.jar:/home/mehmetozanguven/Desktop/ApacheTools/flink-1.10.0/lib/flink-table-blink_2.11-1.10.0.jar:/home/mehmetozanguven/Desktop/ApacheTools/flink-1.10.0/lib/log4j-1.2.17.jar:/home/mehmetozanguven/Desktop/ApacheTools/flink-1.10.0/lib/slf4j-log4j12-1.7.15.jar:/home/mehmetozanguven/Desktop/ApacheTools/flink-1.10.0/lib/flink-dist_2.11-1.10.0.jar:::
-2020-05-03 22:48:42,353 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint         - 
-````
-
-
+2020-05-03 22:48:42,353 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint         -
+```
 
 - Log for signal handler:
 
 ```reStructuredText
 2020-05-03 22:48:42,354 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint         - Registered UNIX signal handlers for [TERM, HUP, INT]
 ```
-
-
 
 - Log from the `flink-conf.yaml file`, `GlobalConfiguration` class loads that file.
 
@@ -174,13 +169,11 @@ public final class GlobalConfiguration {
 }
 ```
 
-
-
 - At that point, our cluster is starting:
 
-````reStructuredText
+```reStructuredText
 2020-05-03 22:48:42,409 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint         - Starting StandaloneSessionClusterEntrypoint.
-````
+```
 
 <br />
 
@@ -226,16 +219,12 @@ public abstract class ClusterEntrypoint implements AutoCloseableAsync, FatalErro
 }
 ```
 
-
-
 - Here is the logs for default filesystem configuration.
 
 ```reStructuredText
 2020-05-03 22:48:42,409 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint         - Install default filesystem.
 2020-05-03 22:48:42,465 INFO  org.apache.flink.core.fs.FileSystem  - Hadoop is not in the classpath/dependencies. The extended set of supported File Systems via Hadoop is not available.
 ```
-
-
 
 - Logs for security context
 
@@ -266,7 +255,7 @@ public abstract class ClusterEntrypoint implements AutoCloseableAsync, FatalErro
             // get job manager rpc address and port-range
 			final String bindAddress = configuration.getString(JobManagerOptions.ADDRESS);
 			final String portRange = getRPCPortRange(configuration);
-			
+
             // create the rpc server with AkkaRpcServiceUtils
 			commonRpcService = createRpcService(configuration, bindAddress, portRange);
 			configuration.setString(JobManagerOptions.ADDRESS, commonRpcService.getAddress());
@@ -277,7 +266,7 @@ public abstract class ClusterEntrypoint implements AutoCloseableAsync, FatalErro
 				Hardware.getNumberCPUCores(),
 				new ExecutorThreadFactory("cluster-io"));
 			haServices = createHaServices(configuration, ioExecutor);
-            // create blobServer and start 
+            // create blobServer and start
             // BlobServer is responsible for listening incoming and to handle them
             // BlobServer is also takes care of creating directory to store BLOBs object
 			blobServer = new BlobServer(configuration, haServices.createBlobStore());
@@ -329,7 +318,7 @@ public abstract class ClusterEntrypoint implements AutoCloseableAsync, FatalErro
 - These logs are similar to Job Manager's log file.
 
 ```reStructuredText
-2020-05-03 22:48:43,894 INFO  org.apache.flink.runtime.taskexecutor.TaskManagerRunner       - 
+2020-05-03 22:48:43,894 INFO  org.apache.flink.runtime.taskexecutor.TaskManagerRunner       -
 
 
 TM_RESOURCES_JVM_PARAMS extraction logs:
@@ -448,8 +437,6 @@ TM_RESOURCES_JVM_PARAMS extraction logs:
 2020-05-10 19:48:34,402 INFO  org.apache.flink.runtime.taskexecutor.TaskExecutor            - Offer reserved slots to the leader of job 9d9ced6c7ac0a516b1958073f0edd4e4.
 ```
 
-
-
 - JobManager receives slots from TaskManagers, and start to deploy the job (JobManager's log file):
 
 ```reStructuredText
@@ -461,9 +448,7 @@ TM_RESOURCES_JVM_PARAMS extraction logs:
 # ...
 ```
 
-
-
-- After deploying, instances start to run  (JobManager's log file):
+- After deploying, instances start to run (JobManager's log file):
 
 ```reStructuredText
 # ...
@@ -476,8 +461,6 @@ TM_RESOURCES_JVM_PARAMS extraction logs:
 2020-05-10 19:48:34,780 INFO  org.apache.flink.runtime.executiongraph.ExecutionGraph        - FindFastestVehicle -> Sink: PrintResult (2/8) (738207a12cec4c57490d1b55290ea34b) switched from DEPLOYING to RUNNING.
 # ...
 ```
-
-
 
 - In the meantime, we see that TaskManager also says "instances are running" (TaskManager's log file):
 
@@ -493,8 +476,6 @@ TM_RESOURCES_JVM_PARAMS extraction logs:
 # ...
 ```
 
-
-
 - After reading `.txt` file, State changed to Finished (JobManager's log file):
 
 ```reStructuredText
@@ -508,8 +489,6 @@ TM_RESOURCES_JVM_PARAMS extraction logs:
 2020-05-10 19:48:41,141 INFO  org.apache.flink.runtime.executiongraph.ExecutionGraph        - Job Flink Streaming Java API Skeleton (9d9ced6c7ac0a516b1958073f0edd4e4) switched from state RUNNING to FINISHED.
 # ...
 ```
-
-
 
 - In the meantime, here is the TaskManager (TaskManager's log file):
 
@@ -525,23 +504,19 @@ TM_RESOURCES_JVM_PARAMS extraction logs:
 # ...
 ```
 
-
-
 - Finally, connection between (JobManager & ResourceManager), (JobManager & TaskManager) closed (JobManager's log file):
 
-````reStructuredText
+```reStructuredText
 2020-05-10 19:48:41,162 INFO  org.apache.flink.runtime.jobmaster.JobMaster                  - Close ResourceManager connection d6d73032757e1a231274935bddee5e9f: JobManager is shutting down..
-````
+```
 
--  (TaskManager's log file)
+- (TaskManager's log file)
 
 ```reStructuredText
 2020-05-10 19:48:41,183 INFO  org.apache.flink.runtime.taskexecutor.TaskExecutor            - Close JobManager connection for job 9d9ced6c7ac0a516b1958073f0edd4e4.
 
 2020-05-10 19:48:41,187 INFO  org.apache.flink.runtime.taskexecutor.TaskExecutor            - Close JobManager connection for job 9d9ced6c7ac0a516b1958073f0edd4e4.
 ```
-
-
 
 <br />
 
