@@ -4,6 +4,7 @@ title: "JavaFX Basic Layouts"
 date: 2022-04-21 20:45:31 +0530
 categories: "javafx"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/javafx/layouts/"
 ---
 
 In this blog post, let's talk about laying out the components in the JavaFX. We need a pre-defined layout solution because computing the coordinates for each components will be really hard.

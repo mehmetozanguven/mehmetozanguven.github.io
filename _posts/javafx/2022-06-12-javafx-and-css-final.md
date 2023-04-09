@@ -4,6 +4,7 @@ title: "JavaFX and CSS (Final)"
 date: 2022-06-12 20:00:31 +0530
 categories: "javafx"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/javafx/javafx-final/"
 ---
 
 We can use CSS(Cascading Style Sheets) to change visual appearance of our JavaFX program.

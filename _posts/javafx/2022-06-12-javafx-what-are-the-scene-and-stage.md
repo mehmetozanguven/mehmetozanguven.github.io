@@ -4,6 +4,7 @@ title: "JavaFX - What are the Scene and Stage ?"
 date: 2022-06-12 19:45:31 +0530
 categories: "javafx"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/javafx/what-are-the-scene-and-stage/"
 ---
 
 # Scene

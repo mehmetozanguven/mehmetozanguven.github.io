@@ -4,6 +4,7 @@ title: "JavaFX GridPane and TilePane"
 date: 2022-04-24 20:45:31 +0530
 categories: "javafx"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/javafx/gridpane-and-tilepane/"
 ---
 
 ## GridPane

@@ -4,6 +4,7 @@ title: "JavaFX Canvas and GraphicsContext"
 date: 2022-04-13 12:45:31 +0530
 categories: "javafx"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/javafx/canvas-and-graphics-context/"
 ---
 
 The screen of a computer is a grid of little squares called **pixels**. The color of each pixel can be set individually, and drawing on the screen just means setting the colors of individual pixels.

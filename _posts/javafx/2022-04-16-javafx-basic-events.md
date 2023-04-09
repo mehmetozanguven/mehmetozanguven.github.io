@@ -4,6 +4,7 @@ title: "JavaFX Basic Events"
 date: 2022-04-16 12:45:31 +0530
 categories: "javafx"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/javafx/basic-events/"
 ---
 
 In JavaFX, events are represented by objects. When an event occurs, system collects all the information relevant to the event and construct an object to contain that information.

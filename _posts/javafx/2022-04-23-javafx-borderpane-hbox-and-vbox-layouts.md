@@ -4,6 +4,7 @@ title: "JavaFX BorderPane HBox and VBox"
 date: 2022-04-23 20:45:31 +0530
 categories: "javafx"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/javafx/hbox-and-vbox/"
 ---
 
 <nav class="custom-table-of-contents">

@@ -4,6 +4,7 @@ title: "JavaFX Basic Inputs and Controls"
 date: 2022-04-19 20:45:31 +0530
 categories: "javafx"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/javafx/inputs-and-controls/"
 ---
 
 If you are going to draw something on the screen and handle some mouse event, then you can only use MouseEvent listener and AnimationTimer that's it!! But in one way or another, most probably you will need to add some inputs for user's interactivity. For that you may want to use Checkbox, RadioButton, TextField and more ... Let's look at the some of these objects:

@@ -4,6 +4,7 @@ title: "JavaFX Color and Paint"
 date: 2022-04-11 12:45:31 +0530
 categories: "javafx"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/javafx/color-and-paint/"
 ---
 
 <nav class="custom-table-of-contents">

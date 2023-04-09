@@ -4,6 +4,7 @@ title: "JavaFX Getting Started"
 date: 2022-04-10 12:45:31 +0530
 categories: "javafx"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/javafx/getting-started/"
 ---
 
 GUI programs are different from the traditional program that you have encountered. GUI programs are event-driven which means that these programs respond to the user actions such as clicking to the button, pressing a key on the keyboard etc ..
