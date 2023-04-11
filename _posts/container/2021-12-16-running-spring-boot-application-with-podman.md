@@ -4,6 +4,7 @@ title: Running Spring Boot Application with Podman
 date: 2021-12-16 00:45:31 +0530
 categories: "container"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/run-spring-boot-application-with-podman/"
 ---
 
 To run spring boot application in a container. We should do the following steps:

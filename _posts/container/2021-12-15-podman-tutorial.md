@@ -4,6 +4,7 @@ title: Podman Tutorial
 date: 2021-12-15 13:45:31 +0530
 categories: "container"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/getting-started-podman/"
 ---
 
 In this one-shot tutorial, we are going to learn what Podman is, how to use it, the differences between Docker and Podman and more..

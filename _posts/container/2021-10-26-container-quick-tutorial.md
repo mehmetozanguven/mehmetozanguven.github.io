@@ -4,6 +4,7 @@ title: Quick Intro to Container(s)
 date: 2021-10-26 13:45:31 +0530
 categories: "container"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/quick-intro-to-containers/"
 ---
 
 Recently, I decided to learn containers (specifically Podman) to simply run my applications in an isolated environment. I can directly jump into the Podman and can run my application. But this would be bad because learning the basic fundamentals are essentials before really diving into it. Before Podman, I just run some applications with Docker (without knowing fundamentals). After that I found Podman was more easy to run and also it is already installed on my linux distro (which is Fedora 34). At the end I decided to learn all related concepts about containers.
@@ -61,9 +62,9 @@ Most Containers rely on an OCI compliant runtime.
 
 ## Container
 
-> Containers have existed within operating systems for quite a long time. 
+> Containers have existed within operating systems for quite a long time.
 
-A container is the runtime instantiation of a Container Image. 
+A container is the runtime instantiation of a Container Image.
 
 It is standard Linux process.
 

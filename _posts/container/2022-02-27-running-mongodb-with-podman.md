@@ -4,6 +4,7 @@ title: Running MongoDB with Podman
 date: 2022-02-27 00:45:31 +0530
 categories: "container"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/run-mongodb-with-podman/"
 ---
 
 Instead of running MongoDB locally, we can easily run with Podman. Here are the basic steps you should follow:

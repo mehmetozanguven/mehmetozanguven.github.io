@@ -4,6 +4,7 @@ title: Running PostgreSQL with Podman
 date: 2021-12-15 17:45:31 +0530
 categories: "container"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/run-postgresql-with-podman/"
 ---
 
 Instead of running postgresql locally, we can easily run with Podman. Here are the basic steps you should follow.
