@@ -4,6 +4,7 @@ title: "Java 8 Date and Time API in one tutorial"
 date: 2021-11-10 19:45:31 +0530
 categories: "java"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/java/java-8-date-time-api/"
 ---
 
 Even we have Java 17 version right now, industries still are using Java 8 & 11 even old ones using Java 6. Also many of these industries are using old legacy date representation called `Date` & `Calendar`. Java 8 provides new way to create dates with time api which is more convenient and also more easy to use.

@@ -4,6 +4,7 @@ title: "Create simple hash map with expiration(time-to-live) feature"
 date: 2022-02-16 +0530
 categories: "java"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/java/create-simple-hash-map-with-expiration-feature/"
 ---
 
 You want to add & use simple cache in your application via hash map, but also you want your cache to remove automatically expired values(expiration timeout determined by you when you created the hashmap).

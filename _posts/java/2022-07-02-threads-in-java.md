@@ -4,6 +4,7 @@ title: "Threads in Java"
 date: 2022-07-02 +0530
 categories: "java"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/java/getting-started-threads-in-java/"
 ---
 
 Like people, computers can multitask. They can be working on several different tasks at the same time. A computer that has just a single central processing unit can't do two things at the same time, but it can still switch its attention back and forth among several tasks. Right now computer has more processing units which means they can work on several tasks simultaneously. To use the these multiprocessing computers, we can do **parallel programming**. In other words we can write a program (composed of several tasks) that can be executed simultaneoulsy.

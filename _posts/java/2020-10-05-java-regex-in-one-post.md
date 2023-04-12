@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  "Regex in one blog"
-date:   2020-10-05 19:45:31 +0530
+title: "Regex in one blog"
+date: 2020-10-05 19:45:31 +0530
 categories: "java"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/java/regex-in-one-blog/"
 ---
 
 In this post, we are going to learn Regex expression in one blog
@@ -12,7 +13,7 @@ Let's start with defining what is Regex or Regex expression.
 
 # What is Regex?
 
-Regex or Regex expression is a special text string for describing a search pattern. Regex can be used to find specific word in the text file or we can use to determine whether text is matched with specific pattern or not. 
+Regex or Regex expression is a special text string for describing a search pattern. Regex can be used to find specific word in the text file or we can use to determine whether text is matched with specific pattern or not.
 
 And also the regex is applied on the text from left to right.
 
@@ -20,28 +21,25 @@ Before diving into regex examples, we should know the specific characters/symbol
 
 ## Regex Symbols
 
-
-- `.`    =>  Any character except new line (please be careful, **not a word, character**) 
-- `\d` => search for any digit `[0-9]`  
-- `\D` =>  search for anything not a digit `[^0-9]` 
-- `\w` => search for a word character `[a-zA-Z0-9-]` (Note: `-` is also a word character)     
-- `\W`  => search for a not word character 
-- `\s` => search for any whitespace (includes space, tab, newline) 
-- `\S` => search for anything not whitespace 
-- `\b` => search for a word boundary. Matches positions where one side is a word character and other side is not a word character. 
-- `\B` => search for not a word boundary  
-- `[]` => matches a characters in brackets  
-- `[^]` =>  negates the condition in the brackets
+- `.` => Any character except new line (please be careful, **not a word, character**)
+- `\d` => search for any digit `[0-9]`
+- `\D` => search for anything not a digit `[^0-9]`
+- `\w` => search for a word character `[a-zA-Z0-9-]` (Note: `-` is also a word character)
+- `\W` => search for a not word character
+- `\s` => search for any whitespace (includes space, tab, newline)
+- `\S` => search for anything not whitespace
+- `\b` => search for a word boundary. Matches positions where one side is a word character and other side is not a word character.
+- `\B` => search for not a word boundary
+- `[]` => matches a characters in brackets
+- `[^]` => negates the condition in the brackets
 - `^` => Beginning of a string (`^a` => string starts with `a` , be careful this command takes care of whitespace for example string starting with whitespace and a character like ` a` does not match)
-- `$` => end of a string (`a$` => string ends with `a`, takes care of whitespace like) 
+- `$` => end of a string (`a$` => string ends with `a`, takes care of whitespace like)
 - `*` => 0 or more
 - `+` => 1 or more
 - `?` => 0 or 1
 - `{3}` => exact number
 - `{3,5}` => range of number
--  `(a | b | c)` => matches the group, (match with a, b or c)     
-
-
+- `(a | b | c)` => matches the group, (match with a, b or c)
 
 Looking at the table is not enough to understand regex. We should do some basic examples before implementing in any programming language. That's why first of all, I am going to use sublime text, then search via regex expression.
 
@@ -66,18 +64,18 @@ Let's write a few examples:
 
 > If you put any space before character `J`, it will also match. Because **space is not a word character**
 
-- `\bJava\b` => will match string Java where before first character `J` and after last character `a` must not followed by any word character. In that case, only the first line will match. Because in the second line `JavaIsAProgrammingLanguage`  there is a word character after the last character `a`.
-- `\BJava`  => will match string Java where before first character `J` must be followed by any word character. In that case, there will be no matched. If you want to see, just update the first line like this:
+- `\bJava\b` => will match string Java where before first character `J` and after last character `a` must not followed by any word character. In that case, only the first line will match. Because in the second line `JavaIsAProgrammingLanguage` there is a word character after the last character `a`.
+- `\BJava` => will match string Java where before first character `J` must be followed by any word character. In that case, there will be no matched. If you want to see, just update the first line like this:
 
 ```wiki
 aJava is a programming language.
 ```
 
-- `Java\B` => will only highlight the second Java character. 
+- `Java\B` => will only highlight the second Java character.
 
 ### Special Characters `-, *, +, ?`
 
-- If we put `-` (dash) outside of the brackets `[]`,  regex will try to match just the symbol itself.
+- If we put `-` (dash) outside of the brackets `[]`, regex will try to match just the symbol itself.
 - If we want to match with internal, then we use `-` in the brackets `[]` , like:
   - `[a-z]` => matches only a single character if it is `a` or `b` or `c` ... or `z`
 
@@ -106,7 +104,7 @@ Regex matching with `ava` because character `a` is followed by `v` and v followe
 
 ### Begin and End `^, $`
 
-If `^` used in `[^]`  bracket, it just negates the condition.
+If `^` used in `[^]` bracket, it just negates the condition.
 
 - `[a-z]` => any lower character between a-z
 - `[^a-z]` => any character, number .. but not lower character between a-z
@@ -122,11 +120,11 @@ Examples (these are not related to the our Java sentences):
 
 <img src="/assets/java/regex/difference_example_1.png" alt="Difference Example" title="Difference Example 1" />
 
-- If you write `[ja]` in the search box: it will match the character `j` or `a` 
+- If you write `[ja]` in the search box: it will match the character `j` or `a`
 
 <img src="/assets/java/regex/difference_example_2.png" alt="Difference Example 2" title="Difference Example 2" />
 
-- 
+-
 
 ## Random Examples
 
@@ -140,7 +138,7 @@ match: define "123"
 match: var g = 123;
 ```
 
-Solution: `[\w\d\s\W]+` => matches *one or more word character*, *number*, *whitespace* and *not a word character*.
+Solution: `[\w\d\s\W]+` => matches _one or more word character_, _number_, _whitespace_ and _not a word character_.
 
 - Example 2:
 
@@ -164,17 +162,17 @@ skip 	ran
 skip 	pan
 ```
 
-Solution: `[cmf]an` => matches single character if it is `c`, or  `m` or `f` and followed by `an` strings.
+Solution: `[cmf]an` => matches single character if it is `c`, or `m` or `f` and followed by `an` strings.
 
 - Example 4:
 
 ```wiki
-match 	hog 
-match 	dog 
+match 	hog
+match 	dog
 skip 	bog
 ```
 
-Solution: You may use the same approach from the previous one =>  `[hd]og`. But there is elegant way and more flexible `[^b]og` 
+Solution: You may use the same approach from the previous one => `[hd]og`. But there is elegant way and more flexible `[^b]og`
 
 For final section, let's do some real examples:
 
@@ -203,9 +201,7 @@ You should match the following tags:
 <div>Hello <span>world</span></div>			capture div
 ```
 
-Solution: `<(\w+)` 
-
-
+Solution: `<(\w+)`
 
 You can find more and more examples in this [link](https://regexone.com/)
 
