@@ -4,6 +4,7 @@ title: "JPA Fundamentals & Hibernate - 1) Entities and Context"
 date: 2021-08-04 12:45:31 +0530
 categories: "jpa"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/jpa/jpa-fundamentals-and-hibernate-entities-and-context/"
 ---
 
 In this series, we are going to learn the JPA fundamentals and we are going to use one of its implementation Hibernate.

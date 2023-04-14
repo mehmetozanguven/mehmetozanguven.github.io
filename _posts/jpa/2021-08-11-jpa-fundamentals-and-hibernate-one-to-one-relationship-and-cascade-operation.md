@@ -4,6 +4,7 @@ title: "JPA Fundamentals & Hibernate - 6) One To One Relationship & Cascade Oper
 date: 2021-08-11 19:45:31 +0530
 categories: "jpa"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/jpa/jpa-fundamentals-and-hibernate-one-to-one-relationship-and-cascade-operation/"
 ---
 
 In this article, we are going to learn **how to construct a one-to-one relationship between entities in the JPA and when to use Cascade operation**
@@ -16,7 +17,7 @@ In this article, we are going to learn **how to construct a one-to-one relations
  <hr class="horizontal-line">
 </nav>
 
-## Github Link 
+## Github Link
 
 If you only need to see the code, here is the [github link](https://github.com/mehmetozanguven/jpa_fundamentals_and_hibernate/tree/master/one-to-one-relation)
 

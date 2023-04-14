@@ -4,6 +4,7 @@ title: "JPA Fundamentals & Hibernate - 2) @Id generation"
 date: 2021-08-06 12:45:31 +0530
 categories: "jpa"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/jpa/jpa-fundamentals-and-hibernate-id-generation/"
 ---
 
 In this post, we are going to find out **"what are the options to provide automatic Id generation instead of setting manually". We will look at the generation strategies.**

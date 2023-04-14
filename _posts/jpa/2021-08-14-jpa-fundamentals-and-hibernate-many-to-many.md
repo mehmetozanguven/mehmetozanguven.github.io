@@ -4,6 +4,7 @@ title: "JPA Fundamentals & Hibernate - 8) Many To Many Relationship"
 date: 2021-08-14 12:45:31 +0530
 categories: "jpa"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/jpa/jpa-fundamentals-and-hibernate-many-to-many/"
 ---
 
 In this post, we are going to learn **how to create many-to-many relationship in JPA**.

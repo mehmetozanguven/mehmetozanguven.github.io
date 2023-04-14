@@ -4,6 +4,7 @@ title: "JPA Fundamentals & Hibernate - 4) @Embeddable and @Embedded"
 date: 2021-08-08 19:45:31 +0530
 categories: "jpa"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/jpa/jpa-fundamentals-and-hibernate-embedded-and-embeddable/"
 ---
 
 In this post, we are going to learn **when and how to use embaddable object in Java and JPA**.

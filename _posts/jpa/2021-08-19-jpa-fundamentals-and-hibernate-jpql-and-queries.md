@@ -4,6 +4,7 @@ title: "JPA Fundamentals & Hibernate - 12) JPQL and Queries"
 date: 2021-08-19 19:45:31 +0530
 categories: "jpa"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/jpa/jpa-fundamentals-and-hibernate-jpql-and-queries/"
 ---
 
 In this article, we will learn **what is the JPQL(The Java Persistence Query Language)** and **how to use it**.

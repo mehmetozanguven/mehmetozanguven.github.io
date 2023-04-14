@@ -4,6 +4,7 @@ title: "JPA Fundamentals & Hibernate - 3) @Enumareted, @Temporal and Date Types"
 date: 2021-08-06 12:45:31 +0530
 categories: "jpa"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/jpa/jpa-fundamentals-and-hibernate-enumarated-temporal-and-date-types/"
 ---
 
 In this post, we are going to learn **`@Enumarated` and `@Temporal`** annotations, **how to store enums as ordinal and string** and **when to store enum types to the database.** Also we are going to learn **how to work with date types and when we need to use @Temporal annotation**
@@ -15,8 +16,6 @@ In this post, we are going to learn **`@Enumarated` and `@Temporal`** annotation
   {:toc}
  <hr class="horizontal-line">
 </nav>
-
-
 
 ## Github Link
 

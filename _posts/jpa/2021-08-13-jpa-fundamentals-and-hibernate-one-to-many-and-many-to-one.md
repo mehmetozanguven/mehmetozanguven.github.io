@@ -4,6 +4,7 @@ title: "JPA Fundamentals & Hibernate - 7) One To Many & Many To One Relationship
 date: 2021-08-13 19:45:31 +0530
 categories: "jpa"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/jpa/jpa-fundamentals-and-hibernate-one-to-many-and-many-to-one/"
 ---
 
 > In the OneToMany setup, `Many` sides must have the foreign key and it is the owner of the relatonship

@@ -4,6 +4,7 @@ title: "JPA Fundamentals & Hibernate - 10) Inheritance Strategies"
 date: 2021-08-15 12:45:31 +0530
 categories: "jpa"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/jpa/jpa-fundamentals-and-hibernate-inheritance-strategies/"
 ---
 
 In this article, we are going to look **how to represent the inheritance relationship in the JPA** and **how to use `@MapperSuperclass` annotation**

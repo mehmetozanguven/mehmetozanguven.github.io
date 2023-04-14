@@ -4,6 +4,7 @@ title: "JPA Fundamentals & Hibernate - 11) Entity Manager"
 date: 2021-08-15 15:45:31 +0530
 categories: "jpa"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/jpa/jpa-fundamentals-and-hibernate-entitiy-manager/"
 ---
 
 In this article, we are going to discuss **what is the entity manager in the JPA** and also **learn the basic operations in the entity manager**

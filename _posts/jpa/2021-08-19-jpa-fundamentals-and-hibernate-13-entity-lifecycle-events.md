@@ -4,6 +4,7 @@ title: "JPA Fundamentals & Hibernate - 13) Entity Lifecycle Events (Final)"
 date: 2021-08-19 22:45:31 +0530
 categories: "jpa"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/jpa/jpa-fundamentals-and-hibernate-13-entity-lifecycle-events/"
 ---
 
 In this article, we are going to learn lifecycle events in the JPA. As of the most application we will have `date_created` and `last_modified` column to our tables and we will update them via entity lifecycle listeners.

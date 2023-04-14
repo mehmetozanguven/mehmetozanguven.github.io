@@ -4,6 +4,7 @@ title: "JPA Fundamentals & Hibernate - 9) AssociationOverride"
 date: 2021-08-14 17:45:31 +0530
 categories: "jpa"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/jpa/jpa-fundamentals-and-hibernate-association-override/"
 ---
 
 In this article, we are going to learn **how to create relationship using `@Embeddable` & `@Embedded` object** .

@@ -4,6 +4,7 @@ title: "JPA Fundamentals & Hibernate - 5) Composed Keys"
 date: 2021-08-10 19:45:31 +0530
 categories: "jpa"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/jpa/jpa-fundamentals-and-hibernate-composed-primary-keys/"
 ---
 
 In this article, we are going to find out **how to create composite keys** in JPA.
