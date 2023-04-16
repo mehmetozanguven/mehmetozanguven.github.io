@@ -4,6 +4,7 @@ title: How to resolve -- PR_CONNECT_RESET_ERROR
 date: 2021-05-23 14:45:31 +0530
 categories: "how-to"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/how-to/how-to-resolve-pr-connect-reset-error/"
 ---
 
 This error might releted to your Nginx configuration(at least problem was the nginx for me)

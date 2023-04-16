@@ -4,6 +4,7 @@ title: How to resolve -- Invalid Cors Request In Spring Boot
 date: 2021-05-13 14:45:31 +0530
 categories: "how-to"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/how-to/how-to-resolve-invalid-cors-request/"
 ---
 
 Recently I have encountered this error. And I can not send any request even I have setup `corsConfiguration.setAllowedOrigins("*")` . Response was only saying => `Invalid CORS request`

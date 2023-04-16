@@ -4,6 +4,7 @@ title: How to resolve -- /var/lib/nginx/tmp/ Permission Denied Error
 date: 2021-06-02 14:45:31 +0530
 categories: "how-to"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/how-to/how-to-resolve-nginx-tmp-permission-denied/"
 ---
 
 Recently I have encountered this error. Problem is that: user that runs nginx service has no permission to access `/var/lib/nginx/tmp` file.
