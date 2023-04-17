@@ -4,6 +4,7 @@ title: "Modern Spring Boot v3 with Thymeleaf, TailwindCSS and AlpineJS"
 date: 2022-12-12 17:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/spring/spring-mvc-with-gulp-and-webpack/"
 ---
 
 In this tutorial, we will integrate Spring MVC with gulp and webpack.
