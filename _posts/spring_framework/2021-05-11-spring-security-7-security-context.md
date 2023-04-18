@@ -4,6 +4,7 @@ title: Spring Security -- 7) Security Context and Security Context Holder
 date: 2021-05-11 22:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/spring-security/security-context/"
 ---
 
 In this post, let's find out **what the Security Context is**

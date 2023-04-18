@@ -4,6 +4,7 @@ title: Spring Security -- 6) Multiple Authentication Filters && Providers
 date: 2021-01-06 23:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/spring-security/multiple-filters-and-providers/"
 ---
 
 In this post, let's implement two steps authentication mechanism. This will be similar to JWT authentication but instead of JWT I will use my implementation. After legitimate user makes the login request, my response will include the header value called **Authorization** and user can be able to access to restricted endpoints using the Authorization header's value.

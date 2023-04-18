@@ -4,6 +4,7 @@ title: Spring Security -- 5) Filter Chain, Custom filter and Authentication
 date: 2020-12-30 23:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/spring-security/custom-filter/"
 ---
 
 Let's look at the Filter Chain, more specifically `AuthenticationFilter` in the Spring Security. And also I am going to implement custom filter. This custom filter will include my custom authentication method because I do not want to use BasicAuthentication anymore!!

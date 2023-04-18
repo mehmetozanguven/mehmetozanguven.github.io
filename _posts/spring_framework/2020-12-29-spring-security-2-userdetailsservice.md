@@ -4,6 +4,7 @@ title: Spring Security -- 2) UserDetailsService"
 date: 2020-12-29 16:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/spring-security/userdetailsservice/"
 ---
 
 In this post, I am going to use real database to check the user against the request(s).

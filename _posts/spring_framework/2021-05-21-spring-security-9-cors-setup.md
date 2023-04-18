@@ -4,6 +4,7 @@ title: Spring Security -- 9) Spring Security CORS Setup
 date: 2021-05-21 22:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/spring-security/cors-setup/"
 ---
 
 In this post, let's find out **what is the CORS policy, how to implement in the Spring Boot and Spring Security, finally how to resolve most common error Access-Control-Allow-Origin => Missing**

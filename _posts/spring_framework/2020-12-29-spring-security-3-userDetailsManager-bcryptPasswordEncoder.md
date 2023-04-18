@@ -4,6 +4,7 @@ title: Spring Security -- 3) UserDetailsManager, JdbcUserDetailsManager and BCry
 date: 2020-12-29 19:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/spring-security/userDetailsManager-JdbcUserDetailsManager-and-bcryptPasswordEncoder/"
 ---
 
 In this post, let's look at the what **UserDetailsManager** is, differences between **UserDetailsService**. And also I am going to implement a project that uses **JdbcUserDetailsManager** with different passwordEncoder.

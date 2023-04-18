@@ -4,6 +4,7 @@ title: Spring Security -- 8) Spring Security CSRF Attack Simulation & CSRF Setup
 date: 2021-05-16 22:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/spring-security/csrf-setup/"
 ---
 
 In this post, we are going to learn **what CSRF(or XSRF) attack is**, **how to simulate csrf attack in spring** and **how to setup csrf protection in spring application**
