@@ -4,6 +4,7 @@ title: How to catch all exceptions in Spring Boot
 date: 2021-10-30 12:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/spring-boot/spring-boot-catch-all-exceptions/"
 ---
 
 In this quick tutorial, let's learn how to catch all exception(s) in Spring Boot. And most probably you want to return customized exception when something wrongs in your web application. Even if there are many ways to implement this feature, in this blog I am going to talk about the solution using `@ControllerAdvice`
@@ -63,18 +64,18 @@ public class EmptyIpException extends RuntimeException {
 
 Let's say in the controller I am intentionally throwing this exception:
 
- ```java
- @RestController
- @RequestMapping("/api")
- public class MyController {
- 
-     @GetMapping( "/ip/{ipAddress}")
-     public ResponseEntity<?> getIpLocation(@PathVariable("ipAddress") Optional<String> pathIp) {
-         
-         throw new EmptyIpException("Ip can not be empty");
-     }
- }
- ```
+```java
+@RestController
+@RequestMapping("/api")
+public class MyController {
+
+    @GetMapping( "/ip/{ipAddress}")
+    public ResponseEntity<?> getIpLocation(@PathVariable("ipAddress") Optional<String> pathIp) {
+
+        throw new EmptyIpException("Ip can not be empty");
+    }
+}
+```
 
 Now if I send this request: `curl -X GET localhost:8080/api/ip/1.1.1.1`, response will be:
 
@@ -91,7 +92,7 @@ Now if I send this request: `curl -X GET localhost:8080/api/ip/1.1.1.1`, respons
 
 ## Catch NoHandlerFoundException
 
-If you send this request: `curl -X GET localhost:8080/api/test/1.1.1.1`, then you will get  `NoHandlerFoundException`, because there is no controller for that request. To catch `NoHandlerFoundException`we need to setup extra things. Because, in default this exception will be handled by `DefaultHandlerExceptionResolver`. 
+If you send this request: `curl -X GET localhost:8080/api/test/1.1.1.1`, then you will get `NoHandlerFoundException`, because there is no controller for that request. To catch `NoHandlerFoundException`we need to setup extra things. Because, in default this exception will be handled by `DefaultHandlerExceptionResolver`.
 
 To handle this exception in our global `@ControllerAdvice`, please set the following properties (in the application.properties file):
 
@@ -118,7 +119,7 @@ public class MyExceptionHandler  {
                         .build();
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
-    
+
     @ExceptionHandler(NoHandlerFoundException.class)
     public ResponseEntity<?> noHandlerFoundException(Exception ex){
         ServiceGenericResponse<String> response =
@@ -146,8 +147,6 @@ Right now, if I send this request: `curl -X GET localhost:8080/api/test/1.1.1.1`
 }
 ```
 
-
-
 ## Catch all un-expected exceptions
 
 We can also write a handler for all unexpected exceptions:
@@ -168,7 +167,7 @@ public class MyExceptionHandler  {
                         .build();
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
-    
+
     @ExceptionHandler(NoHandlerFoundException.class)
     public ResponseEntity<?> noHandlerFoundException(Exception ex){
         ServiceGenericResponse<String> response =
@@ -180,7 +179,7 @@ public class MyExceptionHandler  {
                         .build();
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
-    
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> genericException(Exception ex) {
         logger.error("Unexpected error has happened", ex);
@@ -196,7 +195,7 @@ public class MyExceptionHandler  {
 }
 ```
 
- Let's throw RuntimeException in the controller:
+Let's throw RuntimeException in the controller:
 
 ```java
 @RestController
@@ -204,7 +203,7 @@ public class MyExceptionHandler  {
 public class MyController {
   	@GetMapping( "/ip/{ipAddress}")
     public ResponseEntity<?> getIpLocation(@PathVariable("ipAddress") Optional<String> pathIp) {
-   
+
         throw new RuntimeException("unexpected error");
     }
 }
@@ -222,7 +221,5 @@ Now, If I send this request: `curl -X GET localhost:8080/api/ip/1.1.1.1`, respon
   "success": false
 }
 ```
-
-
 
 If you want to know other ways to handle exception in Spring framework, you can click: [https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc](https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc)

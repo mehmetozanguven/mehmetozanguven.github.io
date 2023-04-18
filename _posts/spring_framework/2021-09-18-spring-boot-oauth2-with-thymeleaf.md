@@ -4,6 +4,7 @@ title: Spring Boot OAuth 2 Implementation with Thymeleaf
 date: 2021-09-18 22:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/spring-boot/spring-boot-oauth2-with-thymeleaf/"
 ---
 
 In this article, we will implement a basic single sign on application using Spring boot. We will use Thymeleaf for html pages

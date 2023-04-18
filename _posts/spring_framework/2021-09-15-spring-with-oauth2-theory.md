@@ -4,6 +4,7 @@ title: Spring Boot with OAuth2 - Theory
 date: 2021-09-15 22:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/spring-boot/spring-boot-oauth2-theory/"
 ---
 
 In this post, we are going to learn **what the oAuth2 is, how to use OAuth2 in Spring boot**. We will start with why do we need a OAuth2, we will look at the possible implementations of OAuth2 and finally we will talk about possible security issues when using OAuth2.

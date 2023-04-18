@@ -4,6 +4,7 @@ title: How to read properties file only once in the Spring Boot application
 date: 2021-11-26 13:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/spring-boot/how-to-read-properties-file-once-in-spring-boot/"
 ---
 
 Do you want to know how to read specific properties file according to the environment variable in Spring boot? Let's explore how to read properties file in a different way that Spring already provides.

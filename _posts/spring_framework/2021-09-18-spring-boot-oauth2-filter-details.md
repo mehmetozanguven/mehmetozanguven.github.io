@@ -4,6 +4,7 @@ title: Spring Boot OAuht2 Reason for /oauth2/authorization/{id}
 date: 2021-09-18 23:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/spring-boot/spring-boot-oauth2-filter-details/"
 ---
 
 Do you know the reason why redirect URL should be `http://localhost:8080/login/oauth2/code/google` when we setup Authorization Server in the console.cloud.google.com? Let's answer this question.

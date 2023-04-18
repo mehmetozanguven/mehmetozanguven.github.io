@@ -4,6 +4,7 @@ title: How to use cache in Spring Boot  applications without annotation(s)
 date: 2022-01-16 15:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/spring-boot/spring-boot-application-without-cache-annotations/"
 ---
 
 Almost every blog(s) on the Internet for caching operation in the Spring Boot are using `@Cacheable`, `@CacheEvit`, `@CachePut` vs... In this blog we are going to implement cache without using annotations instead we will create&use service class to get records from cache.

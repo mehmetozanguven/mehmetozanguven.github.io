@@ -4,6 +4,7 @@ title: How to paginate and sort for join queries in Spring Boot
 date: 2022-08-06 23:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/spring-boot/spring-boot-how-to-paginate-and-sort-for-join-queries/"
 ---
 
 Let's say you have two entities which has many-to-one relationship and you want to paginate your query on the parent side with additional colums from child entity.

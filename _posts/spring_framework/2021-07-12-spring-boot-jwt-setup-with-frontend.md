@@ -4,6 +4,7 @@ title: Spring Boot JWT Setup with Frontend (VueJs)
 date: 2021-07-12 14:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/spring-boot/spring-boot-jwt-setup-with-vuejs/"
 ---
 
 In this post, we are going to setup spring boot rest project with using JWT. we will also integrate the our spring boot application with the frontend (in this case I am going to use VueJS).

@@ -4,6 +4,7 @@ title: Spring Boot OAuth2, Postgresql, Thymeleaf with Form based Authentication
 date: 2021-10-25 22:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/spring-boot/spring-boot-oauth2-with-form-based-authentication/"
 ---
 
 Let's implement oauth2 practical implementation with Spring Boot using PostgreSQL and Thymeleaf. In this application:

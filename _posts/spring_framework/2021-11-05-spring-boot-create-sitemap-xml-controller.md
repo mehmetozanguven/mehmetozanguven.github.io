@@ -4,6 +4,7 @@ title: How to create sitemap.xml controller in Spring Boot
 date: 2021-11-05 13:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/spring-boot/spring-boot-create-sitemap-xml-controller/"
 ---
 
 Let's quickly learn how to generate sitemap.xml endpoint for your spring boot project. We will create a sitemap controller to handle sitemap.xml requests.

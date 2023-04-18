@@ -4,6 +4,7 @@ title: How to create robots.txt controller in Spring Boot
 date: 2021-11-01 13:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/spring-boot/spring-boot-create-robots-txt-controller/"
 ---
 
 Let's learn how to create robots.txt file for your spring boot or spring mvc project. Having robots.txt file tells search engine crawlers, such as google, which URLs the crawler can access on your website.

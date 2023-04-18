@@ -4,6 +4,7 @@ title: Find Client's Location In Spring Boot with IP2Location and Update via Sch
 date: 2021-05-28 14:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/spring-boot/spring-boot-client-location/"
 ---
 
 In this tutorial, **we are going to find location of your clients using spring boot and IP2Location** and also we will look at **how to update IP2Location database periodically with scheduling.**
