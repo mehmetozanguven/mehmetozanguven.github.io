@@ -4,6 +4,7 @@ title: "Aspect Oriented Programming(AOP) with Spring Boot Example - 2"
 date: 2020-11-17 12:45:31 +0530
 categories: "spring"
 author: "mehmetozanguven"
+newUrl: "https://mehmetozanguven.com/spring-boot/aspect-oriented-programming-spring-boot-example-part-2"
 ---
 
 # Aspect Oriented Programming(AOP) with Spring Boot Example - 2
